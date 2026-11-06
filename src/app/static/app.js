@@ -144,6 +144,13 @@
     vaultListContainer: document.getElementById("vaultListContainer"),
     vaultEmptyState: document.getElementById("vaultEmptyState"),
     vaultDetailContent: document.getElementById("vaultDetailContent"),
+    btnDownloadAllVault: document.getElementById("btnDownloadAllVault"),
+    btnClearAllVault: document.getElementById("btnClearAllVault"),
+    vaultConfirmModal: document.getElementById("vaultConfirmModal"),
+    vaultConfirmTitle: document.getElementById("vaultConfirmTitle"),
+    vaultConfirmMessage: document.getElementById("vaultConfirmMessage"),
+    btnCancelVaultConfirm: document.getElementById("btnCancelVaultConfirm"),
+    btnAcceptVaultConfirm: document.getElementById("btnAcceptVaultConfirm"),
   };
 
   // ------------------------------------------------------------------------
@@ -507,6 +514,11 @@
     // Keyboard Shortcuts
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
+        if (el.vaultConfirmModal && !el.vaultConfirmModal.classList.contains("hidden")) {
+          e.preventDefault();
+          closeVaultConfirm();
+          return;
+        }
         if (el.vaultModal && !el.vaultModal.classList.contains("hidden")) {
           e.preventDefault();
           closeVaultModal();
@@ -656,6 +668,40 @@
           selectedVaultCategory = pill.dataset.category || "All";
           loadVaultData(selectedVaultCategory);
         });
+      });
+    }
+
+    if (el.btnDownloadAllVault) {
+      el.btnDownloadAllVault.addEventListener("click", () => {
+        handleDownloadAllVault();
+      });
+    }
+
+    if (el.btnClearAllVault) {
+      el.btnClearAllVault.addEventListener("click", () => {
+        handleClearAllVault();
+      });
+    }
+
+    if (el.btnCancelVaultConfirm) {
+      el.btnCancelVaultConfirm.addEventListener("click", () => {
+        closeVaultConfirm();
+      });
+    }
+
+    if (el.btnAcceptVaultConfirm) {
+      el.btnAcceptVaultConfirm.addEventListener("click", () => {
+        const cb = pendingVaultConfirmCallback;
+        closeVaultConfirm();
+        if (cb) cb();
+      });
+    }
+
+    if (el.vaultConfirmModal) {
+      el.vaultConfirmModal.addEventListener("click", (e) => {
+        if (e.target === el.vaultConfirmModal) {
+          closeVaultConfirm();
+        }
       });
     }
   }
@@ -1552,6 +1598,138 @@
     }
   }
 
+  let pendingVaultConfirmCallback = null;
+
+  function showVaultConfirm(title, message, confirmText, confirmClass, onConfirm) {
+    if (!el.vaultConfirmModal) {
+      if (window.confirm(message)) onConfirm();
+      return;
+    }
+    if (el.vaultConfirmTitle) el.vaultConfirmTitle.textContent = title;
+    if (el.vaultConfirmMessage) el.vaultConfirmMessage.textContent = message;
+    if (el.btnAcceptVaultConfirm) {
+      el.btnAcceptVaultConfirm.textContent = confirmText || "Confirm";
+      el.btnAcceptVaultConfirm.className = `btn ${confirmClass || "btn-danger"} btn-sm`;
+    }
+    pendingVaultConfirmCallback = onConfirm;
+    el.vaultConfirmModal.classList.remove("hidden");
+  }
+
+  function closeVaultConfirm() {
+    if (el.vaultConfirmModal) {
+      el.vaultConfirmModal.classList.add("hidden");
+    }
+    pendingVaultConfirmCallback = null;
+  }
+
+  function handleDownloadAllVault() {
+    if (!currentVaultCorrections || currentVaultCorrections.length === 0) {
+      showToast("Archive is empty", "warning");
+      return;
+    }
+    showVaultConfirm(
+      "Download Archive & Clear Queue?",
+      "This will export all logged corrections and biometric images as a ZIP bundle, and clear the feedback queue.",
+      "Download & Clear",
+      "btn-primary",
+      async () => {
+        try {
+          const link = document.createElement("a");
+          link.href = "/api/feedback/export?clear=true&format=zip";
+          link.download = "";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          currentVaultCorrections = [];
+          selectedCorrectionId = null;
+          renderVaultList([]);
+          renderVaultEmptyDetail();
+          await fetchVaultCount();
+          showToast("Archive exported and cleared successfully.", "success");
+        } catch (err) {
+          showToast("Export failed: " + err.message, "danger");
+        }
+      }
+    );
+  }
+
+  function handleClearAllVault() {
+    if (!currentVaultCorrections || currentVaultCorrections.length === 0) {
+      showToast("Archive is empty", "warning");
+      return;
+    }
+    showVaultConfirm(
+      "Clear Entire Archive?",
+      "Clear entire archive? All records will be permanently deleted.",
+      "Clear All",
+      "btn-danger",
+      async () => {
+        try {
+          const res = await fetch("/api/feedback", { method: "DELETE" });
+          if (!res.ok) {
+            throw new Error(`Server returned HTTP ${res.status}`);
+          }
+          currentVaultCorrections = [];
+          selectedCorrectionId = null;
+          renderVaultList([]);
+          renderVaultEmptyDetail();
+          await fetchVaultCount();
+          showToast("Archive cleared successfully.", "success");
+        } catch (err) {
+          showToast("Failed to clear archive: " + err.message, "danger");
+        }
+      }
+    );
+  }
+
+  function handleDownloadSingleRecord(id) {
+    if (!id) return;
+    const link = document.createElement("a");
+    link.href = `/api/feedback/${encodeURIComponent(id)}/download`;
+    link.download = "";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  function handleDeleteSingleRecord(id) {
+    if (!id) return;
+    showVaultConfirm(
+      "Delete Correction Record?",
+      "Delete this correction from archive? This action cannot be undone.",
+      "Delete Record",
+      "btn-danger",
+      async () => {
+        try {
+          const res = await fetch(`/api/feedback/${encodeURIComponent(id)}`, {
+            method: "DELETE",
+          });
+          if (!res.ok) {
+            throw new Error(`Failed to delete record (HTTP ${res.status})`);
+          }
+          const data = await res.json();
+          updateVaultBadge(data.remaining);
+
+          currentVaultCorrections = currentVaultCorrections.filter((c) => c.id !== id);
+          renderVaultList(currentVaultCorrections);
+
+          if (selectedCorrectionId === id) {
+            if (currentVaultCorrections.length > 0) {
+              selectVaultCorrection(currentVaultCorrections[0].id);
+            } else {
+              selectedCorrectionId = null;
+              renderVaultEmptyDetail();
+            }
+          }
+          showToast("Correction record deleted.", "success");
+        } catch (err) {
+          showToast("Delete failed: " + err.message, "danger");
+        }
+      }
+    );
+  }
+
   function renderVaultList(corrections) {
     if (!el.vaultListContainer) return;
     if (!corrections || corrections.length === 0) {
@@ -1575,7 +1753,15 @@
             <div class="vault-card-info">
               <div class="vault-card-top">
                 <span class="vault-card-filename" title="${escapeHtml(c.filename || "")}">${escapeHtml(c.filename || "impression.png")}</span>
-                <span class="vault-card-time">${timeFormatted}</span>
+                <div class="vault-card-meta-right">
+                  <span class="vault-card-time">${timeFormatted}</span>
+                  <button type="button" class="vault-card-delete" title="Delete record" data-id="${c.id}">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
               </div>
               <div class="vault-card-diff">
                 <span class="vault-diff-from">${escapeHtml(aiName)}</span>
@@ -1592,6 +1778,14 @@
     el.vaultListContainer.querySelectorAll(".vault-card").forEach((card) => {
       card.addEventListener("click", () => {
         selectVaultCorrection(card.dataset.id);
+      });
+    });
+
+    el.vaultListContainer.querySelectorAll(".vault-card-delete").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        if (id) handleDeleteSingleRecord(id);
       });
     });
   }
@@ -1637,6 +1831,23 @@
         <div class="vault-detail-meta">
           <div class="vault-detail-title">${escapeHtml(c.filename || "Impression Snapshot")}</div>
           <div class="vault-detail-subtitle">ID: ${escapeHtml(c.id)} • Category: ${escapeHtml(c.category || "Other")} • Logged: ${timeFormatted}</div>
+        </div>
+        <div class="vault-detail-actions">
+          <button type="button" id="btnDownloadSingleVault" class="btn btn-secondary btn-sm" title="Download record as JSON">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download Record
+          </button>
+          <button type="button" id="btnDeleteSingleVault" class="btn btn-ghost btn-sm text-danger" title="Delete record">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+            Delete Record
+          </button>
         </div>
       </div>
 
@@ -1694,6 +1905,15 @@
         </div>
       </div>
     `;
+
+    const btnDown = el.vaultDetailContent.querySelector("#btnDownloadSingleVault");
+    if (btnDown) {
+      btnDown.addEventListener("click", () => handleDownloadSingleRecord(c.id));
+    }
+    const btnDel = el.vaultDetailContent.querySelector("#btnDeleteSingleVault");
+    if (btnDel) {
+      btnDel.addEventListener("click", () => handleDeleteSingleRecord(c.id));
+    }
   }
 
   function renderVaultEmptyDetail() {

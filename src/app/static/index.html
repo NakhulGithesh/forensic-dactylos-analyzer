@@ -510,16 +510,35 @@
         <button id="btnCloseVault" class="btn-icon modal-close-btn" title="Close Vault (Esc)">✕</button>
       </div>
 
-      <!-- Filter Bar -->
+      <!-- Filter Bar & Vault Actions -->
       <div class="vault-filter-bar">
-        <span class="filter-label">Filter Category:</span>
-        <div class="filter-pills" id="vaultFilterPills">
-          <button type="button" class="filter-pill active" data-category="All">All</button>
-          <button type="button" class="filter-pill" data-category="Whorl">Whorl</button>
-          <button type="button" class="filter-pill" data-category="Ulnar Loop">Ulnar Loop</button>
-          <button type="button" class="filter-pill" data-category="Radial Loop">Radial Loop</button>
-          <button type="button" class="filter-pill" data-category="Arch">Arch</button>
-          <button type="button" class="filter-pill" data-category="Other">Other</button>
+        <div class="vault-filter-left">
+          <span class="filter-label">Filter Category:</span>
+          <div class="filter-pills" id="vaultFilterPills">
+            <button type="button" class="filter-pill active" data-category="All">All</button>
+            <button type="button" class="filter-pill" data-category="Whorl">Whorl</button>
+            <button type="button" class="filter-pill" data-category="Ulnar Loop">Ulnar Loop</button>
+            <button type="button" class="filter-pill" data-category="Radial Loop">Radial Loop</button>
+            <button type="button" class="filter-pill" data-category="Arch">Arch</button>
+            <button type="button" class="filter-pill" data-category="Other">Other</button>
+          </div>
+        </div>
+        <div class="vault-actions-right">
+          <button type="button" id="btnDownloadAllVault" class="btn btn-primary btn-sm" title="Download all records and clear queue">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download All &amp; Clear
+          </button>
+          <button type="button" id="btnClearAllVault" class="btn btn-ghost btn-sm text-danger" title="Clear all records from archive">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+            Clear All
+          </button>
         </div>
       </div>
 
@@ -547,6 +566,29 @@
             <!-- Populated dynamically with fingerprint image & side-by-side comparison -->
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Warning Modal -->
+  <div id="vaultConfirmModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="vaultConfirmTitle">
+    <div class="modal-window confirm-modal-window">
+      <div class="confirm-dialog-body">
+        <div class="confirm-icon-wrap" id="vaultConfirmIconWrap">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="confirm-warning-icon">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <div class="confirm-text-wrap">
+          <h3 id="vaultConfirmTitle" class="confirm-title">Confirm Action</h3>
+          <p id="vaultConfirmMessage" class="confirm-message">Are you sure you want to proceed?</p>
+        </div>
+      </div>
+      <div class="confirm-actions-row">
+        <button type="button" id="btnCancelVaultConfirm" class="btn btn-secondary btn-sm">Cancel</button>
+        <button type="button" id="btnAcceptVaultConfirm" class="btn btn-danger btn-sm">Confirm Action</button>
       </div>
     </div>
   </div>

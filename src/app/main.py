@@ -12,6 +12,7 @@ import os
 import sys
 import threading
 import uuid
+import zipfile
 from typing import Dict, List, Optional, Any, Union
 
 import cv2
@@ -51,7 +52,11 @@ def _load_corrections() -> List[Dict[str, Any]]:
     try:
         with open(FEEDBACK_JSON_PATH, "r", encoding="utf-8") as f:
             data = json.load(f)
-            return data if isinstance(data, list) else []
+            if isinstance(data, list):
+                return data
+            if isinstance(data, dict) and "corrections" in data and isinstance(data["corrections"], list):
+                return data["corrections"]
+            return []
     except Exception:
         return []
 
@@ -590,6 +595,91 @@ async def get_feedback(category: Optional[str] = Query(None)) -> Dict[str, Any]:
     return {"corrections": records}
 
 
+@app.get("/api/feedback/export")
+async def export_feedback(
+    clear: bool = Query(False),
+    format: str = Query("zip"),
+):
+    """
+    Bulk export logged corrections and biometric images as a ZIP archive or JSON bundle.
+    Optionally clears the archive and removes exported image assets atomically.
+    """
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+    ts = now_utc.strftime("%Y%m%d_%H%M%S")
+
+    with _feedback_lock:
+        records = _load_corrections()
+
+        if format.lower() == "json":
+            json_bytes = json.dumps(records, indent=2).encode("utf-8")
+            if clear:
+                _save_corrections([])
+                for r in records:
+                    img_name = r.get("image_filename")
+                    if img_name:
+                        img_p = os.path.join(FEEDBACK_IMAGES_DIR, os.path.basename(img_name))
+                        if os.path.isfile(img_p):
+                            try:
+                                os.remove(img_p)
+                            except Exception:
+                                pass
+            return Response(
+                content=json_bytes,
+                media_type="application/json",
+                headers={
+                    "Content-Disposition": f'attachment; filename="forensic_corrections_{ts}.json"'
+                },
+            )
+
+        # Default: In-memory ZIP archive creation
+        buf = io.BytesIO()
+        exported_images: List[str] = []
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+            # 1. corrections.json
+            zf.writestr("corrections.json", json.dumps(records, indent=2))
+
+            # 2. images/{image_filename}
+            for r in records:
+                img_name = r.get("image_filename")
+                if img_name:
+                    safe_name = os.path.basename(img_name)
+                    img_path = os.path.join(FEEDBACK_IMAGES_DIR, safe_name)
+                    if os.path.isfile(img_path):
+                        zf.write(img_path, arcname=f"images/{safe_name}")
+                        exported_images.append(img_path)
+
+            # 3. METADATA.txt
+            metadata_txt = (
+                "AI Fingerprint Forensic Classification System - Feedback Archive Export\n"
+                "========================================================================\n"
+                f"Export Timestamp (UTC): {now_utc.isoformat()}\n"
+                f"Total Records: {len(records)}\n"
+                f"Referenced Biometric Images: {len(exported_images)}\n"
+                "System: Forensic Dactylos Analyzer Stage 10\n"
+                "Contents: corrections.json, images/, METADATA.txt\n"
+            )
+            zf.writestr("METADATA.txt", metadata_txt)
+
+        zip_bytes = buf.getvalue()
+
+        if clear:
+            _save_corrections([])
+            for img_path in exported_images:
+                try:
+                    if os.path.isfile(img_path):
+                        os.remove(img_path)
+                except Exception:
+                    pass
+
+        return Response(
+            content=zip_bytes,
+            media_type="application/zip",
+            headers={
+                "Content-Disposition": f'attachment; filename="forensic_corrections_archive_{ts}.zip"'
+            },
+        )
+
+
 @app.get("/api/feedback/count")
 async def get_feedback_count() -> Dict[str, Any]:
     """Return the total count of logged corrections in the archive."""
@@ -613,6 +703,28 @@ async def get_feedback_image(filename: str):
     return FileResponse(img_path, media_type="image/png")
 
 
+@app.delete("/api/feedback")
+async def clear_all_feedback() -> Dict[str, Any]:
+    """
+    Thread-safe bulk deletion of all feedback corrections and associated image assets.
+    """
+    with _feedback_lock:
+        records = _load_corrections()
+        count = len(records)
+        if os.path.isdir(FEEDBACK_IMAGES_DIR):
+            for fname in os.listdir(FEEDBACK_IMAGES_DIR):
+                if fname == ".gitkeep":
+                    continue
+                fpath = os.path.join(FEEDBACK_IMAGES_DIR, fname)
+                if os.path.isfile(fpath):
+                    try:
+                        os.remove(fpath)
+                    except Exception:
+                        pass
+        _save_corrections([])
+    return {"status": "cleared", "deleted_count": count}
+
+
 @app.get("/api/feedback/{feedback_id}")
 async def get_feedback_record(feedback_id: str) -> Dict[str, Any]:
     """Retrieve single correction record by unique ID."""
@@ -621,6 +733,59 @@ async def get_feedback_record(feedback_id: str) -> Dict[str, Any]:
     for r in records:
         if r.get("id") == feedback_id:
             return r
+    raise HTTPException(status_code=404, detail=f"Correction '{feedback_id}' not found.")
+
+
+@app.delete("/api/feedback/{feedback_id}")
+async def delete_feedback_record(feedback_id: str) -> Dict[str, Any]:
+    """
+    Thread-safe deletion of a single feedback correction and its disk image asset.
+    """
+    with _feedback_lock:
+        records = _load_corrections()
+        found_idx = None
+        for i, r in enumerate(records):
+            if r.get("id") == feedback_id:
+                found_idx = i
+                break
+
+        if found_idx is None:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Correction '{feedback_id}' not found.",
+            )
+
+        deleted_record = records.pop(found_idx)
+        img_name = deleted_record.get("image_filename")
+        if img_name:
+            img_path = os.path.join(FEEDBACK_IMAGES_DIR, os.path.basename(img_name))
+            if os.path.isfile(img_path):
+                try:
+                    os.remove(img_path)
+                except Exception:
+                    pass
+
+        _save_corrections(records)
+        remaining = len(records)
+
+    return {"status": "deleted", "id": feedback_id, "remaining": remaining}
+
+
+@app.get("/api/feedback/{feedback_id}/download")
+async def download_feedback_record(feedback_id: str):
+    """Export a single correction record as a JSON download."""
+    with _feedback_lock:
+        records = _load_corrections()
+    for r in records:
+        if r.get("id") == feedback_id:
+            record_json = json.dumps(r, indent=2)
+            return Response(
+                content=record_json,
+                media_type="application/json",
+                headers={
+                    "Content-Disposition": f'attachment; filename="{feedback_id}.json"'
+                },
+            )
     raise HTTPException(status_code=404, detail=f"Correction '{feedback_id}' not found.")
 
 

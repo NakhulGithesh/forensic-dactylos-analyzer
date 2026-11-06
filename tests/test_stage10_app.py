@@ -4,11 +4,21 @@ Verifies FastAPI endpoints: /api/health, /api/sample-gallery, /api/analyze, /api
 as well as static frontend serving, defect detection, and full forensic JSON response schema.
 """
 
+import io
+import json
 import os
+import zipfile
 import pytest
 from fastapi.testclient import TestClient
 
-from src.app.main import app, BASE_DIR, SAMPLE_REGISTRY
+from src.app.main import (
+    app,
+    BASE_DIR,
+    SAMPLE_REGISTRY,
+    FEEDBACK_IMAGES_DIR,
+    FEEDBACK_JSON_PATH,
+    _save_corrections,
+)
 
 
 @pytest.fixture(scope="module")
@@ -16,6 +26,23 @@ def client():
     """Create FastAPI TestClient fixture."""
     with TestClient(app) as c:
         yield c
+
+
+@pytest.fixture(scope="module", autouse=True)
+def clean_feedback_queue():
+    """Ensure feedback queue is cleanly reset after test module finishes."""
+    yield
+    _save_corrections([])
+    if os.path.isdir(FEEDBACK_IMAGES_DIR):
+        for fname in os.listdir(FEEDBACK_IMAGES_DIR):
+            if fname == ".gitkeep":
+                continue
+            fpath = os.path.join(FEEDBACK_IMAGES_DIR, fname)
+            if os.path.isfile(fpath):
+                try:
+                    os.remove(fpath)
+                except Exception:
+                    pass
 
 
 class TestStage10ApplicationAPI:
@@ -633,5 +660,160 @@ class TestStage10ApplicationAPI:
 
         assert 'div#imageModal' not in nesting.get('feedbackModal', [])
         assert 'div#imageModal' not in nesting.get('vaultModal', [])
+
+    def test_feedback_export_all_zip(self, client):
+        """POST 2 feedback items (one with image), call GET /api/feedback/export?format=zip, verify contents."""
+        tiny_png = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+        p1 = {
+            "image_base64": tiny_png,
+            "filename": "export_test1.png",
+            "ai_prediction": {"anatomical_label": "Whorl"},
+            "user_correction": "Arch",
+            "category": "Arch",
+        }
+        p2 = {
+            "image_base64": None,
+            "filename": "export_test2.png",
+            "ai_prediction": {"anatomical_label": "Loop"},
+            "user_correction": "Whorl",
+            "category": "Whorl",
+        }
+        res1 = client.post("/api/feedback", json=p1)
+        assert res1.status_code == 200
+        id1 = res1.json()["id"]
+
+        res2 = client.post("/api/feedback", json=p2)
+        assert res2.status_code == 200
+        id2 = res2.json()["id"]
+
+        export_res = client.get("/api/feedback/export?format=zip")
+        assert export_res.status_code == 200
+        assert export_res.headers["content-type"] == "application/zip"
+        assert "attachment; filename=" in export_res.headers.get("content-disposition", "")
+        assert export_res.headers["content-disposition"].endswith('.zip"')
+
+        with zipfile.ZipFile(io.BytesIO(export_res.content)) as zf:
+            namelist = zf.namelist()
+            assert "corrections.json" in namelist
+            assert "METADATA.txt" in namelist
+            assert f"images/{id1}.png" in namelist
+
+            corrections_in_zip = json.loads(zf.read("corrections.json").decode("utf-8"))
+            zip_ids = {c["id"] for c in corrections_in_zip}
+            assert id1 in zip_ids
+            assert id2 in zip_ids
+
+            meta = zf.read("METADATA.txt").decode("utf-8")
+            assert "AI Fingerprint Forensic Classification System" in meta
+
+    def test_feedback_export_and_clear(self, client):
+        """POST 1 feedback item with image, call GET /api/feedback/export?clear=true&format=zip, verify queue cleared and image deleted."""
+        tiny_png = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+        p = {
+            "image_base64": tiny_png,
+            "filename": "clear_test.png",
+            "ai_prediction": {"anatomical_label": "Whorl"},
+            "user_correction": "Arch",
+            "category": "Arch",
+        }
+        res = client.post("/api/feedback", json=p)
+        assert res.status_code == 200
+        corr_id = res.json()["id"]
+        img_path = os.path.join(FEEDBACK_IMAGES_DIR, f"{corr_id}.png")
+        assert os.path.isfile(img_path)
+
+        export_res = client.get("/api/feedback/export?clear=true&format=zip")
+        assert export_res.status_code == 200
+        assert export_res.headers["content-type"] == "application/zip"
+
+        count_res = client.get("/api/feedback/count")
+        assert count_res.status_code == 200
+        assert count_res.json()["count"] == 0
+
+        assert not os.path.isfile(img_path)
+
+    def test_feedback_delete_single_record(self, client):
+        """POST 1 feedback item with image, call DELETE /api/feedback/{id}, verify image removed and record deleted."""
+        tiny_png = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+        p = {
+            "image_base64": tiny_png,
+            "filename": "delete_single_test.png",
+            "ai_prediction": {"anatomical_label": "Whorl"},
+            "user_correction": "Ulnar Loop",
+            "category": "Ulnar Loop",
+        }
+        res = client.post("/api/feedback", json=p)
+        assert res.status_code == 200
+        corr_id = res.json()["id"]
+        img_path = os.path.join(FEEDBACK_IMAGES_DIR, f"{corr_id}.png")
+        assert os.path.isfile(img_path)
+
+        del_res = client.delete(f"/api/feedback/{corr_id}")
+        assert del_res.status_code == 200
+        assert del_res.json()["status"] == "deleted"
+        assert del_res.json()["id"] == corr_id
+
+        assert not os.path.isfile(img_path)
+
+        get_res = client.get(f"/api/feedback/{corr_id}")
+        assert get_res.status_code == 404
+
+    def test_feedback_delete_nonexistent_returns_404(self, client):
+        """DELETE /api/feedback/nonexistent_xyz returns 404."""
+        del_res = client.delete("/api/feedback/nonexistent_xyz")
+        assert del_res.status_code == 404
+
+    def test_feedback_download_single_record(self, client):
+        """POST 1 feedback item, call GET /api/feedback/{id}/download, verify 200 OK, application/json, valid body."""
+        p = {
+            "image_base64": None,
+            "filename": "download_test.png",
+            "ai_prediction": {"anatomical_label": "Arch"},
+            "user_correction": "Tented Arch",
+            "category": "Arch",
+        }
+        res = client.post("/api/feedback", json=p)
+        assert res.status_code == 200
+        corr_id = res.json()["id"]
+
+        dl_res = client.get(f"/api/feedback/{corr_id}/download")
+        assert dl_res.status_code == 200
+        assert dl_res.headers["content-type"] == "application/json"
+        assert f'filename="{corr_id}.json"' in dl_res.headers.get("content-disposition", "")
+        data = dl_res.json()
+        assert data["id"] == corr_id
+        assert data["user_correction"] == "Tented Arch"
+
+    def test_feedback_clear_all(self, client):
+        """POST 2 items, call DELETE /api/feedback, verify 200 OK, count 0."""
+        p1 = {"image_base64": None, "user_correction": "A", "category": "Arch"}
+        p2 = {"image_base64": None, "user_correction": "B", "category": "Whorl"}
+        res1 = client.post("/api/feedback", json=p1)
+        res2 = client.post("/api/feedback", json=p2)
+        assert res1.status_code == 200
+        assert res2.status_code == 200
+
+        del_res = client.delete("/api/feedback")
+        assert del_res.status_code == 200
+        data = del_res.json()
+        assert data["status"] == "cleared"
+        assert data["deleted_count"] >= 2
+
+        count_res = client.get("/api/feedback/count")
+        assert count_res.status_code == 200
+        assert count_res.json()["count"] == 0
+
+    def test_frontend_vault_export_and_delete_controls_present(self, client):
+        """Verify index.html contains btnDownloadAllVault, btnClearAllVault, vaultConfirmModal."""
+        res = client.get("/")
+        assert res.status_code == 200
+        html_text = res.text
+        assert 'id="btnDownloadAllVault"' in html_text
+        assert 'id="btnClearAllVault"' in html_text
+        assert 'id="vaultConfirmModal"' in html_text
+        assert 'id="vaultConfirmTitle"' in html_text
+        assert 'id="vaultConfirmMessage"' in html_text
+        assert 'id="btnCancelVaultConfirm"' in html_text
+        assert 'id="btnAcceptVaultConfirm"' in html_text
 
 
