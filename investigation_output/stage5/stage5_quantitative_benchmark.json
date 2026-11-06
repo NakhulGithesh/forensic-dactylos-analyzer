@@ -1,0 +1,161 @@
+{
+  "metadata": {
+    "timestamp": "2026-11-06 21:56:20",
+    "platform": "Apple Silicon (macOS, M5 Pro, 64 GB Unified RAM)",
+    "stage": "Stage 5 - Fingerprint Feature Detection"
+  },
+  "nist_sd04_evaluation": {
+    "A": {
+      "total_evaluated": 40,
+      "avg_cores_hybrid": 0.6,
+      "avg_deltas_hybrid": 0.525,
+      "avg_cores_poincare": 0.675,
+      "avg_deltas_poincare": 0.45,
+      "avg_cores_filter": 0.325,
+      "avg_deltas_filter": 0.45,
+      "avg_cores_curv": 2.725,
+      "avg_deltas_curv": 1.625,
+      "mean_coherence": 0.552035690844059,
+      "mean_frequency_cyc_px": 0.1251953125,
+      "mean_confidence_core": 0.6876404143155768,
+      "mean_confidence_delta": 0.6762505731508839,
+      "loop_direction_accuracy_pct": 0.0
+    },
+    "T": {
+      "total_evaluated": 40,
+      "avg_cores_hybrid": 0.8,
+      "avg_deltas_hybrid": 0.7,
+      "avg_cores_poincare": 0.775,
+      "avg_deltas_poincare": 0.7,
+      "avg_cores_filter": 0.75,
+      "avg_deltas_filter": 0.65,
+      "avg_cores_curv": 2.675,
+      "avg_deltas_curv": 1.775,
+      "mean_coherence": 0.5849466942250728,
+      "mean_frequency_cyc_px": 0.1244140625,
+      "mean_confidence_core": 0.7743019516863443,
+      "mean_confidence_delta": 0.7775992316930435,
+      "loop_direction_accuracy_pct": 0.0
+    },
+    "W": {
+      "total_evaluated": 40,
+      "avg_cores_hybrid": 2.2,
+      "avg_deltas_hybrid": 2.0,
+      "avg_cores_poincare": 2.175,
+      "avg_deltas_poincare": 2.125,
+      "avg_cores_filter": 0.675,
+      "avg_deltas_filter": 1.45,
+      "avg_cores_curv": 3.375,
+      "avg_deltas_curv": 3.025,
+      "mean_coherence": 0.6368837602436542,
+      "mean_frequency_cyc_px": 0.135546875,
+      "mean_confidence_core": 0.8045464533584339,
+      "mean_confidence_delta": 0.8437748737486374,
+      "loop_direction_accuracy_pct": 0.0
+    },
+    "L": {
+      "total_evaluated": 40,
+      "avg_cores_hybrid": 1.125,
+      "avg_deltas_hybrid": 0.925,
+      "avg_cores_poincare": 1.075,
+      "avg_deltas_poincare": 0.85,
+      "avg_cores_filter": 0.725,
+      "avg_deltas_filter": 0.925,
+      "avg_cores_curv": 2.825,
+      "avg_deltas_curv": 1.525,
+      "mean_coherence": 0.6052758358418941,
+      "mean_frequency_cyc_px": 0.1244140625,
+      "mean_confidence_core": 0.7963176334845273,
+      "mean_confidence_delta": 0.8153422591588558,
+      "loop_direction_accuracy_pct": 90.0
+    },
+    "R": {
+      "total_evaluated": 40,
+      "avg_cores_hybrid": 1.225,
+      "avg_deltas_hybrid": 1.275,
+      "avg_cores_poincare": 1.275,
+      "avg_deltas_poincare": 1.15,
+      "avg_cores_filter": 0.525,
+      "avg_deltas_filter": 1.075,
+      "avg_cores_curv": 2.8,
+      "avg_deltas_curv": 1.775,
+      "mean_coherence": 0.6053909584879875,
+      "mean_frequency_cyc_px": 0.1255859375,
+      "mean_confidence_core": 0.7991981093813072,
+      "mean_confidence_delta": 0.8091793603878361,
+      "loop_direction_accuracy_pct": 87.5
+    }
+  },
+  "socofing_evaluation": {
+    "None": {
+      "total_evaluated": 50,
+      "mean_coherence": 0.7239508843421936,
+      "std_coherence": 0.059750147683990035,
+      "avg_cores_detected": 1.68,
+      "avg_deltas_detected": 1.28,
+      "truncated_feature_pct": 42.0,
+      "mean_core_drift_px": 0.0
+    },
+    "CR": {
+      "total_evaluated": 50,
+      "mean_coherence": 0.7128885066509247,
+      "std_coherence": 0.053293857092226574,
+      "avg_cores_detected": 1.64,
+      "avg_deltas_detected": 1.26,
+      "truncated_feature_pct": 42.0,
+      "mean_core_drift_px": 13.531468073606007
+    },
+    "Obl": {
+      "total_evaluated": 50,
+      "mean_coherence": 0.7039444553852081,
+      "std_coherence": 0.059695123375932815,
+      "avg_cores_detected": 1.74,
+      "avg_deltas_detected": 1.18,
+      "truncated_feature_pct": 44.0,
+      "mean_core_drift_px": 8.296153129993415
+    },
+    "Zcut": {
+      "total_evaluated": 50,
+      "mean_coherence": 0.7193651401996612,
+      "std_coherence": 0.0525365029941091,
+      "avg_cores_detected": 1.62,
+      "avg_deltas_detected": 1.24,
+      "truncated_feature_pct": 40.0,
+      "mean_core_drift_px": 11.842614353699208
+    }
+  },
+  "latency_and_throughput": {
+    "hardware": "Apple Silicon (macOS, M5 Pro, 64 GB Unified RAM)",
+    "resolution": "256x256",
+    "orientation_field": {
+      "mean_ms": 2.426492478698492,
+      "std_ms": 0.07812504571364587,
+      "throughput_fps": 412.1174941932539
+    },
+    "singular_points_hybrid": {
+      "mean_ms": 12.74094668449834,
+      "std_ms": 0.12585038599800838,
+      "throughput_fps": 78.48710341254943
+    },
+    "singular_points_poincare_alone": {
+      "mean_ms": 12.834875020198524,
+      "std_ms": 0.10172856496601052,
+      "throughput_fps": 77.91271815473685
+    },
+    "singular_points_complex_filter_alone": {
+      "mean_ms": 14.84292000066489,
+      "std_ms": 0.11134737845776128,
+      "throughput_fps": 67.37218821870663
+    },
+    "geometry_and_frequency": {
+      "mean_ms": 4.70791493775323,
+      "std_ms": 0.38040614573222764,
+      "throughput_fps": 212.40825571866264
+    },
+    "end_to_end_pipeline": {
+      "mean_ms": 47.553149121813476,
+      "std_ms": 0.4498649805996946,
+      "throughput_fps": 21.029101509941476
+    }
+  }
+}

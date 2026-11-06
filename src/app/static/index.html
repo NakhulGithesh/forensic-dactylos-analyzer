@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Biometric Fingerprint Recognition & Forensic Classification</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="dark-theme">
+  <!-- System Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a10 10 0 0 0-10 10c0 4.5 3 8.3 7.1 9.5"/>
+          <path d="M12 6a6 6 0 0 0-6 6c0 2.7 1.8 5 4.3 5.7"/>
+          <path d="M12 10a2 2 0 0 0-2 2c0 .9.6 1.7 1.4 1.9"/>
+          <path d="M12 14c2.2 0 4-1.8 4-4a4 4 0 0 0-8 0"/>
+          <path d="M16 12a4 4 0 0 1 4 4c0 3.3-2.7 6-6 6"/>
+          <path d="M12 18c1.1 0 2-.9 2-2"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="system-title">Fingerprint Analysis & Classification Workstation</h1>
+        <div class="system-subtitle">Biometric pattern analysis, landmark extraction & quality assessment</div>
+      </div>
+    </div>
+
+    <div class="header-controls">
+      <button type="button" id="btnOpenVault" class="btn btn-secondary vault-btn" title="Open Correction Vault">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 8v13H3V8"/>
+          <path d="M1 3h22v5H1z"/>
+          <path d="M10 12h4"/>
+        </svg>
+        Correction Vault
+        <span id="vaultBadgeCount" class="badge-vault-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Grid Workspace -->
+  <main class="dashboard-grid">
+
+    <!-- LEFT PANEL: Image Visualization, Layers & Ingestion -->
+    <section class="panel panel-left" aria-label="Fingerprint Visualization and Ingestion">
+
+      <!-- Ingestion & Configuration Toolbar -->
+      <div class="card card-toolbar">
+        <div class="card-header">
+          <span class="card-title">Impression Ingestion & Acquisition</span>
+          <span class="badge badge-info" id="inputStatusBadge">Ready for Input</span>
+        </div>
+
+        <div class="upload-dropzone" id="dropZone">
+          <input type="file" id="fileInput" accept="image/png,image/bmp,image/jpeg,image/tiff" class="file-input-hidden" aria-label="Upload fingerprint impression image">
+          <div class="dropzone-content">
+            <svg class="drop-icon" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <p class="drop-text"><strong>Drag & Drop</strong> fingerprint impression here or <strong>browse</strong></p>
+            <span class="drop-subtext">Supports NIST PNG/TXT, SOCOFing BMP, TIFF, JPG (Grayscale / Optical)</span>
+          </div>
+        </div>
+
+        <div class="toolbar-meta-row">
+          <div class="form-group">
+            <label for="handSelect">Anatomical Hand:</label>
+            <select id="handSelect" class="form-select">
+              <option value="">Auto-Detect</option>
+              <option value="Right">Right Hand</option>
+              <option value="Left">Left Hand</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="digitSelect">Digit Designation:</label>
+            <select id="digitSelect" class="form-select">
+              <option value="">Auto (Unspecified)</option>
+              <option value="01">Digit 01 - Right Thumb</option>
+              <option value="02">Digit 02 - Right Index</option>
+              <option value="03">Digit 03 - Right Middle</option>
+              <option value="04">Digit 04 - Right Ring</option>
+              <option value="05">Digit 05 - Right Little</option>
+              <option value="06">Digit 06 - Left Thumb</option>
+              <option value="07">Digit 07 - Left Index</option>
+              <option value="08">Digit 08 - Left Middle</option>
+              <option value="09">Digit 09 - Left Ring</option>
+              <option value="10">Digit 10 - Left Little</option>
+            </select>
+          </div>
+
+          <div class="toolbar-actions">
+            <button id="btnAnalyze" class="btn btn-primary">
+              <span id="analyzeSpinner" class="spinner hidden"></span>
+              <span id="analyzeBtnText">Run Forensic Analysis</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visualization Canvas Card -->
+      <div class="card card-canvas-viewer">
+        <div class="card-header canvas-header">
+          <div class="metadata-chips">
+            <span class="chip" id="chipFilename">f0001_01.png</span>
+            <span class="chip" id="chipResolution">512 × 512 px</span>
+            <span class="chip chip-quality" id="chipQuality">Q: --</span>
+            <span class="chip chip-gate" id="chipGate">GATE: PENDING</span>
+          </div>
+
+          <div class="canvas-zoom-controls">
+            <button id="btnZoomFit" class="btn-icon" title="Fit to View">Fit</button>
+            <button id="btnZoom100" class="btn-icon" title="100% Native Pixels">1:1</button>
+          </div>
+        </div>
+
+        <!-- Layer Toggles Ribbon -->
+        <div class="layer-toggles-ribbon" role="toolbar" aria-label="Diagnostic Overlay Layers">
+          <span class="ribbon-label">DIAGNOSTIC LAYERS:</span>
+          <label class="toggle-pill toggle-cores">
+            <input type="checkbox" id="toggleCores" checked>
+            <span class="toggle-indicator core-indicator"></span>
+            <span class="toggle-text">Cores (Red)</span>
+          </label>
+          <label class="toggle-pill toggle-deltas">
+            <input type="checkbox" id="toggleDeltas" checked>
+            <span class="toggle-indicator delta-indicator"></span>
+            <span class="toggle-text">Deltas (Blue)</span>
+          </label>
+          <label class="toggle-pill toggle-streamlines">
+            <input type="checkbox" id="toggleStreamlines" checked>
+            <span class="toggle-indicator streamline-indicator"></span>
+            <span class="toggle-text">Ridge Flow</span>
+          </label>
+          <label class="toggle-pill toggle-damage">
+            <input type="checkbox" id="toggleDamage" checked>
+            <span class="toggle-indicator damage-indicator"></span>
+            <span class="toggle-text">Damage Mask</span>
+          </label>
+          <label class="toggle-pill toggle-composite">
+            <input type="checkbox" id="toggleComposite">
+            <span class="toggle-indicator composite-indicator"></span>
+            <span class="toggle-text">Composite View</span>
+          </label>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="canvas-viewport" id="canvasViewport" title="Click to open full-screen forensic inspection view">
+          <canvas id="fingerprintCanvas" width="512" height="512" title="Click to open full-screen forensic inspection view"></canvas>
+          <div id="canvasOverlayPlaceholder" class="placeholder-overlay">
+            <p>Upload or drag & drop a fingerprint impression to inspect ridge landmarks</p>
+          </div>
+        </div>
+
+        <!-- Visual Legend Bar -->
+        <div class="canvas-legend">
+          <div class="legend-item"><span class="legend-symbol core-dot"></span> Core (Red Circle / Crosshair)</div>
+          <div class="legend-item"><span class="legend-symbol delta-tri"></span> Delta (Blue Triangle)</div>
+          <div class="legend-item"><span class="legend-symbol flow-line"></span> Ridge Flow Streamlines (Cyan)</div>
+          <div class="legend-item"><span class="legend-symbol damage-box"></span> Damage / Defect Mask (Red)</div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT PANEL: Analytical Results & Forensic Explanation -->
+    <section class="panel panel-right" aria-label="Analytical Results and Forensic Rationale">
+
+      <!-- Prominent Primary Macro Pattern Banner -->
+      <div class="card card-hero-banner" id="heroBanner">
+        <div class="banner-top-row">
+          <span class="banner-eyebrow">ANATOMICAL PATTERN CLASSIFICATION</span>
+          <span class="badge-nist-symbol" id="nistSymbolBadge">[W]</span>
+        </div>
+        <div class="banner-main-row">
+          <h2 class="banner-class-title" id="primaryClassTitle">WHORL</h2>
+          <div class="banner-confidence-badge" id="primaryConfBadge">98.4% Confidence</div>
+        </div>
+
+        <!-- Softmax Confidence Bar -->
+        <div class="confidence-meter-wrap">
+          <div class="confidence-meter-header">
+            <span>Primary Softmax Probability</span>
+            <span id="confidencePercentageText">98.4%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="confidenceBarFill" style="width: 98.4%;"></div>
+          </div>
+        </div>
+
+        <!-- Multi-Class Softmax Breakdown -->
+        <div class="multiclass-distribution" id="classDistributionGrid">
+          <!-- Dynamically populated class probabilities -->
+        </div>
+      </div>
+
+      <!-- Subtype Refinement & Verifiability Badge Card -->
+      <div class="card card-subtype">
+        <div class="card-header">
+          <span class="card-title">Dermatoglyphic Subtype Refinement</span>
+          <span class="badge badge-status" id="subtypeStatusBadge">Resolved</span>
+        </div>
+        <div class="subtype-body">
+          <div class="subtype-hero-name" id="subtypeName">Double Loop Whorl</div>
+          <div class="subtype-meta-row">
+            <span class="subtype-category-tag" id="subtypeCategory">Category: Whorl</span>
+            <span class="verifiability-pill" id="verifiabilityBadge">Deterministic (Strict)</span>
+          </div>
+          <p class="subtype-reason-text" id="subtypeReasonText">Dual interlocking cores verified with bilateral delta triradii conforming to canonical Henry-Galton whorl topology.</p>
+        </div>
+      </div>
+
+      <!-- False Prediction Action Row -->
+      <div class="card card-feedback-action">
+        <div class="feedback-action-row">
+          <div class="feedback-prompt-text">
+            <span class="feedback-prompt-title">Discrepancy Reporting</span>
+            <span class="feedback-prompt-desc">Disagree with automated classification or subtype?</span>
+          </div>
+          <button type="button" id="btnFalsePrediction" class="btn btn-warning-outline" title="Report inaccurate prediction">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            False Prediction?
+          </button>
+        </div>
+      </div>
+
+      <!-- Dermatoglyphic Topology & Morphometry Grid -->
+      <div class="card card-topology">
+        <div class="card-header">
+          <span class="card-title">Dermatoglyphic Landmark Metrics</span>
+          <span class="card-time-stat" id="pipelineLatency">Execution: 42.8 ms</span>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">Core Landmarks</div>
+            <div class="metric-value" id="valCoresCount">2</div>
+            <div class="metric-sub" id="valCoresCoord">Coords: (254, 210), (278, 245)</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Delta Triradii</div>
+            <div class="metric-value" id="valDeltasCount">2</div>
+            <div class="metric-sub" id="valDeltasCoord">Coords: (140, 360), (395, 372)</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Margin Truncation</div>
+            <div class="metric-value" id="valTruncation">Enclosed</div>
+            <div class="metric-sub" id="valTruncationDetail">All singular points within margin</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Ridge Count (Core-Delta)</div>
+            <div class="metric-value" id="valRidgeCount">14.2 ridges</div>
+            <div class="metric-sub" id="valWavelength">Wavelength: 9.8 px</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Flow Drift Angle</div>
+            <div class="metric-value" id="valExitAngle">142.5° Drift</div>
+            <div class="metric-sub" id="valFlowDirection">Whorl Flow</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Ridge Coherence</div>
+            <div class="metric-value" id="valCoherence">0.82</div>
+            <div class="metric-sub" id="valCoherenceTier">High Local Parallelism</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quality & Defect Diagnostics Alert Card -->
+      <div class="card card-quality" id="qualityCard">
+        <div class="card-header">
+          <span class="card-title">Biometric Quality & Defect Assessment</span>
+          <span class="badge" id="qualityTierBadge">Good Tier</span>
+        </div>
+        <div class="quality-grid">
+          <div class="quality-score-dial">
+            <div class="dial-value" id="overallQualityScore">79.2</div>
+            <div class="dial-label">Quality Score Q / 100</div>
+          </div>
+          <div class="quality-submetrics">
+            <div class="q-metric-row">
+              <span class="q-label">Usable Foreground Area:</span>
+              <span class="q-val" id="qUsableArea">88.4%</span>
+            </div>
+            <div class="q-metric-row">
+              <span class="q-label">Ridge Clarity:</span>
+              <span class="q-val" id="qClarity">82.1 / 100</span>
+            </div>
+            <div class="q-metric-row">
+              <span class="q-label">Frequency Continuity:</span>
+              <span class="q-val" id="qFreqCont">78.5 / 100</span>
+            </div>
+            <div class="q-metric-row">
+              <span class="q-label">Physical Damage Defect:</span>
+              <span class="q-val" id="qDamageStatus">None Detected</span>
+            </div>
+          </div>
+        </div>
+        <div class="quality-alert-banner" id="qualityAlertBanner">
+          <span class="alert-icon">✓</span>
+          <span class="alert-text" id="qualityAlertText">Impression meets biometric quality standards for automated filing.</span>
+        </div>
+      </div>
+
+
+      <!-- Action & Export Toolbar Card -->
+      <div class="card card-export-actions">
+        <div class="export-actions-row">
+          <button id="btnPrintReport" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 6 2 18 2 18 9"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <rect x="6" y="14" width="12" height="8"/>
+            </svg>
+            Print / Save PDF
+          </button>
+          <button id="btnResetView" class="btn btn-secondary">Reset Dashboard</button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="app-footer"></footer>
+
+  <!-- Forensic Inspection Lightbox Modal with Pan & Zoom -->
+  <div id="imageModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-label="Forensic Inspection Viewer">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-title">Forensic Inspection View</span>
+          <span class="modal-subtitle" id="modalImageMeta">Native Resolution</span>
+        </div>
+
+        <!-- Layer toggles in modal -->
+        <div class="modal-layer-toggles">
+          <label class="modal-toggle-pill">
+            <input type="checkbox" id="modalToggleCores" checked>
+            <span class="toggle-indicator core-indicator"></span> Cores
+          </label>
+          <label class="modal-toggle-pill">
+            <input type="checkbox" id="modalToggleDeltas" checked>
+            <span class="toggle-indicator delta-indicator"></span> Deltas
+          </label>
+          <label class="modal-toggle-pill">
+            <input type="checkbox" id="modalToggleStreamlines" checked>
+            <span class="toggle-indicator streamline-indicator"></span> Flow
+          </label>
+          <label class="modal-toggle-pill">
+            <input type="checkbox" id="modalToggleDamage" checked>
+            <span class="toggle-indicator damage-indicator"></span> Damage
+          </label>
+        </div>
+
+        <!-- Zoom & Navigation Toolbar -->
+        <div class="modal-zoom-toolbar">
+          <button id="modalBtnZoomOut" class="btn-icon" title="Zoom Out (-)">−</button>
+          <span id="modalZoomLevel" class="modal-zoom-val">100%</span>
+          <button id="modalBtnZoomIn" class="btn-icon" title="Zoom In (+)">+</button>
+          <button id="modalBtnFit" class="btn-icon" title="Fit to View">Fit</button>
+          <button id="modalBtn100" class="btn-icon" title="100% Native">1:1</button>
+          <button id="modalBtnClose" class="btn-icon modal-close-btn" title="Close (Esc)">✕</button>
+        </div>
+      </div>
+
+      <!-- Pan/Zoom Viewport -->
+      <div class="modal-viewport" id="modalViewport">
+        <div class="modal-canvas-transform" id="modalCanvasContainer">
+          <canvas id="modalCanvas"></canvas>
+        </div>
+        <div class="modal-hint-bar">Scroll to Zoom • Drag to Move • Esc to Close</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- False Prediction Reporting Modal (Accidental-Click Protected) -->
+  <div id="feedbackModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-label="Report Inaccurate Prediction">
+    <div class="modal-window feedback-modal-window">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-title">Report Inaccurate Prediction</span>
+          <span class="modal-subtitle">Examiner Ground-Truth Discrepancy Logging</span>
+        </div>
+        <button id="btnCancelFeedbackX" class="btn-icon modal-close-btn" title="Close (Esc)">✕</button>
+      </div>
+
+      <div class="feedback-modal-body">
+        <!-- Accidental-Click Protection Warning Note -->
+        <div class="feedback-warning-banner">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <div class="warning-banner-text">
+            <strong>Verification Note:</strong> Please verify you want to log a correction for this impression.
+          </div>
+        </div>
+
+        <!-- Current AI Summary Display -->
+        <div class="feedback-current-ai">
+          <span class="preview-label">Current Automated AI Prediction:</span>
+          <span class="preview-value" id="feedbackAiSummary">--</span>
+        </div>
+
+        <!-- Quick-Select Category Options -->
+        <div class="feedback-section">
+          <label class="section-label">Verified Anatomical Classification:</label>
+          <div class="feedback-options-grid">
+            <label class="feedback-radio-card">
+              <input type="radio" name="feedbackCategoryOption" value="Plain Arch" data-category="Arch">
+              <div class="radio-content">
+                <span class="radio-title">Plain Arch</span>
+                <span class="radio-desc">Wave-like flow, 0 cores, 0 deltas</span>
+              </div>
+            </label>
+            <label class="feedback-radio-card">
+              <input type="radio" name="feedbackCategoryOption" value="Tented Arch" data-category="Arch">
+              <div class="radio-content">
+                <span class="radio-title">Tented Arch</span>
+                <span class="radio-desc">Sharp angular spine (>45°)</span>
+              </div>
+            </label>
+            <label class="feedback-radio-card">
+              <input type="radio" name="feedbackCategoryOption" value="Whorl" data-category="Whorl">
+              <div class="radio-content">
+                <span class="radio-title">Whorl</span>
+                <span class="radio-desc">Concentric / spiral, ≥2 deltas</span>
+              </div>
+            </label>
+            <label class="feedback-radio-card">
+              <input type="radio" name="feedbackCategoryOption" value="Ulnar Loop" data-category="Ulnar Loop">
+              <div class="radio-content">
+                <span class="radio-title">Ulnar Loop</span>
+                <span class="radio-desc">Ridge flow loops toward little finger</span>
+              </div>
+            </label>
+            <label class="feedback-radio-card">
+              <input type="radio" name="feedbackCategoryOption" value="Radial Loop" data-category="Radial Loop">
+              <div class="radio-content">
+                <span class="radio-title">Radial Loop</span>
+                <span class="radio-desc">Ridge flow loops toward thumb margin</span>
+              </div>
+            </label>
+            <label class="feedback-radio-card">
+              <input type="radio" name="feedbackCategoryOption" value="Other" data-category="Other">
+              <div class="radio-content">
+                <span class="radio-title">Other / Custom</span>
+                <span class="radio-desc">Composite, accidental, or custom subtype</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Conditional Whorl Subtypes -->
+        <div id="feedbackWhorlWrap" class="feedback-subgroup hidden">
+          <label for="feedbackWhorlSubtype" class="subgroup-label">Common Whorl Subtypes:</label>
+          <select id="feedbackWhorlSubtype" class="form-select">
+            <option value="Target Centric Whorl">Target Centric</option>
+            <option value="Spiral Whorl">Spiral</option>
+            <option value="Double Loop Whorl">Double Loop</option>
+            <option value="Elongated Target Centric Whorl">Elongated Target Centric</option>
+            <option value="Elongated Spiral Whorl">Elongated Spiral</option>
+            <option value="Other Whorl">Other Whorl</option>
+          </select>
+        </div>
+
+        <!-- Dynamically Expanded Custom Text Area -->
+        <div id="feedbackCustomWrap" class="feedback-subgroup hidden">
+          <label for="feedbackCustomText" class="subgroup-label">Exact Classification / Subtype Name:</label>
+          <textarea id="feedbackCustomText" class="form-textarea" rows="2" placeholder="Type exact classification or subtype name..."></textarea>
+        </div>
+
+        <!-- Notes Textarea -->
+        <div class="feedback-section">
+          <label for="feedbackNotes" class="section-label">Examiner Notes & Explanation (Optional):</label>
+          <textarea id="feedbackNotes" class="form-textarea" rows="3" placeholder="Provide forensic rationale (e.g., triradius delta obscured by heavy pressure, manual core identification)..."></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer feedback-modal-footer">
+        <button type="button" id="btnCancelFeedback" class="btn btn-ghost">Cancel</button>
+        <button type="button" id="btnSubmitFeedback" class="btn btn-primary">Save to Feedback Archive</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review Vault / Correction Archive Drawer & Viewer Modal -->
+  <div id="vaultModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-label="Correction Vault & Review Archive">
+    <div class="modal-window vault-modal-window">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="vault-header-title">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 8v13H3V8"/>
+              <path d="M1 3h22v5H1z"/>
+              <path d="M10 12h4"/>
+            </svg>
+            <span class="modal-title">Correction Vault & Review Archive</span>
+          </div>
+          <span class="modal-subtitle">Examiner-verified corrections audit trail & forensic dataset feedback queue</span>
+        </div>
+        <button id="btnCloseVault" class="btn-icon modal-close-btn" title="Close Vault (Esc)">✕</button>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="vault-filter-bar">
+        <span class="filter-label">Filter Category:</span>
+        <div class="filter-pills" id="vaultFilterPills">
+          <button type="button" class="filter-pill active" data-category="All">All</button>
+          <button type="button" class="filter-pill" data-category="Whorl">Whorl</button>
+          <button type="button" class="filter-pill" data-category="Ulnar Loop">Ulnar Loop</button>
+          <button type="button" class="filter-pill" data-category="Radial Loop">Radial Loop</button>
+          <button type="button" class="filter-pill" data-category="Arch">Arch</button>
+          <button type="button" class="filter-pill" data-category="Other">Other</button>
+        </div>
+      </div>
+
+      <!-- Vault Main Split Body -->
+      <div class="vault-body">
+        <!-- Left Panel: Scrollable list of logged corrections -->
+        <div class="vault-list-panel" id="vaultListPanel">
+          <div class="vault-list-container" id="vaultListContainer">
+            <!-- Dynamically populated correction cards -->
+          </div>
+        </div>
+
+        <!-- Right Panel: Side-by-Side Comparison Detail -->
+        <div class="vault-detail-panel" id="vaultDetailPanel">
+          <div class="vault-empty-state" id="vaultEmptyState">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 8v13H3V8"/>
+              <path d="M1 3h22v5H1z"/>
+              <path d="M10 12h4"/>
+            </svg>
+            <p>Select a correction from the archive list to view side-by-side comparison</p>
+          </div>
+
+          <div class="vault-detail-content hidden" id="vaultDetailContent">
+            <!-- Populated dynamically with fingerprint image & side-by-side comparison -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

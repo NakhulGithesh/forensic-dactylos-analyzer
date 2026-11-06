@@ -1,0 +1,41 @@
+# ==============================================================================
+# Forensic Dactylos Analyzer - Git Ignore
+# ==============================================================================
+
+# Raw Large Biometric Datasets (>2.4GB, restricted distribution)
+Fingerprint Data/
+
+# Model Checkpoints (>100MB exceeds GitHub hard limit)
+# Download trained checkpoints via GitHub Releases v1.0.0
+models/*.pt
+models/*.pth
+!models/.gitkeep
+
+# Local Test Artefacts & Cache
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Python Bytecode & Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv/
+venv/
+env/
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Feedback Queue Local Run Data (Keep folder structure, ignore test run images)
+data/feedback_queue/images/*.png
+!data/feedback_queue/images/.gitkeep

@@ -1,0 +1,635 @@
+{
+  "device": "macOS Apple Silicon (M5 Pro, 64 GB RAM)",
+  "timestamp": "2026-11-06 21:10:34",
+  "cropping_and_boundary_benchmark": {
+    "nist": {
+      "total_evaluated": 4000,
+      "bottom_rows_480_511_blank_pct": 100.0,
+      "crop_evaluations": {
+        "bottom_crop_0_480": {
+          "core_clipping_count": 0,
+          "core_clipping_pct": 0.0,
+          "delta_clipping_count": 0,
+          "delta_clipping_pct": 0.0,
+          "safe_for_minutiae": true
+        },
+        "conservative_16_480": {
+          "core_clipping_count": 0,
+          "core_clipping_pct": 0.0,
+          "delta_clipping_count": 0,
+          "delta_clipping_pct": 0.0,
+          "safe_for_minutiae": true
+        },
+        "moderate_24_480": {
+          "core_clipping_count": 0,
+          "core_clipping_pct": 0.0,
+          "delta_clipping_count": 0,
+          "delta_clipping_pct": 0.0,
+          "safe_for_minutiae": true
+        },
+        "square_center_480x480": {
+          "core_clipping_count": 0,
+          "core_clipping_pct": 0.0,
+          "delta_clipping_count": 0,
+          "delta_clipping_pct": 0.0,
+          "safe_for_minutiae": true
+        },
+        "aggressive_crop_448x448": {
+          "core_clipping_count": 669,
+          "core_clipping_pct": 21.124,
+          "delta_clipping_count": 639,
+          "delta_clipping_pct": 21.145,
+          "safe_for_minutiae": false
+        }
+      },
+      "core_y_distribution": {
+        "min": 24,
+        "max": 456,
+        "p05": 24.0,
+        "p95": 408.0
+      },
+      "delta_y_distribution": {
+        "min": 24,
+        "max": 456,
+        "p05": 24.0,
+        "p95": 408.0
+      }
+    },
+    "socofing": {
+      "standard_padding_vs_crop": {},
+      "highres_padding_vs_crop": {},
+      "standard": {
+        "original_shape": [
+          103,
+          96
+        ],
+        "padded_shape": [
+          103,
+          103
+        ],
+        "crop_shape": [
+          96,
+          96
+        ],
+        "padding_content_loss_pct": 0.0,
+        "center_crop_content_loss_pct": 6.8,
+        "center_crop_clipped_pixels": 672,
+        "verdict": "Padding strictly preserves 100% of sensor capture without vertical ridge clipping."
+      },
+      "highres": {
+        "original_shape": [
+          298,
+          241
+        ],
+        "padded_shape": [
+          298,
+          298
+        ],
+        "crop_shape": [
+          241,
+          241
+        ],
+        "padding_content_loss_pct": 0.0,
+        "center_crop_content_loss_pct": 19.13,
+        "center_crop_clipped_pixels": 13737,
+        "verdict": "Center crop destroys 19.13% of vertical ridge flow; Aspect-ratio padding is mandatory."
+      }
+    }
+  },
+  "resolution_interpolation_benchmark": {
+    "NIST_SD04": {
+      "256x256": {
+        "Bilinear": {
+          "ssim_mean": 0.934,
+          "ssim_std": 0.0107,
+          "psnr_mean_db": 31.82,
+          "psnr_std_db": 1.86,
+          "sharpness_var": 1845.43,
+          "latency_per_img_ms": 0.0899,
+          "throughput_img_per_sec": 11126.2
+        },
+        "Bicubic": {
+          "ssim_mean": 0.9647,
+          "ssim_std": 0.0088,
+          "psnr_mean_db": 35.07,
+          "psnr_std_db": 1.65,
+          "sharpness_var": 2461.77,
+          "latency_per_img_ms": 0.1807,
+          "throughput_img_per_sec": 5534.8
+        },
+        "Lanczos": {
+          "ssim_mean": 0.963,
+          "ssim_std": 0.01,
+          "psnr_mean_db": 35.1,
+          "psnr_std_db": 1.63,
+          "sharpness_var": 2383.28,
+          "latency_per_img_ms": 0.3736,
+          "throughput_img_per_sec": 2676.3
+        }
+      },
+      "224x224": {
+        "Bilinear": {
+          "ssim_mean": 0.9176,
+          "ssim_std": 0.0127,
+          "psnr_mean_db": 30.8,
+          "psnr_std_db": 1.9,
+          "sharpness_var": 2765.19,
+          "latency_per_img_ms": 0.0919,
+          "throughput_img_per_sec": 10885.0
+        },
+        "Bicubic": {
+          "ssim_mean": 0.9497,
+          "ssim_std": 0.0114,
+          "psnr_mean_db": 33.37,
+          "psnr_std_db": 1.7,
+          "sharpness_var": 3420.12,
+          "latency_per_img_ms": 0.1611,
+          "throughput_img_per_sec": 6206.0
+        },
+        "Lanczos": {
+          "ssim_mean": 0.9473,
+          "ssim_std": 0.0126,
+          "psnr_mean_db": 33.26,
+          "psnr_std_db": 1.7,
+          "sharpness_var": 3329.15,
+          "latency_per_img_ms": 0.3361,
+          "throughput_img_per_sec": 2975.2
+        }
+      },
+      "160x160": {
+        "Bilinear": {
+          "ssim_mean": 0.8419,
+          "ssim_std": 0.0214,
+          "psnr_mean_db": 27.64,
+          "psnr_std_db": 2.01,
+          "sharpness_var": 6912.51,
+          "latency_per_img_ms": 0.0318,
+          "throughput_img_per_sec": 31489.5
+        },
+        "Bicubic": {
+          "ssim_mean": 0.8818,
+          "ssim_std": 0.0211,
+          "psnr_mean_db": 29.07,
+          "psnr_std_db": 1.81,
+          "sharpness_var": 7355.44,
+          "latency_per_img_ms": 0.1229,
+          "throughput_img_per_sec": 8135.2
+        },
+        "Lanczos": {
+          "ssim_mean": 0.8808,
+          "ssim_std": 0.0221,
+          "psnr_mean_db": 29.0,
+          "psnr_std_db": 1.8,
+          "sharpness_var": 7249.71,
+          "latency_per_img_ms": 0.2523,
+          "throughput_img_per_sec": 3962.8
+        }
+      }
+    },
+    "SOCOFing": {
+      "256x256": {
+        "Bilinear": {
+          "ssim_mean": 0.9723,
+          "ssim_std": 0.0026,
+          "psnr_mean_db": 23.74,
+          "psnr_std_db": 1.32,
+          "sharpness_var": 1795.95,
+          "latency_per_img_ms": 0.0326,
+          "throughput_img_per_sec": 30713.3
+        },
+        "Bicubic": {
+          "ssim_mean": 0.9985,
+          "ssim_std": 0.0002,
+          "psnr_mean_db": 36.67,
+          "psnr_std_db": 0.81,
+          "sharpness_var": 2533.85,
+          "latency_per_img_ms": 0.0575,
+          "throughput_img_per_sec": 17390.5
+        },
+        "Lanczos": {
+          "ssim_mean": 0.9981,
+          "ssim_std": 0.0003,
+          "psnr_mean_db": 36.08,
+          "psnr_std_db": 1.22,
+          "sharpness_var": 2756.34,
+          "latency_per_img_ms": 0.1346,
+          "throughput_img_per_sec": 7429.4
+        }
+      },
+      "224x224": {
+        "Bilinear": {
+          "ssim_mean": 0.9641,
+          "ssim_std": 0.0038,
+          "psnr_mean_db": 22.72,
+          "psnr_std_db": 1.41,
+          "sharpness_var": 2745.57,
+          "latency_per_img_ms": 0.0258,
+          "throughput_img_per_sec": 38772.2
+        },
+        "Bicubic": {
+          "ssim_mean": 0.9985,
+          "ssim_std": 0.0003,
+          "psnr_mean_db": 36.84,
+          "psnr_std_db": 1.38,
+          "sharpness_var": 4047.86,
+          "latency_per_img_ms": 0.0492,
+          "throughput_img_per_sec": 20310.4
+        },
+        "Lanczos": {
+          "ssim_mean": 0.9978,
+          "ssim_std": 0.0006,
+          "psnr_mean_db": 35.01,
+          "psnr_std_db": 1.53,
+          "sharpness_var": 4382.56,
+          "latency_per_img_ms": 0.1162,
+          "throughput_img_per_sec": 8608.3
+        }
+      },
+      "160x160": {
+        "Bilinear": {
+          "ssim_mean": 0.9284,
+          "ssim_std": 0.0072,
+          "psnr_mean_db": 19.99,
+          "psnr_std_db": 1.33,
+          "sharpness_var": 7692.86,
+          "latency_per_img_ms": 0.0214,
+          "throughput_img_per_sec": 46796.3
+        },
+        "Bicubic": {
+          "ssim_mean": 0.9947,
+          "ssim_std": 0.0009,
+          "psnr_mean_db": 30.7,
+          "psnr_std_db": 1.01,
+          "sharpness_var": 12113.3,
+          "latency_per_img_ms": 0.0361,
+          "throughput_img_per_sec": 27713.6
+        },
+        "Lanczos": {
+          "ssim_mean": 0.9922,
+          "ssim_std": 0.0014,
+          "psnr_mean_db": 30.28,
+          "psnr_std_db": 1.29,
+          "sharpness_var": 13122.56,
+          "latency_per_img_ms": 0.0822,
+          "throughput_img_per_sec": 12167.5
+        }
+      }
+    }
+  },
+  "enhancement_strategies_benchmark": {
+    "NIST_Clean": {
+      "Baseline_MinMax": {
+        "michelson_contrast": 0.5257,
+        "sharpness_var": 3875.36,
+        "avg_minutiae_count": 22226.5,
+        "latency_ms": 0.0542
+      },
+      "Baseline_ZScore": {
+        "michelson_contrast": 0.3933,
+        "sharpness_var": 2172.09,
+        "avg_minutiae_count": 22275.6,
+        "latency_ms": 0.1114
+      },
+      "CLAHE_4x4_clip1.5": {
+        "michelson_contrast": 0.6472,
+        "sharpness_var": 6661.44,
+        "avg_minutiae_count": 25735.8,
+        "latency_ms": 0.1155
+      },
+      "CLAHE_8x8_clip2.0": {
+        "michelson_contrast": 0.6795,
+        "sharpness_var": 8638.08,
+        "avg_minutiae_count": 28101.3,
+        "latency_ms": 0.1295
+      },
+      "Bandpass_DoG": {
+        "michelson_contrast": 0.3917,
+        "sharpness_var": 1214.28,
+        "avg_minutiae_count": 16534.5,
+        "latency_ms": 0.269
+      },
+      "Percentile_Stretch": {
+        "michelson_contrast": 0.7313,
+        "sharpness_var": 6255.42,
+        "avg_minutiae_count": 22648.0,
+        "latency_ms": 0.4839
+      },
+      "Hybrid_Recommended": {
+        "michelson_contrast": 0.7567,
+        "sharpness_var": 8989.86,
+        "avg_minutiae_count": 25823.1,
+        "latency_ms": 0.5574
+      }
+    },
+    "NIST_Ambiguous": {
+      "Baseline_MinMax": {
+        "michelson_contrast": 0.4816,
+        "sharpness_var": 2909.31,
+        "avg_minutiae_count": 18746.8,
+        "latency_ms": 0.0539
+      },
+      "Baseline_ZScore": {
+        "michelson_contrast": 0.3717,
+        "sharpness_var": 1707.09,
+        "avg_minutiae_count": 19021.9,
+        "latency_ms": 0.111
+      },
+      "CLAHE_4x4_clip1.5": {
+        "michelson_contrast": 0.5727,
+        "sharpness_var": 4832.93,
+        "avg_minutiae_count": 24247.2,
+        "latency_ms": 0.1049
+      },
+      "CLAHE_8x8_clip2.0": {
+        "michelson_contrast": 0.6047,
+        "sharpness_var": 6645.59,
+        "avg_minutiae_count": 27496.7,
+        "latency_ms": 0.1359
+      },
+      "Bandpass_DoG": {
+        "michelson_contrast": 0.3352,
+        "sharpness_var": 827.53,
+        "avg_minutiae_count": 13645.2,
+        "latency_ms": 0.2577
+      },
+      "Percentile_Stretch": {
+        "michelson_contrast": 0.6974,
+        "sharpness_var": 4892.28,
+        "avg_minutiae_count": 19845.7,
+        "latency_ms": 0.4453
+      },
+      "Hybrid_Recommended": {
+        "michelson_contrast": 0.7072,
+        "sharpness_var": 7194.06,
+        "avg_minutiae_count": 24609.0,
+        "latency_ms": 0.5558
+      }
+    },
+    "SOCOFing_Real": {
+      "Baseline_MinMax": {
+        "michelson_contrast": 0.8229,
+        "sharpness_var": 2756.34,
+        "avg_minutiae_count": 12320.6,
+        "latency_ms": 0.0519
+      },
+      "Baseline_ZScore": {
+        "michelson_contrast": 0.3817,
+        "sharpness_var": 511.4,
+        "avg_minutiae_count": 12327.3,
+        "latency_ms": 0.1081
+      },
+      "CLAHE_4x4_clip1.5": {
+        "michelson_contrast": 0.8292,
+        "sharpness_var": 2883.27,
+        "avg_minutiae_count": 14215.0,
+        "latency_ms": 0.1121
+      },
+      "CLAHE_8x8_clip2.0": {
+        "michelson_contrast": 0.8275,
+        "sharpness_var": 3049.44,
+        "avg_minutiae_count": 14747.0,
+        "latency_ms": 0.1327
+      },
+      "Bandpass_DoG": {
+        "michelson_contrast": 0.477,
+        "sharpness_var": 776.73,
+        "avg_minutiae_count": 11005.8,
+        "latency_ms": 0.257
+      },
+      "Percentile_Stretch": {
+        "michelson_contrast": 0.8229,
+        "sharpness_var": 2756.34,
+        "avg_minutiae_count": 12320.6,
+        "latency_ms": 0.3631
+      },
+      "Hybrid_Recommended": {
+        "michelson_contrast": 0.8435,
+        "sharpness_var": 2916.81,
+        "avg_minutiae_count": 14209.3,
+        "latency_ms": 0.4456
+      }
+    },
+    "SOCOFing_Altered": {
+      "Baseline_MinMax": {
+        "michelson_contrast": 0.8269,
+        "sharpness_var": 2840.75,
+        "avg_minutiae_count": 11754.3,
+        "latency_ms": 0.0516
+      },
+      "Baseline_ZScore": {
+        "michelson_contrast": 0.3937,
+        "sharpness_var": 543.71,
+        "avg_minutiae_count": 11752.9,
+        "latency_ms": 0.1057
+      },
+      "CLAHE_4x4_clip1.5": {
+        "michelson_contrast": 0.8351,
+        "sharpness_var": 2949.42,
+        "avg_minutiae_count": 13242.5,
+        "latency_ms": 0.1153
+      },
+      "CLAHE_8x8_clip2.0": {
+        "michelson_contrast": 0.8348,
+        "sharpness_var": 3108.78,
+        "avg_minutiae_count": 13802.6,
+        "latency_ms": 0.136
+      },
+      "Bandpass_DoG": {
+        "michelson_contrast": 0.4911,
+        "sharpness_var": 830.4,
+        "avg_minutiae_count": 10509.5,
+        "latency_ms": 0.2533
+      },
+      "Percentile_Stretch": {
+        "michelson_contrast": 0.8269,
+        "sharpness_var": 2840.75,
+        "avg_minutiae_count": 11754.3,
+        "latency_ms": 0.3695
+      },
+      "Hybrid_Recommended": {
+        "michelson_contrast": 0.8492,
+        "sharpness_var": 2985.01,
+        "avg_minutiae_count": 13238.9,
+        "latency_ms": 0.4427
+      }
+    }
+  },
+  "spectral_and_frequency_integrity_benchmark": {
+    "nist_classes": {
+      "A": {
+        "fingerprint_id": "0005",
+        "raw": {
+          "f0_cyc_px": 0.1772,
+          "snr_db": 11.9,
+          "rvcr": 0.5511
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1772,
+          "snr_db": 12.09,
+          "rvcr": 0.8454
+        }
+      },
+      "T": {
+        "fingerprint_id": "0021",
+        "raw": {
+          "f0_cyc_px": 0.1772,
+          "snr_db": 10.42,
+          "rvcr": 0.395
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1772,
+          "snr_db": 10.32,
+          "rvcr": 0.7519
+        }
+      },
+      "W": {
+        "fingerprint_id": "0001",
+        "raw": {
+          "f0_cyc_px": 0.1457,
+          "snr_db": 10.08,
+          "rvcr": 0.4433
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1457,
+          "snr_db": 9.98,
+          "rvcr": 0.7981
+        }
+      },
+      "L": {
+        "fingerprint_id": "0003",
+        "raw": {
+          "f0_cyc_px": 0.0512,
+          "snr_db": 5.33,
+          "rvcr": 0.5058
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.0512,
+          "snr_db": 4.74,
+          "rvcr": 0.5583
+        }
+      },
+      "R": {
+        "fingerprint_id": "0002",
+        "raw": {
+          "f0_cyc_px": 0.1693,
+          "snr_db": 13.01,
+          "rvcr": 0.3468
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1693,
+          "snr_db": 13.0,
+          "rvcr": 0.7912
+        }
+      }
+    },
+    "socofing_alteration_tiers": {
+      "None": {
+        "raw": {
+          "f0_cyc_px": 0.1417,
+          "snr_db": 25.53,
+          "rvcr": 0.8658
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1299,
+          "snr_db": 26.74,
+          "rvcr": 0.8835
+        }
+      },
+      "Easy": {
+        "raw": {
+          "f0_cyc_px": 0.1299,
+          "snr_db": 26.6,
+          "rvcr": 0.8552
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1299,
+          "snr_db": 26.71,
+          "rvcr": 0.8794
+        }
+      },
+      "Medium": {
+        "raw": {
+          "f0_cyc_px": 0.1339,
+          "snr_db": 28.92,
+          "rvcr": 0.8574
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1339,
+          "snr_db": 28.57,
+          "rvcr": 0.8782
+        }
+      },
+      "Hard": {
+        "raw": {
+          "f0_cyc_px": 0.1417,
+          "snr_db": 30.12,
+          "rvcr": 0.8609
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1378,
+          "snr_db": 29.75,
+          "rvcr": 0.8763
+        }
+      }
+    },
+    "socofing_alteration_types": {
+      "None": {
+        "raw": {
+          "f0_cyc_px": 0.1417,
+          "snr_db": 25.53,
+          "rvcr": 0.8658
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1299,
+          "snr_db": 26.74,
+          "rvcr": 0.8835
+        }
+      },
+      "CR": {
+        "raw": {
+          "f0_cyc_px": 0.1299,
+          "snr_db": 26.6,
+          "rvcr": 0.8552
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1299,
+          "snr_db": 26.71,
+          "rvcr": 0.8794
+        }
+      },
+      "Obl": {
+        "raw": {
+          "f0_cyc_px": 0.1417,
+          "snr_db": 25.53,
+          "rvcr": 0.8456
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1417,
+          "snr_db": 25.67,
+          "rvcr": 0.8688
+        }
+      },
+      "Zcut": {
+        "raw": {
+          "f0_cyc_px": 0.1299,
+          "snr_db": 26.26,
+          "rvcr": 0.864
+        },
+        "hybrid": {
+          "f0_cyc_px": 0.1299,
+          "snr_db": 26.65,
+          "rvcr": 0.8825
+        }
+      }
+    }
+  },
+  "selected_configuration": {
+    "cropping_strategy_nist": "Bottom crop [0:480, :], direct scaling to target resolution (zero artificial padding)",
+    "cropping_strategy_socofing": "Aspect-ratio symmetric padding to square (103x103 or 298x298)",
+    "selected_resolution": "256x256",
+    "selected_interpolation": "Lanczos4 (cv2.INTER_LANCZOS4)",
+    "selected_enhancement": "Hybrid (CLAHE 4x4 tile, clipLimit 1.5 + Percentile Stretch [1%, 99%])",
+    "tensor_normalization": "Range [0.0, 1.0], Float32, single channel (1x256x256)",
+    "average_pipeline_latency_ms": 0.5574
+  }
+}

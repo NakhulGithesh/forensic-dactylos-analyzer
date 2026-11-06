@@ -1,0 +1,601 @@
+image_path,fingerprint_id,impression,hand,finger_num,finger_name,digit_code,gender,original_nist_class,primary_class,secondary_class,is_ambiguous,derived_anatomical_class,derived_anatomical_secondary_class,history_token,history_raw,width,height,split
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0003_10.png,0003,f,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,f0003_10.pct L a214a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0003_10.png,0003,s,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,s0003_10.pct L b214a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0004_05.png,0004,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f0004_05.pct R a2755.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0004_05.png,0004,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s0004_05.pct R b2755.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0016_08.png,0016,f,Left,8,Middle,08,M,A,A,,False,Plain Arch,,A,f0016_08.pct A a1508.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0016_08.png,0016,s,Left,8,Middle,08,M,A,A,,False,Plain Arch,,A,s0016_08.pct A b1508.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0040_07.png,0040,f,Left,7,Index,07,M,T,T,,False,Tented Arch,,T,f0040_07.pct T a0267.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0040_07.png,0040,s,Left,7,Index,07,M,T,T,,False,Tented Arch,,T,s0040_07.pct T b0267.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0058_10.png,0058,f,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,f0058_10.pct A a156a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0058_10.png,0058,s,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,s0058_10.pct A b156a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0087_03.png,0087,f,Right,3,Middle,03,M,T,T,A,True,Tented Arch,Plain Arch,TA,f0087_03.pct TA a2793.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0087_03.png,0087,s,Right,3,Middle,03,M,T,T,A,True,Tented Arch,Plain Arch,TA,s0087_03.pct TA b2793.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0091_10.png,0091,f,Left,10,Little,10,M,L,L,T,True,Ulnar Loop,Tented Arch,LT,f0091_10.pct LT a270a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0091_10.png,0091,s,Left,10,Little,10,M,L,L,T,True,Ulnar Loop,Tented Arch,LT,s0091_10.pct LT b270a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0096_03.png,0096,f,Right,3,Middle,03,M,W,W,,False,Whorl,,W,f0096_03.pct W a0853.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0096_03.png,0096,s,Right,3,Middle,03,M,W,W,,False,Whorl,,W,s0096_03.pct W b0853.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0103_10.png,0103,f,Left,10,Little,10,F,L,L,T,True,Ulnar Loop,Tented Arch,LT,f0103_10.pct LT a200a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0103_10.png,0103,s,Left,10,Little,10,F,L,L,T,True,Ulnar Loop,Tented Arch,LT,s0103_10.pct LT b200a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0105_03.png,0105,f,Right,3,Middle,03,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,f0105_03.pct TR a0453.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0105_03.png,0105,s,Right,3,Middle,03,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,s0105_03.pct TR b0453.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0109_05.png,0109,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f0109_05.pct R a1285.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0109_05.png,0109,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s0109_05.pct R b1285.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0111_02.png,0111,f,Right,2,Index,02,M,A,A,,False,Plain Arch,,A,f0111_02.pct A a1552.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0111_02.png,0111,s,Right,2,Index,02,M,A,A,,False,Plain Arch,,A,s0111_02.pct A b1552.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0116_06.png,0116,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f0116_06.pct L a0786.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0116_06.png,0116,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s0116_06.pct L b0786.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0120_08.png,0120,f,Left,8,Middle,08,F,A,A,,False,Plain Arch,,A,f0120_08.pct A a2308.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0120_08.png,0120,s,Left,8,Middle,08,F,A,A,,False,Plain Arch,,A,s0120_08.pct A b2308.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0122_03.png,0122,f,Right,3,Middle,03,M,T,T,,False,Tented Arch,,T,f0122_03.pct T a2123.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0122_03.png,0122,s,Right,3,Middle,03,M,T,T,,False,Tented Arch,,T,s0122_03.pct T b2123.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0134_03.png,0134,f,Right,3,Middle,03,F,T,T,R,True,Tented Arch,Ulnar Loop,TR,f0134_03.pct TR a2213.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0134_03.png,0134,s,Right,3,Middle,03,F,T,T,R,True,Tented Arch,Ulnar Loop,TR,s0134_03.pct TR b2213.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0145_10.png,0145,f,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,f0145_10.pct A a143a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0145_10.png,0145,s,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,s0145_10.pct A b143a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0148_02.png,0148,f,Right,2,Index,02,M,L,L,,False,Radial Loop,,L,f0148_02.pct L a1002.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0148_02.png,0148,s,Right,2,Index,02,M,L,L,,False,Radial Loop,,L,s0148_02.pct L b1002.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0151_06.png,0151,f,Left,6,Thumb,06,F,A,A,,False,Plain Arch,,A,f0151_06.pct A a1156.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0151_06.png,0151,s,Left,6,Thumb,06,F,A,A,,False,Plain Arch,,A,s0151_06.pct A b1156.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0163_03.png,0163,f,Right,3,Middle,03,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,f0163_03.pct TR a2713.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0163_03.png,0163,s,Right,3,Middle,03,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,s0163_03.pct TR b2713.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0169_05.png,0169,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f0169_05.pct R a2415.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0169_05.png,0169,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s0169_05.pct R b2415.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0180_01.png,0180,f,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,f0180_01.pct W a0621.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0180_01.png,0180,s,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,s0180_01.pct W b0621.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0195_07.png,0195,f,Left,7,Index,07,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,f0195_07.pct TL a0187.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0195_07.png,0195,s,Left,7,Index,07,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,s0195_07.pct TL b0187.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0197_08.png,0197,f,Left,8,Middle,08,M,T,T,,False,Tented Arch,,T,f0197_08.pct T a0158.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0197_08.png,0197,s,Left,8,Middle,08,M,T,T,,False,Tented Arch,,T,s0197_08.pct T b0158.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0198_06.png,0198,f,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,f0198_06.pct W a0976.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0198_06.png,0198,s,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,s0198_06.pct W b0976.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0204_10.png,0204,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f0204_10.pct L a098a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0204_10.png,0204,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s0204_10.pct L b098a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0215_01.png,0215,f,Right,1,Thumb,01,F,A,A,,False,Plain Arch,,A,f0215_01.pct A a1871.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0215_01.png,0215,s,Right,1,Thumb,01,F,A,A,,False,Plain Arch,,A,s0215_01.pct A b1871.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0216_05.png,0216,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f0216_05.pct R a0675.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0216_05.png,0216,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s0216_05.pct R b0675.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0224_09.png,0224,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f0224_09.pct L a0689.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0224_09.png,0224,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s0224_09.pct L b0689.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0231_03.png,0231,f,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,f0231_03.pct R a1013.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0231_03.png,0231,s,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,s0231_03.pct R b1013.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0236_04.png,0236,f,Right,4,Ring,04,F,A,A,,False,Plain Arch,,A,f0236_04.pct A a1834.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0236_04.png,0236,s,Right,4,Ring,04,F,A,A,,False,Plain Arch,,A,s0236_04.pct A b1834.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0237_07.png,0237,f,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,f0237_07.pct A a2407.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0237_07.png,0237,s,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,s0237_07.pct A b2407.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/f0247_08.png,0247,f,Left,8,Middle,08,M,W,W,,False,Whorl,,W,f0247_08.pct W a0358.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_0/s0247_08.png,0247,s,Left,8,Middle,08,M,W,W,,False,Whorl,,W,s0247_08.pct W b0358.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0256_03.png,0256,f,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,f0256_03.pct R a1373.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0256_03.png,0256,s,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,s0256_03.pct R b1373.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0259_10.png,0259,f,Left,10,Little,10,M,A,A,T,True,Plain Arch,Tented Arch,AT,f0259_10.pct AT a235a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0259_10.png,0259,s,Left,10,Little,10,M,A,A,T,True,Plain Arch,Tented Arch,AT,s0259_10.pct AT b235a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0264_01.png,0264,f,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,f0264_01.pct W a0831.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0264_01.png,0264,s,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,s0264_01.pct W b0831.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0265_04.png,0265,f,Right,4,Ring,04,F,W,W,,False,Whorl,,W,f0265_04.pct W a0054.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0265_04.png,0265,s,Right,4,Ring,04,F,W,W,,False,Whorl,,W,s0265_04.pct W b0054.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0267_07.png,0267,f,Left,7,Index,07,F,A,A,T,True,Plain Arch,Tented Arch,AT,f0267_07.pct AT a2167.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0267_07.png,0267,s,Left,7,Index,07,F,A,A,T,True,Plain Arch,Tented Arch,AT,s0267_07.pct AT b2167.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0271_04.png,0271,f,Right,4,Ring,04,M,A,A,,False,Plain Arch,,A,f0271_04.pct A a1644.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0271_04.png,0271,s,Right,4,Ring,04,M,A,A,,False,Plain Arch,,A,s0271_04.pct A b1644.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0285_08.png,0285,f,Left,8,Middle,08,M,T,T,,False,Tented Arch,,T,f0285_08.pct T a2528.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0285_08.png,0285,s,Left,8,Middle,08,M,T,T,,False,Tented Arch,,T,s0285_08.pct T b2528.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0288_01.png,0288,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f0288_01.pct R a2411.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0288_01.png,0288,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s0288_01.pct R b2411.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0291_03.png,0291,f,Right,3,Middle,03,M,W,W,,False,Whorl,,W,f0291_03.pct W a0833.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0291_03.png,0291,s,Right,3,Middle,03,M,W,W,,False,Whorl,,W,s0291_03.pct W b0833.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0295_07.png,0295,f,Left,7,Index,07,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,f0295_07.pct TL a2647.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0295_07.png,0295,s,Left,7,Index,07,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,s0295_07.pct TL b2647.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0304_08.png,0304,f,Left,8,Middle,08,M,T,T,A,True,Tented Arch,Plain Arch,TA,f0304_08.pct TA a2478.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0304_08.png,0304,s,Left,8,Middle,08,M,T,T,A,True,Tented Arch,Plain Arch,TA,s0304_08.pct TA b2478.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0310_05.png,0310,f,Right,5,Little,05,M,W,W,,False,Whorl,,W,f0310_05.pct W a0525.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0310_05.png,0310,s,Right,5,Little,05,M,W,W,,False,Whorl,,W,s0310_05.pct W b0525.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0323_09.png,0323,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f0323_09.pct L a0399.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0323_09.png,0323,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s0323_09.pct L b0399.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0329_09.png,0329,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f0329_09.pct L a2779.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0329_09.png,0329,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s0329_09.pct L b2779.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0340_03.png,0340,f,Right,3,Middle,03,F,R,R,,False,Ulnar Loop,,R,f0340_03.pct R a2293.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0340_03.png,0340,s,Right,3,Middle,03,F,R,R,,False,Ulnar Loop,,R,s0340_03.pct R b2293.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0356_02.png,0356,f,Right,2,Index,02,M,W,W,,False,Whorl,,W,f0356_02.pct W a0812.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0356_02.png,0356,s,Right,2,Index,02,M,W,W,,False,Whorl,,W,s0356_02.pct W b0812.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0366_06.png,0366,f,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,f0366_06.pct A a1566.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0366_06.png,0366,s,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,s0366_06.pct A b1566.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0371_05.png,0371,f,Right,5,Little,05,M,W,W,R,True,Whorl,Ulnar Loop,WR,f0371_05.pct WR a0905.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0371_05.png,0371,s,Right,5,Little,05,M,W,W,R,True,Whorl,Ulnar Loop,WR,s0371_05.pct WR b0905.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0372_07.png,0372,f,Left,7,Index,07,M,R,R,,False,Radial Loop,,R,f0372_07.pct R a0497.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0372_07.png,0372,s,Left,7,Index,07,M,R,R,,False,Radial Loop,,R,s0372_07.pct R b0497.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0377_04.png,0377,f,Right,4,Ring,04,M,W,W,,False,Whorl,,W,f0377_04.pct W a0344.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0377_04.png,0377,s,Right,4,Ring,04,M,W,W,,False,Whorl,,W,s0377_04.pct W b0344.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0380_04.png,0380,f,Right,4,Ring,04,M,W,W,,False,Whorl,,W,f0380_04.pct W a1324.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0380_04.png,0380,s,Right,4,Ring,04,M,W,W,,False,Whorl,,W,s0380_04.pct W b1324.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0382_01.png,0382,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f0382_01.pct R a0081.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0382_01.png,0382,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s0382_01.pct R b0081.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0383_04.png,0383,f,Right,4,Ring,04,M,A,A,,False,Plain Arch,,A,f0383_04.pct A a1564.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0383_04.png,0383,s,Right,4,Ring,04,M,A,A,,False,Plain Arch,,A,s0383_04.pct A b1564.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0389_07.png,0389,f,Left,7,Index,07,M,T,T,,False,Tented Arch,,T,f0389_07.pct T a2577.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0389_07.png,0389,s,Left,7,Index,07,M,T,T,,False,Tented Arch,,T,s0389_07.pct T b2577.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0390_09.png,0390,f,Left,9,Ring,09,M,W,W,,False,Whorl,,W,f0390_09.pct W a0899.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0390_09.png,0390,s,Left,9,Ring,09,M,W,W,,False,Whorl,,W,s0390_09.pct W b0899.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0392_07.png,0392,f,Left,7,Index,07,M,W,W,,False,Whorl,,W,f0392_07.pct W a0617.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0392_07.png,0392,s,Left,7,Index,07,M,W,W,,False,Whorl,,W,s0392_07.pct W b0617.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0396_09.png,0396,f,Left,9,Ring,09,M,W,W,,False,Whorl,,W,f0396_09.pct W a0379.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0396_09.png,0396,s,Left,9,Ring,09,M,W,W,,False,Whorl,,W,s0396_09.pct W b0379.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0399_02.png,0399,f,Right,2,Index,02,M,R,R,,False,Ulnar Loop,,R,f0399_02.pct R a0522.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0399_02.png,0399,s,Right,2,Index,02,M,R,R,,False,Ulnar Loop,,R,s0399_02.pct R b0522.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0400_02.png,0400,f,Right,2,Index,02,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,f0400_02.pct TR a1282.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0400_02.png,0400,s,Right,2,Index,02,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,s0400_02.pct TR b1282.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0406_04.png,0406,f,Right,4,Ring,04,M,T,T,A,True,Tented Arch,Plain Arch,TA,f0406_04.pct TA a1034.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0406_04.png,0406,s,Right,4,Ring,04,M,T,T,A,True,Tented Arch,Plain Arch,TA,s0406_04.pct TA b1034.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0437_04.png,0437,f,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,f0437_04.pct R a0764.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0437_04.png,0437,s,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,s0437_04.pct R b0764.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0443_06.png,0443,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f0443_06.pct L a1376.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0443_06.png,0443,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s0443_06.pct L b1376.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0452_06.png,0452,f,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,f0452_06.pct W a0606.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0452_06.png,0452,s,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,s0452_06.pct W b0606.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0455_04.png,0455,f,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,f0455_04.pct R a1354.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0455_04.png,0455,s,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,s0455_04.pct R b1354.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0457_09.png,0457,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f0457_09.pct L a2069.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0457_09.png,0457,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s0457_09.pct L b2069.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0472_07.png,0472,f,Left,7,Index,07,M,W,W,,False,Whorl,,W,f0472_07.pct W a0647.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0472_07.png,0472,s,Left,7,Index,07,M,W,W,,False,Whorl,,W,s0472_07.pct W b0647.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0475_03.png,0475,f,Right,3,Middle,03,F,T,T,,False,Tented Arch,,T,f0475_03.pct T a2033.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0475_03.png,0475,s,Right,3,Middle,03,F,T,T,,False,Tented Arch,,T,s0475_03.pct T b2033.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0480_04.png,0480,f,Right,4,Ring,04,F,R,R,,False,Ulnar Loop,,R,f0480_04.pct R a2224.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0480_04.png,0480,s,Right,4,Ring,04,F,R,R,,False,Ulnar Loop,,R,s0480_04.pct R b2224.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/f0500_02.png,0500,f,Right,2,Index,02,F,A,A,T,True,Plain Arch,Tented Arch,AT,f0500_02.pct AT a1992.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_1/s0500_02.png,0500,s,Right,2,Index,02,F,A,A,T,True,Plain Arch,Tented Arch,AT,s0500_02.pct AT b1992.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0511_10.png,0511,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f0511_10.pct L a003a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0511_10.png,0511,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s0511_10.pct L b003a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0513_07.png,0513,f,Left,7,Index,07,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,f0513_07.pct TL a2527.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0513_07.png,0513,s,Left,7,Index,07,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,s0513_07.pct TL b2527.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0517_10.png,0517,f,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,f0517_10.pct A a150a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0517_10.png,0517,s,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,s0517_10.pct A b150a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0519_06.png,0519,f,Left,6,Thumb,06,F,W,W,,False,Whorl,,W,f0519_06.pct W a0926.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0519_06.png,0519,s,Left,6,Thumb,06,F,W,W,,False,Whorl,,W,s0519_06.pct W b0926.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0520_09.png,0520,f,Left,9,Ring,09,M,W,W,,False,Whorl,,W,f0520_09.pct W a1319.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0520_09.png,0520,s,Left,9,Ring,09,M,W,W,,False,Whorl,,W,s0520_09.pct W b1319.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0521_08.png,0521,f,Left,8,Middle,08,M,L,L,,False,Ulnar Loop,,L,f0521_08.pct L a0678.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0521_08.png,0521,s,Left,8,Middle,08,M,L,L,,False,Ulnar Loop,,L,s0521_08.pct L b0678.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0528_03.png,0528,f,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,f0528_03.pct R a2373.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0528_03.png,0528,s,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,s0528_03.pct R b2373.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0531_02.png,0531,f,Right,2,Index,02,M,T,T,,False,Tented Arch,,T,f0531_02.pct T a1342.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0531_02.png,0531,s,Right,2,Index,02,M,T,T,,False,Tented Arch,,T,s0531_02.pct T b1342.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0536_02.png,0536,f,Right,2,Index,02,M,W,W,,False,Whorl,,W,f0536_02.pct W a0842.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0536_02.png,0536,s,Right,2,Index,02,M,W,W,,False,Whorl,,W,s0536_02.pct W b0842.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0561_08.png,0561,f,Left,8,Middle,08,M,T,T,A,True,Tented Arch,Plain Arch,TA,f0561_08.pct TA a2598.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0561_08.png,0561,s,Left,8,Middle,08,M,T,T,A,True,Tented Arch,Plain Arch,TA,s0561_08.pct TA b2598.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0566_09.png,0566,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f0566_09.pct L a0629.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0566_09.png,0566,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s0566_09.pct L b0629.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0567_06.png,0567,f,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,f0567_06.pct A a1556.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0567_06.png,0567,s,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,s0567_06.pct A b1556.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0571_02.png,0571,f,Right,2,Index,02,F,T,T,A,True,Tented Arch,Plain Arch,TA,f0571_02.pct TA a2182.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0571_02.png,0571,s,Right,2,Index,02,F,T,T,A,True,Tented Arch,Plain Arch,TA,s0571_02.pct TA b2182.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0573_07.png,0573,f,Left,7,Index,07,M,T,T,,False,Tented Arch,,T,f0573_07.pct T a2487.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0573_07.png,0573,s,Left,7,Index,07,M,T,T,,False,Tented Arch,,T,s0573_07.pct T b2487.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0577_06.png,0577,f,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,f0577_06.pct A a1606.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0577_06.png,0577,s,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,s0577_06.pct A b1606.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0578_02.png,0578,f,Right,2,Index,02,M,A,A,,False,Plain Arch,,A,f0578_02.pct A a1532.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0578_02.png,0578,s,Right,2,Index,02,M,A,A,,False,Plain Arch,,A,s0578_02.pct A b1532.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0581_04.png,0581,f,Right,4,Ring,04,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,f0581_04.pct TR a2484.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0581_04.png,0581,s,Right,4,Ring,04,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,s0581_04.pct TR b2484.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0582_10.png,0582,f,Left,10,Little,10,M,W,W,,False,Whorl,,W,f0582_10.pct W a029a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0582_10.png,0582,s,Left,10,Little,10,M,W,W,,False,Whorl,,W,s0582_10.pct W b029a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0583_02.png,0583,f,Right,2,Index,02,M,R,R,,False,Ulnar Loop,,R,f0583_02.pct R a0632.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0583_02.png,0583,s,Right,2,Index,02,M,R,R,,False,Ulnar Loop,,R,s0583_02.pct R b0632.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0592_10.png,0592,f,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,f0592_10.pct A a175a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0592_10.png,0592,s,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,s0592_10.pct A b175a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0596_04.png,0596,f,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,f0596_04.pct R a2704.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0596_04.png,0596,s,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,s0596_04.pct R b2704.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0601_06.png,0601,f,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,f0601_06.pct A a1576.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0601_06.png,0601,s,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,s0601_06.pct A b1576.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0604_01.png,0604,f,Right,1,Thumb,01,M,A,A,,False,Plain Arch,,A,f0604_01.pct A a0231.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0604_01.png,0604,s,Right,1,Thumb,01,M,A,A,,False,Plain Arch,,A,s0604_01.pct A b0231.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0606_01.png,0606,f,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,f0606_01.pct W a0971.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0606_01.png,0606,s,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,s0606_01.pct W b0971.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0609_01.png,0609,f,Right,1,Thumb,01,F,A,A,,False,Plain Arch,,A,f0609_01.pct A a1861.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0609_01.png,0609,s,Right,1,Thumb,01,F,A,A,,False,Plain Arch,,A,s0609_01.pct A b1861.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0629_05.png,0629,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f0629_05.pct R a0875.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0629_05.png,0629,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s0629_05.pct R b0875.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0631_04.png,0631,f,Right,4,Ring,04,M,W,W,,False,Whorl,,W,f0631_04.pct W a0064.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0631_04.png,0631,s,Right,4,Ring,04,M,W,W,,False,Whorl,,W,s0631_04.pct W b0064.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0640_05.png,0640,f,Right,5,Little,05,F,R,R,,False,Ulnar Loop,,R,f0640_05.pct R a2235.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0640_05.png,0640,s,Right,5,Little,05,F,R,R,,False,Ulnar Loop,,R,s0640_05.pct R b2235.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0641_05.png,0641,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f0641_05.pct R a0845.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0641_05.png,0641,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s0641_05.pct R b0845.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0649_10.png,0649,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f0649_10.pct L a074a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0649_10.png,0649,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s0649_10.pct L b074a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0655_01.png,0655,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f0655_01.pct R a2311.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0655_01.png,0655,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s0655_01.pct R b2311.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0657_06.png,0657,f,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,f0657_06.pct W a0826.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0657_06.png,0657,s,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,s0657_06.pct W b0826.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0693_03.png,0693,f,Right,3,Middle,03,F,T,T,A,True,Tented Arch,Plain Arch,TA,f0693_03.pct TA a1973.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0693_03.png,0693,s,Right,3,Middle,03,F,T,T,A,True,Tented Arch,Plain Arch,TA,s0693_03.pct TA b1973.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0697_07.png,0697,f,Left,7,Index,07,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,f0697_07.pct TL a2457.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0697_07.png,0697,s,Left,7,Index,07,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,s0697_07.pct TL b2457.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0714_07.png,0714,f,Left,7,Index,07,M,W,W,,False,Whorl,,W,f0714_07.pct W a0937.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0714_07.png,0714,s,Left,7,Index,07,M,W,W,,False,Whorl,,W,s0714_07.pct W b0937.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0717_10.png,0717,f,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,f0717_10.pct L a227a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0717_10.png,0717,s,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,s0717_10.pct L b227a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0722_04.png,0722,f,Right,4,Ring,04,F,R,R,,False,Ulnar Loop,,R,f0722_04.pct R a1114.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0722_04.png,0722,s,Right,4,Ring,04,F,R,R,,False,Ulnar Loop,,R,s0722_04.pct R b1114.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0723_01.png,0723,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f0723_01.pct R a0141.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0723_01.png,0723,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s0723_01.pct R b0141.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0726_06.png,0726,f,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,f0726_06.pct A a1536.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0726_06.png,0726,s,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,s0726_06.pct A b1536.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0730_05.png,0730,f,Right,5,Little,05,M,A,A,,False,Plain Arch,,A,f0730_05.pct A a1555.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0730_05.png,0730,s,Right,5,Little,05,M,A,A,,False,Plain Arch,,A,s0730_05.pct A b1555.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/f0733_08.png,0733,f,Left,8,Middle,08,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,f0733_08.pct TL a1238.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_2/s0733_08.png,0733,s,Left,8,Middle,08,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,s0733_08.pct TL b1238.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0759_03.png,0759,f,Right,3,Middle,03,F,T,T,,False,Tented Arch,,T,f0759_03.pct T a1983.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0759_03.png,0759,s,Right,3,Middle,03,F,T,T,,False,Tented Arch,,T,s0759_03.pct T b1983.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0786_09.png,0786,f,Left,9,Ring,09,M,T,T,,False,Tented Arch,,T,f0786_09.pct T a0139.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0786_09.png,0786,s,Left,9,Ring,09,M,T,T,,False,Tented Arch,,T,s0786_09.pct T b0139.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0805_01.png,0805,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f0805_01.pct R a0411.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0805_01.png,0805,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s0805_01.pct R b0411.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0808_07.png,0808,f,Left,7,Index,07,M,L,L,,False,Ulnar Loop,,L,f0808_07.pct L a1267.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0808_07.png,0808,s,Left,7,Index,07,M,L,L,,False,Ulnar Loop,,L,s0808_07.pct L b1267.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0810_10.png,0810,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f0810_10.pct L a114a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0810_10.png,0810,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s0810_10.pct L b114a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0823_06.png,0823,f,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,f0823_06.pct A a1586.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0823_06.png,0823,s,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,s0823_06.pct A b1586.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0826_01.png,0826,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f0826_01.pct R a2371.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0826_01.png,0826,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s0826_01.pct R b2371.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0830_02.png,0830,f,Right,2,Index,02,M,A,A,,False,Plain Arch,,A,f0830_02.pct A a1662.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0830_02.png,0830,s,Right,2,Index,02,M,A,A,,False,Plain Arch,,A,s0830_02.pct A b1662.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0835_10.png,0835,f,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,f0835_10.pct L a202a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0835_10.png,0835,s,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,s0835_10.pct L b202a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0837_02.png,0837,f,Right,2,Index,02,M,L,L,,False,Radial Loop,,L,f0837_02.pct L a0342.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0837_02.png,0837,s,Right,2,Index,02,M,L,L,,False,Radial Loop,,L,s0837_02.pct L b0342.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0839_10.png,0839,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f0839_10.pct L a239a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0839_10.png,0839,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s0839_10.pct L b239a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0841_09.png,0841,f,Left,9,Ring,09,F,L,L,,False,Ulnar Loop,,L,f0841_09.pct L a2229.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0841_09.png,0841,s,Left,9,Ring,09,F,L,L,,False,Ulnar Loop,,L,s0841_09.pct L b2229.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0843_05.png,0843,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f0843_05.pct R a0435.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0843_05.png,0843,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s0843_05.pct R b0435.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0845_10.png,0845,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f0845_10.pct L a272a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0845_10.png,0845,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s0845_10.pct L b272a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0848_01.png,0848,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f0848_01.pct R a2741.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0848_01.png,0848,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s0848_01.pct R b2741.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0860_07.png,0860,f,Left,7,Index,07,M,W,W,,False,Whorl,,W,f0860_07.pct W a0627.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0860_07.png,0860,s,Left,7,Index,07,M,W,W,,False,Whorl,,W,s0860_07.pct W b0627.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0864_05.png,0864,f,Right,5,Little,05,F,T,T,R,True,Tented Arch,Ulnar Loop,TR,f0864_05.pct TR a1475.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0864_05.png,0864,s,Right,5,Little,05,F,T,T,R,True,Tented Arch,Ulnar Loop,TR,s0864_05.pct TR b1475.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0867_02.png,0867,f,Right,2,Index,02,F,W,W,,False,Whorl,,W,f0867_02.pct W a0922.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0867_02.png,0867,s,Right,2,Index,02,F,W,W,,False,Whorl,,W,s0867_02.pct W b0922.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0868_07.png,0868,f,Left,7,Index,07,F,T,T,R,True,Tented Arch,Radial Loop,TR,f0868_07.pct TR a2247.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0868_07.png,0868,s,Left,7,Index,07,F,T,T,R,True,Tented Arch,Radial Loop,TR,s0868_07.pct TR b2247.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0885_06.png,0885,f,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,f0885_06.pct W a0486.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0885_06.png,0885,s,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,s0885_06.pct W b0486.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0888_10.png,0888,f,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,f0888_10.pct L a225a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0888_10.png,0888,s,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,s0888_10.pct L b225a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0890_01.png,0890,f,Right,1,Thumb,01,F,A,A,,False,Plain Arch,,A,f0890_01.pct A a2171.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0890_01.png,0890,s,Right,1,Thumb,01,F,A,A,,False,Plain Arch,,A,s0890_01.pct A b2171.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0895_01.png,0895,f,Right,1,Thumb,01,F,A,A,,False,Plain Arch,,A,f0895_01.pct A a1991.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0895_01.png,0895,s,Right,1,Thumb,01,F,A,A,,False,Plain Arch,,A,s0895_01.pct A b1991.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0896_05.png,0896,f,Right,5,Little,05,M,W,W,,False,Whorl,,W,f0896_05.pct W a0375.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0896_05.png,0896,s,Right,5,Little,05,M,W,W,,False,Whorl,,W,s0896_05.pct W b0375.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0901_09.png,0901,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f0901_09.pct L a0039.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0901_09.png,0901,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s0901_09.pct L b0039.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0912_02.png,0912,f,Right,2,Index,02,M,T,T,,False,Tented Arch,,T,f0912_02.pct T a2692.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0912_02.png,0912,s,Right,2,Index,02,M,T,T,,False,Tented Arch,,T,s0912_02.pct T b2692.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0914_06.png,0914,f,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,f0914_06.pct W a0106.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0914_06.png,0914,s,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,s0914_06.pct W b0106.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0919_06.png,0919,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f0919_06.pct L a2066.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0919_06.png,0919,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s0919_06.pct L b2066.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0929_10.png,0929,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f0929_10.pct L a101a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0929_10.png,0929,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s0929_10.pct L b101a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0937_04.png,0937,f,Right,4,Ring,04,M,W,W,,False,Whorl,,W,f0937_04.pct W a0844.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0937_04.png,0937,s,Right,4,Ring,04,M,W,W,,False,Whorl,,W,s0937_04.pct W b0844.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0947_01.png,0947,f,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,f0947_01.pct W a0631.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0947_01.png,0947,s,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,s0947_01.pct W b0631.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0952_06.png,0952,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f0952_06.pct L a2546.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0952_06.png,0952,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s0952_06.pct L b2546.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0969_06.png,0969,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f0969_06.pct L a0096.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0969_06.png,0969,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s0969_06.pct L b0096.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0979_01.png,0979,f,Right,1,Thumb,01,F,A,A,,False,Plain Arch,,A,f0979_01.pct A a2181.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0979_01.png,0979,s,Right,1,Thumb,01,F,A,A,,False,Plain Arch,,A,s0979_01.pct A b2181.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0986_08.png,0986,f,Left,8,Middle,08,M,W,W,,False,Whorl,,W,f0986_08.pct W a0588.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0986_08.png,0986,s,Left,8,Middle,08,M,W,W,,False,Whorl,,W,s0986_08.pct W b0588.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0991_02.png,0991,f,Right,2,Index,02,M,W,W,,False,Whorl,,W,f0991_02.pct W a0972.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0991_02.png,0991,s,Right,2,Index,02,M,W,W,,False,Whorl,,W,s0991_02.pct W b0972.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0993_08.png,0993,f,Left,8,Middle,08,F,T,T,A,True,Tented Arch,Plain Arch,TA,f0993_08.pct TA a1618.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0993_08.png,0993,s,Left,8,Middle,08,F,T,T,A,True,Tented Arch,Plain Arch,TA,s0993_08.pct TA b1618.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f0999_07.png,0999,f,Left,7,Index,07,F,L,L,,False,Ulnar Loop,,L,f0999_07.pct L a1117.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s0999_07.png,0999,s,Left,7,Index,07,F,L,L,,False,Ulnar Loop,,L,s0999_07.pct L b1117.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/f1000_07.png,1000,f,Left,7,Index,07,F,T,T,A,True,Tented Arch,Plain Arch,TA,f1000_07.pct TA a2297.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_3/s1000_07.png,1000,s,Left,7,Index,07,F,T,T,A,True,Tented Arch,Plain Arch,TA,s1000_07.pct TA b2297.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1001_05.png,1001,f,Right,5,Little,05,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,f1001_05.pct TR a0175.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1001_05.png,1001,s,Right,5,Little,05,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,s1001_05.pct TR b0175.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1003_04.png,1003,f,Right,4,Ring,04,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,f1003_04.pct TR a0154.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1003_04.png,1003,s,Right,4,Ring,04,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,s1003_04.pct TR b0154.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1037_06.png,1037,f,Left,6,Thumb,06,M,T,T,,False,Tented Arch,,T,f1037_06.pct T a2516.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1037_06.png,1037,s,Left,6,Thumb,06,M,T,T,,False,Tented Arch,,T,s1037_06.pct T b2516.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1046_09.png,1046,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f1046_09.pct L a0959.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1046_09.png,1046,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s1046_09.pct L b0959.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1050_05.png,1050,f,Right,5,Little,05,M,A,A,,False,Plain Arch,,A,f1050_05.pct A a1635.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1050_05.png,1050,s,Right,5,Little,05,M,A,A,,False,Plain Arch,,A,s1050_05.pct A b1635.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1054_01.png,1054,f,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,f1054_01.pct W a0331.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1054_01.png,1054,s,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,s1054_01.pct W b0331.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1056_05.png,1056,f,Right,5,Little,05,F,R,R,,False,Ulnar Loop,,R,f1056_05.pct R a0055.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1056_05.png,1056,s,Right,5,Little,05,F,R,R,,False,Ulnar Loop,,R,s1056_05.pct R b0055.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1060_05.png,1060,f,Right,5,Little,05,M,A,A,,False,Plain Arch,,A,f1060_05.pct A a1625.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1060_05.png,1060,s,Right,5,Little,05,M,A,A,,False,Plain Arch,,A,s1060_05.pct A b1625.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1063_09.png,1063,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f1063_09.pct L a1259.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1063_09.png,1063,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s1063_09.pct L b1259.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1071_08.png,1071,f,Left,8,Middle,08,M,A,A,,False,Plain Arch,,A,f1071_08.pct A a1668.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1071_08.png,1071,s,Left,8,Middle,08,M,A,A,,False,Plain Arch,,A,s1071_08.pct A b1668.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1086_03.png,1086,f,Right,3,Middle,03,M,A,A,,False,Plain Arch,,A,f1086_03.pct A a1753.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1086_03.png,1086,s,Right,3,Middle,03,M,A,A,,False,Plain Arch,,A,s1086_03.pct A b1753.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1088_03.png,1088,f,Right,3,Middle,03,F,T,T,R,True,Tented Arch,Ulnar Loop,TR,f1088_03.pct TR a2253.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1088_03.png,1088,s,Right,3,Middle,03,F,T,T,R,True,Tented Arch,Ulnar Loop,TR,s1088_03.pct TR b2253.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1103_10.png,1103,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f1103_10.pct L a023a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1103_10.png,1103,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s1103_10.pct L b023a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1105_08.png,1105,f,Left,8,Middle,08,M,L,L,,False,Ulnar Loop,,L,f1105_08.pct L a1018.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1105_08.png,1105,s,Left,8,Middle,08,M,L,L,,False,Ulnar Loop,,L,s1105_08.pct L b1018.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1116_01.png,1116,f,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,f1116_01.pct W a0311.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1116_01.png,1116,s,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,s1116_01.pct W b0311.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1124_05.png,1124,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f1124_05.pct R a2095.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1124_05.png,1124,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s1124_05.pct R b2095.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1126_07.png,1126,f,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,f1126_07.pct A a2117.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1126_07.png,1126,s,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,s1126_07.pct A b2117.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1130_09.png,1130,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f1130_09.pct L a2509.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1130_09.png,1130,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s1130_09.pct L b2509.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1144_05.png,1144,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f1144_05.pct R a0785.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1144_05.png,1144,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s1144_05.pct R b0785.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1146_03.png,1146,f,Right,3,Middle,03,F,T,T,R,True,Tented Arch,Ulnar Loop,TR,f1146_03.pct TR a1613.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1146_03.png,1146,s,Right,3,Middle,03,F,T,T,R,True,Tented Arch,Ulnar Loop,TR,s1146_03.pct TR b1613.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1149_09.png,1149,f,Left,9,Ring,09,F,T,T,R,True,Tented Arch,Radial Loop,TR,f1149_09.pct TR a1979.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1149_09.png,1149,s,Left,9,Ring,09,F,T,T,R,True,Tented Arch,Radial Loop,TR,s1149_09.pct TR b1979.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1150_10.png,1150,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f1150_10.pct L a031a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1150_10.png,1150,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s1150_10.pct L b031a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1163_03.png,1163,f,Right,3,Middle,03,M,T,T,L,True,Tented Arch,Radial Loop,TL,f1163_03.pct TL a2543.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1163_03.png,1163,s,Right,3,Middle,03,M,T,T,L,True,Tented Arch,Radial Loop,TL,s1163_03.pct TL b2543.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1175_08.png,1175,f,Left,8,Middle,08,M,L,L,,False,Ulnar Loop,,L,f1175_08.pct L a0648.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1175_08.png,1175,s,Left,8,Middle,08,M,L,L,,False,Ulnar Loop,,L,s1175_08.pct L b0648.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1178_05.png,1178,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f1178_05.pct R a0105.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1178_05.png,1178,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s1178_05.pct R b0105.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1190_04.png,1190,f,Right,4,Ring,04,M,R,R,T,True,Ulnar Loop,Tented Arch,RT,f1190_04.pct RT a2364.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1190_04.png,1190,s,Right,4,Ring,04,M,R,R,T,True,Ulnar Loop,Tented Arch,RT,s1190_04.pct RT b2364.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1191_10.png,1191,f,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,f1191_10.pct L a219a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1191_10.png,1191,s,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,s1191_10.pct L b219a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1193_05.png,1193,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f1193_05.pct R a1165.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1193_05.png,1193,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s1193_05.pct R b1165.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1201_10.png,1201,f,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,f1201_10.pct L a109a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1201_10.png,1201,s,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,s1201_10.pct L b109a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1211_10.png,1211,f,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,f1211_10.pct L a223a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1211_10.png,1211,s,Left,10,Little,10,F,L,L,,False,Ulnar Loop,,L,s1211_10.pct L b223a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1215_08.png,1215,f,Left,8,Middle,08,M,A,A,,False,Plain Arch,,A,f1215_08.pct A a1808.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1215_08.png,1215,s,Left,8,Middle,08,M,A,A,,False,Plain Arch,,A,s1215_08.pct A b1808.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1217_05.png,1217,f,Right,5,Little,05,M,W,W,,False,Whorl,,W,f1217_05.pct W a0605.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1217_05.png,1217,s,Right,5,Little,05,M,W,W,,False,Whorl,,W,s1217_05.pct W b0605.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1235_01.png,1235,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f1235_01.pct R a1331.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1235_01.png,1235,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s1235_01.pct R b1331.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1237_09.png,1237,f,Left,9,Ring,09,M,W,W,,False,Whorl,,W,f1237_09.pct W a1139.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1237_09.png,1237,s,Left,9,Ring,09,M,W,W,,False,Whorl,,W,s1237_09.pct W b1139.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1238_09.png,1238,f,Left,9,Ring,09,M,L,L,T,True,Ulnar Loop,Tented Arch,LT,f1238_09.pct LT a2109.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1238_09.png,1238,s,Left,9,Ring,09,M,L,L,T,True,Ulnar Loop,Tented Arch,LT,s1238_09.pct LT b2109.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/f1244_01.png,1244,f,Right,1,Thumb,01,F,R,R,,False,Ulnar Loop,,R,f1244_01.pct R a0711.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_4/s1244_01.png,1244,s,Right,1,Thumb,01,F,R,R,,False,Ulnar Loop,,R,s1244_01.pct R b0711.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1263_09.png,1263,f,Left,9,Ring,09,M,W,W,,False,Whorl,,W,f1263_09.pct W a0319.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1263_09.png,1263,s,Left,9,Ring,09,M,W,W,,False,Whorl,,W,s1263_09.pct W b0319.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1264_05.png,1264,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f1264_05.pct R a0585.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1264_05.png,1264,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s1264_05.pct R b0585.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1269_04.png,1269,f,Right,4,Ring,04,F,R,R,,False,Ulnar Loop,,R,f1269_04.pct R a1474.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1269_04.png,1269,s,Right,4,Ring,04,F,R,R,,False,Ulnar Loop,,R,s1269_04.pct R b1474.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1281_08.png,1281,f,Left,8,Middle,08,F,A,A,,False,Plain Arch,,A,f1281_08.pct A a1878.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1281_08.png,1281,s,Left,8,Middle,08,F,A,A,,False,Plain Arch,,A,s1281_08.pct A b1878.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1282_01.png,1282,f,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,f1282_01.pct W a1251.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1282_01.png,1282,s,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,s1282_01.pct W b1251.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1287_02.png,1287,f,Right,2,Index,02,M,W,W,,False,Whorl,,W,f1287_02.pct W a0292.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1287_02.png,1287,s,Right,2,Index,02,M,W,W,,False,Whorl,,W,s1287_02.pct W b0292.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1289_09.png,1289,f,Left,9,Ring,09,M,W,W,,False,Whorl,,W,f1289_09.pct W a0879.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1289_09.png,1289,s,Left,9,Ring,09,M,W,W,,False,Whorl,,W,s1289_09.pct W b0879.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1292_07.png,1292,f,Left,7,Index,07,F,R,R,T,True,Radial Loop,Tented Arch,RT,f1292_07.pct RT a2047.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1292_07.png,1292,s,Left,7,Index,07,F,R,R,T,True,Radial Loop,Tented Arch,RT,s1292_07.pct RT b2047.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1295_07.png,1295,f,Left,7,Index,07,M,L,L,,False,Ulnar Loop,,L,f1295_07.pct L a0067.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1295_07.png,1295,s,Left,7,Index,07,M,L,L,,False,Ulnar Loop,,L,s1295_07.pct L b0067.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1311_06.png,1311,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f1311_06.pct L a0156.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1311_06.png,1311,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s1311_06.pct L b0156.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1325_03.png,1325,f,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,f1325_03.pct R a1133.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1325_03.png,1325,s,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,s1325_03.pct R b1133.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1326_07.png,1326,f,Left,7,Index,07,F,T,T,A,True,Tented Arch,Plain Arch,TA,f1326_07.pct TA a2307.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1326_07.png,1326,s,Left,7,Index,07,F,T,T,A,True,Tented Arch,Plain Arch,TA,s1326_07.pct TA b2307.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1330_03.png,1330,f,Right,3,Middle,03,M,R,R,T,True,Ulnar Loop,Tented Arch,RT,f1330_03.pct RT a2463.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1330_03.png,1330,s,Right,3,Middle,03,M,R,R,T,True,Ulnar Loop,Tented Arch,RT,s1330_03.pct RT b2463.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1331_04.png,1331,f,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,f1331_04.pct R a1414.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1331_04.png,1331,s,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,s1331_04.pct R b1414.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1333_08.png,1333,f,Left,8,Middle,08,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,f1333_08.pct TL a2358.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1333_08.png,1333,s,Left,8,Middle,08,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,s1333_08.pct TL b2358.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1335_08.png,1335,f,Left,8,Middle,08,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,f1335_08.pct TL a2738.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1335_08.png,1335,s,Left,8,Middle,08,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,s1335_08.pct TL b2738.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1337_02.png,1337,f,Right,2,Index,02,F,A,A,,False,Plain Arch,,A,f1337_02.pct A a1832.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1337_02.png,1337,s,Right,2,Index,02,F,A,A,,False,Plain Arch,,A,s1337_02.pct A b1832.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1349_04.png,1349,f,Right,4,Ring,04,F,A,A,,False,Plain Arch,,A,f1349_04.pct A a1824.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1349_04.png,1349,s,Right,4,Ring,04,F,A,A,,False,Plain Arch,,A,s1349_04.pct A b1824.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1360_02.png,1360,f,Right,2,Index,02,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,f1360_02.pct TR a2482.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1360_02.png,1360,s,Right,2,Index,02,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,s1360_02.pct TR b2482.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1372_04.png,1372,f,Right,4,Ring,04,M,W,W,,False,Whorl,,W,f1372_04.pct W a0404.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1372_04.png,1372,s,Right,4,Ring,04,M,W,W,,False,Whorl,,W,s1372_04.pct W b0404.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1377_08.png,1377,f,Left,8,Middle,08,F,W,W,,False,Whorl,,W,f1377_08.pct W a1158.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1377_08.png,1377,s,Left,8,Middle,08,F,W,W,,False,Whorl,,W,s1377_08.pct W b1158.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1379_07.png,1379,f,Left,7,Index,07,M,L,L,,False,Ulnar Loop,,L,f1379_07.pct L a1127.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1379_07.png,1379,s,Left,7,Index,07,M,L,L,,False,Ulnar Loop,,L,s1379_07.pct L b1127.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1389_08.png,1389,f,Left,8,Middle,08,F,L,L,,False,Ulnar Loop,,L,f1389_08.pct L a1388.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1389_08.png,1389,s,Left,8,Middle,08,F,L,L,,False,Ulnar Loop,,L,s1389_08.pct L b1388.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1409_06.png,1409,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f1409_06.pct L a1026.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1409_06.png,1409,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s1409_06.pct L b1026.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1416_06.png,1416,f,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,f1416_06.pct A a1726.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1416_06.png,1416,s,Left,6,Thumb,06,M,A,A,,False,Plain Arch,,A,s1416_06.pct A b1726.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1422_06.png,1422,f,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,f1422_06.pct W a1266.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1422_06.png,1422,s,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,s1422_06.pct W b1266.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1437_07.png,1437,f,Left,7,Index,07,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,f1437_07.pct TL a2537.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1437_07.png,1437,s,Left,7,Index,07,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,s1437_07.pct TL b2537.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1439_01.png,1439,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f1439_01.pct R a0261.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1439_01.png,1439,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s1439_01.pct R b0261.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1445_10.png,1445,f,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,f1445_10.pct A a171a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1445_10.png,1445,s,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,s1445_10.pct A b171a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1456_10.png,1456,f,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,f1456_10.pct A a176a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1456_10.png,1456,s,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,s1456_10.pct A b176a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1457_09.png,1457,f,Left,9,Ring,09,M,W,W,,False,Whorl,,W,f1457_09.pct W a0579.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1457_09.png,1457,s,Left,9,Ring,09,M,W,W,,False,Whorl,,W,s1457_09.pct W b0579.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1466_09.png,1466,f,Left,9,Ring,09,F,L,L,,False,Ulnar Loop,,L,f1466_09.pct L a2019.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1466_09.png,1466,s,Left,9,Ring,09,F,L,L,,False,Ulnar Loop,,L,s1466_09.pct L b2019.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1477_07.png,1477,f,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,f1477_07.pct A a1697.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1477_07.png,1477,s,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,s1477_07.pct A b1697.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1478_07.png,1478,f,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,f1478_07.pct A a1077.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1478_07.png,1478,s,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,s1478_07.pct A b1077.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1488_01.png,1488,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f1488_01.pct R a2681.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1488_01.png,1488,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s1488_01.pct R b2681.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1490_08.png,1490,f,Left,8,Middle,08,M,T,T,,False,Tented Arch,,T,f1490_08.pct T a2078.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1490_08.png,1490,s,Left,8,Middle,08,M,T,T,,False,Tented Arch,,T,s1490_08.pct T b2078.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/f1495_10.png,1495,f,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,f1495_10.pct A a157a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_5/s1495_10.png,1495,s,Left,10,Little,10,M,A,A,,False,Plain Arch,,A,s1495_10.pct A b157a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1506_02.png,1506,f,Right,2,Index,02,M,T,T,,False,Tented Arch,,T,f1506_02.pct T a2592.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1506_02.png,1506,s,Right,2,Index,02,M,T,T,,False,Tented Arch,,T,s1506_02.pct T b2592.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1516_02.png,1516,f,Right,2,Index,02,F,R,R,,False,Ulnar Loop,,R,f1516_02.pct R a1382.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1516_02.png,1516,s,Right,2,Index,02,F,R,R,,False,Ulnar Loop,,R,s1516_02.pct R b1382.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1521_02.png,1521,f,Right,2,Index,02,M,T,T,,False,Tented Arch,,T,f1521_02.pct T a0112.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1521_02.png,1521,s,Right,2,Index,02,M,T,T,,False,Tented Arch,,T,s1521_02.pct T b0112.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1523_05.png,1523,f,Right,5,Little,05,M,R,R,W,True,Ulnar Loop,Whorl,RW,f1523_05.pct RW a0695.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1523_05.png,1523,s,Right,5,Little,05,M,R,R,W,True,Ulnar Loop,Whorl,RW,s1523_05.pct RW b0695.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1524_08.png,1524,f,Left,8,Middle,08,M,T,T,R,True,Tented Arch,Radial Loop,TR,f1524_08.pct TR a2548.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1524_08.png,1524,s,Left,8,Middle,08,M,T,T,R,True,Tented Arch,Radial Loop,TR,s1524_08.pct TR b2548.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1530_02.png,1530,f,Right,2,Index,02,F,T,T,,False,Tented Arch,,T,f1530_02.pct T a2202.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1530_02.png,1530,s,Right,2,Index,02,F,T,T,,False,Tented Arch,,T,s1530_02.pct T b2202.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1531_08.png,1531,f,Left,8,Middle,08,M,L,L,,False,Ulnar Loop,,L,f1531_08.pct L a0198.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1531_08.png,1531,s,Left,8,Middle,08,M,L,L,,False,Ulnar Loop,,L,s1531_08.pct L b0198.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1542_06.png,1542,f,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,f1542_06.pct W a0436.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1542_06.png,1542,s,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,s1542_06.pct W b0436.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1547_01.png,1547,f,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,f1547_01.pct R a2571.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1547_01.png,1547,s,Right,1,Thumb,01,M,R,R,,False,Ulnar Loop,,R,s1547_01.pct R b2571.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1556_06.png,1556,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f1556_06.pct L a0536.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1556_06.png,1556,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s1556_06.pct L b0536.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1569_06.png,1569,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f1569_06.pct L a2676.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1569_06.png,1569,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s1569_06.pct L b2676.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1574_07.png,1574,f,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,f1574_07.pct A a1517.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1574_07.png,1574,s,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,s1574_07.pct A b1517.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1577_10.png,1577,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f1577_10.pct L a078a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1577_10.png,1577,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s1577_10.pct L b078a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1583_04.png,1583,f,Right,4,Ring,04,F,R,R,,False,Ulnar Loop,,R,f1583_04.pct R a2044.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1583_04.png,1583,s,Right,4,Ring,04,F,R,R,,False,Ulnar Loop,,R,s1583_04.pct R b2044.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1587_05.png,1587,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f1587_05.pct R a1075.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1587_05.png,1587,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s1587_05.pct R b1075.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1596_04.png,1596,f,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,f1596_04.pct R a0164.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1596_04.png,1596,s,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,s1596_04.pct R b0164.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1605_03.png,1605,f,Right,3,Middle,03,F,A,A,,False,Plain Arch,,A,f1605_03.pct A a1823.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1605_03.png,1605,s,Right,3,Middle,03,F,A,A,,False,Plain Arch,,A,s1605_03.pct A b1823.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1615_07.png,1615,f,Left,7,Index,07,F,L,L,,False,Ulnar Loop,,L,f1615_07.pct L a0717.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1615_07.png,1615,s,Left,7,Index,07,F,L,L,,False,Ulnar Loop,,L,s1615_07.pct L b0717.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1617_03.png,1617,f,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,f1617_03.pct R a0263.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1617_03.png,1617,s,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,s1617_03.pct R b0263.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1620_07.png,1620,f,Left,7,Index,07,M,L,L,,False,Ulnar Loop,,L,f1620_07.pct L a1007.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1620_07.png,1620,s,Left,7,Index,07,M,L,L,,False,Ulnar Loop,,L,s1620_07.pct L b1007.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1628_10.png,1628,f,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,f1628_10.pct L a141a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1628_10.png,1628,s,Left,10,Little,10,M,L,L,,False,Ulnar Loop,,L,s1628_10.pct L b141a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1631_03.png,1631,f,Right,3,Middle,03,M,W,W,,False,Whorl,,W,f1631_03.pct W a0013.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1631_03.png,1631,s,Right,3,Middle,03,M,W,W,,False,Whorl,,W,s1631_03.pct W b0013.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1633_05.png,1633,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f1633_05.pct R a0775.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1633_05.png,1633,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s1633_05.pct R b0775.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1634_09.png,1634,f,Left,9,Ring,09,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,f1634_09.pct TL a0189.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1634_09.png,1634,s,Left,9,Ring,09,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,s1634_09.pct TL b0189.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1638_04.png,1638,f,Right,4,Ring,04,M,A,A,,False,Plain Arch,,A,f1638_04.pct A a1764.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1638_04.png,1638,s,Right,4,Ring,04,M,A,A,,False,Plain Arch,,A,s1638_04.pct A b1764.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1649_05.png,1649,f,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,f1649_05.pct R a0115.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1649_05.png,1649,s,Right,5,Little,05,M,R,R,,False,Ulnar Loop,,R,s1649_05.pct R b0115.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1650_08.png,1650,f,Left,8,Middle,08,M,L,L,,False,Ulnar Loop,,L,f1650_08.pct L a0038.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1650_08.png,1650,s,Left,8,Middle,08,M,L,L,,False,Ulnar Loop,,L,s1650_08.pct L b0038.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1667_10.png,1667,f,Left,10,Little,10,M,W,W,,False,Whorl,,W,f1667_10.pct W a012a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1667_10.png,1667,s,Left,10,Little,10,M,W,W,,False,Whorl,,W,s1667_10.pct W b012a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1671_09.png,1671,f,Left,9,Ring,09,M,W,W,,False,Whorl,,W,f1671_09.pct W a0569.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1671_09.png,1671,s,Left,9,Ring,09,M,W,W,,False,Whorl,,W,s1671_09.pct W b0569.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1676_09.png,1676,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f1676_09.pct L a0459.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1676_09.png,1676,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s1676_09.pct L b0459.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1677_01.png,1677,f,Right,1,Thumb,01,M,A,A,,False,Plain Arch,,A,f1677_01.pct A a1621.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1677_01.png,1677,s,Right,1,Thumb,01,M,A,A,,False,Plain Arch,,A,s1677_01.pct A b1621.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1689_08.png,1689,f,Left,8,Middle,08,F,T,T,R,True,Tented Arch,Radial Loop,TR,f1689_08.pct TR a2048.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1689_08.png,1689,s,Left,8,Middle,08,F,T,T,R,True,Tented Arch,Radial Loop,TR,s1689_08.pct TR b2048.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1699_07.png,1699,f,Left,7,Index,07,M,T,T,A,True,Tented Arch,Plain Arch,TA,f1699_07.pct TA a2767.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1699_07.png,1699,s,Left,7,Index,07,M,T,T,A,True,Tented Arch,Plain Arch,TA,s1699_07.pct TA b2767.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1710_03.png,1710,f,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,f1710_03.pct R a0633.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1710_03.png,1710,s,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,s1710_03.pct R b0633.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1714_03.png,1714,f,Right,3,Middle,03,M,A,A,,False,Plain Arch,,A,f1714_03.pct A a1603.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1714_03.png,1714,s,Right,3,Middle,03,M,A,A,,False,Plain Arch,,A,s1714_03.pct A b1603.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1717_04.png,1717,f,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,f1717_04.pct R a0094.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1717_04.png,1717,s,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,s1717_04.pct R b0094.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1718_09.png,1718,f,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,f1718_09.pct L a2089.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1718_09.png,1718,s,Left,9,Ring,09,M,L,L,,False,Ulnar Loop,,L,s1718_09.pct L b2089.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1724_01.png,1724,f,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,f1724_01.pct W a0341.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1724_01.png,1724,s,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,s1724_01.pct W b0341.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1734_09.png,1734,f,Left,9,Ring,09,M,A,A,,False,Plain Arch,,A,f1734_09.pct A a1609.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1734_09.png,1734,s,Left,9,Ring,09,M,A,A,,False,Plain Arch,,A,s1734_09.pct A b1609.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1739_01.png,1739,f,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,f1739_01.pct W a0941.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1739_01.png,1739,s,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,s1739_01.pct W b0941.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1742_06.png,1742,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f1742_06.pct L a2406.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1742_06.png,1742,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s1742_06.pct L b2406.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1743_08.png,1743,f,Left,8,Middle,08,M,A,A,,False,Plain Arch,,A,f1743_08.pct A a1598.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1743_08.png,1743,s,Left,8,Middle,08,M,A,A,,False,Plain Arch,,A,s1743_08.pct A b1598.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/f1748_02.png,1748,f,Right,2,Index,02,M,T,T,L,True,Tented Arch,Radial Loop,TL,f1748_02.pct TL a2112.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_6/s1748_02.png,1748,s,Right,2,Index,02,M,T,T,L,True,Tented Arch,Radial Loop,TL,s1748_02.pct TL b2112.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1760_04.png,1760,f,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,f1760_04.pct R a2114.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1760_04.png,1760,s,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,s1760_04.pct R b2114.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1788_02.png,1788,f,Right,2,Index,02,M,R,R,,False,Ulnar Loop,,R,f1788_02.pct R a0402.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1788_02.png,1788,s,Right,2,Index,02,M,R,R,,False,Ulnar Loop,,R,s1788_02.pct R b0402.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1794_08.png,1794,f,Left,8,Middle,08,M,R,R,,False,Radial Loop,,R,f1794_08.pct R a0908.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1794_08.png,1794,s,Left,8,Middle,08,M,R,R,,False,Radial Loop,,R,s1794_08.pct R b0908.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1801_03.png,1801,f,Right,3,Middle,03,F,T,T,A,True,Tented Arch,Plain Arch,TA,f1801_03.pct TA a2003.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1801_03.png,1801,s,Right,3,Middle,03,F,T,T,A,True,Tented Arch,Plain Arch,TA,s1801_03.pct TA b2003.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1811_02.png,1811,f,Right,2,Index,02,M,T,T,,False,Tented Arch,,T,f1811_02.pct T a2812.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1811_02.png,1811,s,Right,2,Index,02,M,T,T,,False,Tented Arch,,T,s1811_02.pct T b2812.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1814_01.png,1814,f,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,f1814_01.pct W a0991.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1814_01.png,1814,s,Right,1,Thumb,01,M,W,W,,False,Whorl,,W,s1814_01.pct W b0991.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1818_02.png,1818,f,Right,2,Index,02,M,A,A,,False,Plain Arch,,A,f1818_02.pct A a1672.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1818_02.png,1818,s,Right,2,Index,02,M,A,A,,False,Plain Arch,,A,s1818_02.pct A b1672.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1825_03.png,1825,f,Right,3,Middle,03,M,A,A,,False,Plain Arch,,A,f1825_03.pct A a1803.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1825_03.png,1825,s,Right,3,Middle,03,M,A,A,,False,Plain Arch,,A,s1825_03.pct A b1803.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1839_06.png,1839,f,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,f1839_06.pct W a0806.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1839_06.png,1839,s,Left,6,Thumb,06,M,W,W,,False,Whorl,,W,s1839_06.pct W b0806.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1840_04.png,1840,f,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,f1840_04.pct R a0314.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1840_04.png,1840,s,Right,4,Ring,04,M,R,R,,False,Ulnar Loop,,R,s1840_04.pct R b0314.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1855_02.png,1855,f,Right,2,Index,02,M,A,A,,False,Plain Arch,,A,f1855_02.pct A a1642.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1855_02.png,1855,s,Right,2,Index,02,M,A,A,,False,Plain Arch,,A,s1855_02.pct A b1642.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1859_02.png,1859,f,Right,2,Index,02,M,W,W,,False,Whorl,,W,f1859_02.pct W a0942.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1859_02.png,1859,s,Right,2,Index,02,M,W,W,,False,Whorl,,W,s1859_02.pct W b0942.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1864_07.png,1864,f,Left,7,Index,07,F,T,T,A,True,Tented Arch,Plain Arch,TA,f1864_07.pct TA a2197.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1864_07.png,1864,s,Left,7,Index,07,F,T,T,A,True,Tented Arch,Plain Arch,TA,s1864_07.pct TA b2197.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1880_04.png,1880,f,Right,4,Ring,04,M,W,W,,False,Whorl,,W,f1880_04.pct W a0594.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1880_04.png,1880,s,Right,4,Ring,04,M,W,W,,False,Whorl,,W,s1880_04.pct W b0594.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1882_03.png,1882,f,Right,3,Middle,03,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,f1882_03.pct TR a2803.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1882_03.png,1882,s,Right,3,Middle,03,M,T,T,R,True,Tented Arch,Ulnar Loop,TR,s1882_03.pct TR b2803.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1885_03.png,1885,f,Right,3,Middle,03,F,T,T,R,True,Tented Arch,Ulnar Loop,TR,f1885_03.pct TR a2013.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1885_03.png,1885,s,Right,3,Middle,03,F,T,T,R,True,Tented Arch,Ulnar Loop,TR,s1885_03.pct TR b2013.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1891_08.png,1891,f,Left,8,Middle,08,M,W,W,,False,Whorl,,W,f1891_08.pct W a0598.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1891_08.png,1891,s,Left,8,Middle,08,M,W,W,,False,Whorl,,W,s1891_08.pct W b0598.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1894_07.png,1894,f,Left,7,Index,07,F,A,A,,False,Plain Arch,,A,f1894_07.pct A a2217.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1894_07.png,1894,s,Left,7,Index,07,F,A,A,,False,Plain Arch,,A,s1894_07.pct A b2217.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1908_08.png,1908,f,Left,8,Middle,08,M,A,A,,False,Plain Arch,,A,f1908_08.pct A a1578.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1908_08.png,1908,s,Left,8,Middle,08,M,A,A,,False,Plain Arch,,A,s1908_08.pct A b1578.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1941_03.png,1941,f,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,f1941_03.pct R a0763.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1941_03.png,1941,s,Right,3,Middle,03,M,R,R,,False,Ulnar Loop,,R,s1941_03.pct R b0763.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1943_03.png,1943,f,Right,3,Middle,03,M,W,W,,False,Whorl,,W,f1943_03.pct W a0563.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1943_03.png,1943,s,Right,3,Middle,03,M,W,W,,False,Whorl,,W,s1943_03.pct W b0563.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1949_06.png,1949,f,Left,6,Thumb,06,F,L,L,,False,Ulnar Loop,,L,f1949_06.pct L a2206.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1949_06.png,1949,s,Left,6,Thumb,06,F,L,L,,False,Ulnar Loop,,L,s1949_06.pct L b2206.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1951_04.png,1951,f,Right,4,Ring,04,M,W,W,,False,Whorl,,W,f1951_04.pct W a0914.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1951_04.png,1951,s,Right,4,Ring,04,M,W,W,,False,Whorl,,W,s1951_04.pct W b0914.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1955_08.png,1955,f,Left,8,Middle,08,F,T,T,,False,Tented Arch,,T,f1955_08.pct T a1478.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1955_08.png,1955,s,Left,8,Middle,08,F,T,T,,False,Tented Arch,,T,s1955_08.pct T b1478.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1961_07.png,1961,f,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,f1961_07.pct A a1367.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1961_07.png,1961,s,Left,7,Index,07,M,A,A,,False,Plain Arch,,A,s1961_07.pct A b1367.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1967_08.png,1967,f,Left,8,Middle,08,F,T,T,,False,Tented Arch,,T,f1967_08.pct T a2238.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1967_08.png,1967,s,Left,8,Middle,08,F,T,T,,False,Tented Arch,,T,s1967_08.pct T b2238.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1969_03.png,1969,f,Right,3,Middle,03,M,R,R,T,True,Ulnar Loop,Tented Arch,RT,f1969_03.pct RT a2383.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1969_03.png,1969,s,Right,3,Middle,03,M,R,R,T,True,Ulnar Loop,Tented Arch,RT,s1969_03.pct RT b2383.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1986_06.png,1986,f,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,f1986_06.pct L a1916.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1986_06.png,1986,s,Left,6,Thumb,06,M,L,L,,False,Ulnar Loop,,L,s1986_06.pct L b1916.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1987_09.png,1987,f,Left,9,Ring,09,M,W,W,,False,Whorl,,W,f1987_09.pct W a0359.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1987_09.png,1987,s,Left,9,Ring,09,M,W,W,,False,Whorl,,W,s1987_09.pct W b0359.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1991_06.png,1991,f,Left,6,Thumb,06,F,A,A,,False,Plain Arch,,A,f1991_06.pct A a1896.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1991_06.png,1991,s,Left,6,Thumb,06,F,A,A,,False,Plain Arch,,A,s1991_06.pct A b1896.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f1997_04.png,1997,f,Right,4,Ring,04,M,A,A,,False,Plain Arch,,A,f1997_04.pct A a1654.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s1997_04.png,1997,s,Right,4,Ring,04,M,A,A,,False,Plain Arch,,A,s1997_04.pct A b1654.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/f2000_10.png,2000,f,Left,10,Little,10,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,f2000_10.pct TL a013a.pct,512,512,val
+Fingerprint Data/NISTSpecialDatabase4GrayScaleImagesofFIGS/sd04/png_txt/figs_7/s2000_10.png,2000,s,Left,10,Little,10,M,T,T,L,True,Tented Arch,Ulnar Loop,TL,s2000_10.pct TL b013a.pct,512,512,val
