@@ -1,21 +1,41 @@
-MIT License
+Copyright (c) 2026 Nakhul Githesh. All Rights Reserved.
 
-Copyright (c) 2026 Nakhul
+FORENSIC DACTYLOS ANALYZER SOURCE-AVAILABLE & NON-COMMERCIAL LICENSE
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This repository and its source code are publicly available for inspection,
+evaluation, academic study, and educational reference only.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+By viewing, downloading, cloning, or using this software, you agree to the
+following binding terms and conditions:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. STRICT PROHIBITION OF COMMERCIAL USE & MONETIZATION
+   Under no circumstances may this software, its algorithms, source code,
+   neural network architectures, trained models, documentation, or derived
+   works be sold, rented, leased, sublicensed, commercialized, or incorporated
+   into any commercial software, paid service, SaaS, or commercial offering,
+   directly or indirectly, without the prior express written consent of
+   Nakhul Githesh.
+
+2. PROHIBITION OF UNAUTHORIZED REDISTRIBUTION & PUBLIC HOSTING
+   You may NOT redistribute, republish, mirror, re-host, fork for public
+   distribution, or deploy this software or any substantial portion of it on
+   any public web service, cloud server, mobile app store, or package manager
+   without explicit prior written permission from Nakhul Githesh.
+
+3. PERMITTED USE (PERSONAL & ACADEMIC EVALUATION ONLY)
+   Permission is granted exclusively for personal non-commercial review,
+   independent academic research, and educational evaluation, provided that:
+   (a) All copyright, license, and attribution notices remain intact;
+   (b) Any publication, paper, or benchmark referencing this system credits
+       Nakhul Githesh and links to this original repository;
+   (c) No revenue, fee, or commercial advantage is derived from its use.
+
+4. DISCLAIMER OF WARRANTY
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER "AS IS" WITHOUT WARRANTY
+   OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+   OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+   IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR
+   OTHER LIABILITY ARISING OUT OF OR IN CONNECTION WITH THE SOFTWARE.
+
+For enterprise licensing, commercial use inquiries, or written permissions:
+Contact: Nakhul Githesh (nakhulgitheshwork@gmail.com)

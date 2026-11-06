@@ -4,7 +4,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-MPS%20%2F%20CUDA%20%2F%20CPU-EE4C2C.svg)](https://pytorch.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg)](https://fastapi.tiangolo.com/)
 [![Tests](https://img.shields.io/badge/Tests-206%20Passed-brightgreen.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-gray.svg)]()
+[![License](https://img.shields.io/badge/License-Source--Available%20%2F%20Non--Commercial-red.svg)](LICENSE)
 
 **Forensic Dactylos Analyzer** is an end-to-end AI-powered biometric fingerprint intelligence workstation. It combines deep neural network inference, classical orientation field mathematics, dermatoglyphic taxonomy rules, and image quality assessment (IQA) into an examiner-grade interactive web application.
 
@@ -171,5 +171,12 @@ forensic-dactylos-analyzer/
 
 ---
 
-## ⚖️ License
-MIT License. See [LICENSE](LICENSE) for details.
+## ⚖️ License & Intellectual Property
+Copyright (c) 2026 Nakhul Githesh. All Rights Reserved.
+
+This repository is **source-available for non-commercial, personal, and academic evaluation only**:
+- **Commercial Use & Sale Strictly Prohibited**: You may not sell, sublicense, monetize, or incorporate this software, its trained neural models, or its algorithms into any commercial product or paid service without explicit prior written authorization from Nakhul Githesh.
+- **Unauthorized Public Re-hosting Prohibited**: You may not redistribute, mirror, re-publish, or deploy this code publicly without prior written consent.
+- For commercial licensing inquiries or enterprise permissions: contact `nakhulgitheshwork@gmail.com`.
+
+See [LICENSE](LICENSE) for the full binding legal terms.
