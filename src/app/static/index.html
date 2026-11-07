@@ -49,7 +49,6 @@
       <div class="card card-toolbar">
         <div class="card-header">
           <span class="card-title">Impression Ingestion & Acquisition</span>
-          <span class="badge badge-info" id="inputStatusBadge">Ready for Input</span>
         </div>
 
         <div class="upload-dropzone" id="dropZone">
@@ -174,21 +173,21 @@
       <div class="card card-hero-banner" id="heroBanner">
         <div class="banner-top-row">
           <span class="banner-eyebrow">ANATOMICAL PATTERN CLASSIFICATION</span>
-          <span class="badge-nist-symbol" id="nistSymbolBadge">[W]</span>
         </div>
         <div class="banner-main-row">
-          <h2 class="banner-class-title" id="primaryClassTitle">WHORL</h2>
-          <div class="banner-confidence-badge" id="primaryConfBadge">98.4% Confidence</div>
-        </div>
-
-        <!-- Softmax Confidence Bar -->
-        <div class="confidence-meter-wrap">
-          <div class="confidence-meter-header">
-            <span>Primary Softmax Probability</span>
-            <span id="confidencePercentageText">98.4%</span>
+          <div class="banner-title-group">
+            <h2 class="banner-class-title" id="primaryClassTitle">WHORL</h2>
+            <div class="banner-confidence-badge" id="primaryConfBadge" style="display: none;">98.4% Confidence</div>
           </div>
-          <div class="progress-track">
-            <div class="progress-fill" id="confidenceBarFill" style="width: 98.4%;"></div>
+          <div class="confidence-circle-wrap">
+            <svg class="confidence-ring" viewBox="0 0 100 100">
+              <circle class="confidence-ring-bg" cx="50" cy="50" r="42" stroke-width="8" fill="none"/>
+              <circle class="confidence-ring-fill" id="confidenceRingCircle" cx="50" cy="50" r="42" stroke-width="8" stroke-linecap="round" fill="none" stroke-dasharray="263.89" stroke-dashoffset="4.22"/>
+            </svg>
+            <div class="confidence-circle-content">
+              <span class="confidence-circle-num" id="confidencePercentageText">98.4%</span>
+              <span class="confidence-circle-label">CONFIDENCE</span>
+            </div>
           </div>
         </div>
 
@@ -202,7 +201,6 @@
       <div class="card card-subtype">
         <div class="card-header">
           <span class="card-title">Dermatoglyphic Subtype Refinement</span>
-          <span class="badge badge-status" id="subtypeStatusBadge">Resolved</span>
         </div>
         <div class="subtype-body">
           <div class="subtype-hero-name" id="subtypeName">Double Loop Whorl</div>
@@ -236,7 +234,6 @@
       <div class="card card-topology">
         <div class="card-header">
           <span class="card-title">Dermatoglyphic Landmark Metrics</span>
-          <span class="card-time-stat" id="pipelineLatency">Execution: 42.8 ms</span>
         </div>
         <div class="metrics-grid">
           <div class="metric-card">
@@ -532,13 +529,6 @@
             </svg>
             Download All &amp; Clear
           </button>
-          <button type="button" id="btnClearAllVault" class="btn btn-ghost btn-sm text-danger" title="Clear all records from archive">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6"/>
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-            </svg>
-            Clear All
-          </button>
         </div>
       </div>
 
@@ -564,6 +554,12 @@
 
           <div class="vault-detail-content hidden" id="vaultDetailContent">
             <!-- Populated dynamically with fingerprint image & side-by-side comparison -->
+            <div class="vault-detail-actions" style="display:none;">
+              <button type="button" id="btnInspectVaultPrint" class="btn btn-primary btn-sm" title="Open full-screen forensic inspection with ridge flow lines, cores and deltas">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Inspect Print &amp; Overlays
+              </button>
+            </div>
           </div>
         </div>
       </div>

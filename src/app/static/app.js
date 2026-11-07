@@ -12,6 +12,7 @@
     rawImage: null,
     compositeImage: null,
     damageImage: null,
+    damageMaskImage: null,
     selectedFile: null,
     selectedSampleId: null,
     isAnalyzing: false,
@@ -82,6 +83,7 @@
     primaryConfBadge: document.getElementById("primaryConfBadge"),
     confidenceBarFill: document.getElementById("confidenceBarFill"),
     confidencePercentageText: document.getElementById("confidencePercentageText"),
+    confidenceRingCircle: document.getElementById("confidenceRingCircle"),
     classDistributionGrid: document.getElementById("classDistributionGrid"),
 
     subtypeStatusBadge: document.getElementById("subtypeStatusBadge"),
@@ -145,7 +147,6 @@
     vaultEmptyState: document.getElementById("vaultEmptyState"),
     vaultDetailContent: document.getElementById("vaultDetailContent"),
     btnDownloadAllVault: document.getElementById("btnDownloadAllVault"),
-    btnClearAllVault: document.getElementById("btnClearAllVault"),
     vaultConfirmModal: document.getElementById("vaultConfirmModal"),
     vaultConfirmTitle: document.getElementById("vaultConfirmTitle"),
     vaultConfirmMessage: document.getElementById("vaultConfirmMessage"),
@@ -677,12 +678,6 @@
       });
     }
 
-    if (el.btnClearAllVault) {
-      el.btnClearAllVault.addEventListener("click", () => {
-        handleClearAllVault();
-      });
-    }
-
     if (el.btnCancelVaultConfirm) {
       el.btnCancelVaultConfirm.addEventListener("click", () => {
         closeVaultConfirm();
@@ -819,6 +814,7 @@
     state.rawImage = raw;
     state.compositeImage = composite;
     state.damageImage = damage;
+    state.damageMaskImage = damage;
   }
 
   // ------------------------------------------------------------------------
@@ -858,49 +854,71 @@
     const primClass = cls.primary_class || "?";
     const conf = cls.confidence !== undefined ? (cls.confidence * 100).toFixed(1) : "0.0";
 
-    el.primaryClassTitle.textContent = anatLabel;
-    el.nistSymbolBadge.textContent = `[${primClass}]`;
-    el.primaryConfBadge.textContent = `${conf}% Confidence`;
-    el.confidenceBarFill.style.width = `${Math.min(Math.max(cls.confidence * 100, 0), 100)}%`;
-    el.confidencePercentageText.textContent = `${conf}%`;
+    if (el.primaryClassTitle) el.primaryClassTitle.textContent = anatLabel;
+    if (el.nistSymbolBadge) el.nistSymbolBadge.textContent = `[${primClass}]`;
+    if (el.primaryConfBadge) el.primaryConfBadge.textContent = `${conf}% Confidence`;
+    if (el.confidenceBarFill) el.confidenceBarFill.style.width = `${Math.min(Math.max(cls.confidence * 100, 0), 100)}%`;
+    if (el.confidencePercentageText) el.confidencePercentageText.textContent = `${conf}%`;
+
+    // Circular Confidence Meter Gauge
+    if (el.confidenceRingCircle) {
+      const circumference = 2 * Math.PI * 42; // ~263.89
+      el.confidenceRingCircle.style.strokeDasharray = circumference;
+      const confRatio = cls.confidence !== undefined ? cls.confidence : 0;
+      const offset = circumference * (1 - Math.min(1, Math.max(0, confRatio)));
+      el.confidenceRingCircle.style.strokeDashoffset = offset;
+      if (confRatio >= 0.8) {
+        el.confidenceRingCircle.style.stroke = "var(--emerald-bright)";
+      } else if (confRatio >= 0.6) {
+        el.confidenceRingCircle.style.stroke = "var(--amber-bright)";
+      } else {
+        el.confidenceRingCircle.style.stroke = "var(--rose-bright)";
+      }
+    }
 
     // Multi-class Softmax breakdown
-    el.classDistributionGrid.innerHTML = "";
-    const probs = cls.probabilities || {};
-    const nistClasses = ["W", "L", "R", "A", "T"];
-    const classNames = { W: "Whorl", L: "Left Loop", R: "Right Loop", A: "Arch", T: "Tented Arch" };
+    if (el.classDistributionGrid) {
+      el.classDistributionGrid.innerHTML = "";
+      const probs = cls.probabilities || {};
+      const nistClasses = ["W", "L", "R", "A", "T"];
+      const classNames = { W: "Whorl", L: "Left Loop", R: "Right Loop", A: "Arch", T: "Tented Arch" };
 
-    nistClasses.forEach((c) => {
-      const p = probs[c] !== undefined ? (probs[c] * 100).toFixed(1) : "0.0";
-      const cell = document.createElement("div");
-      cell.className = `prob-cell ${c === primClass ? "active-class" : ""}`;
-      cell.innerHTML = `
-        <span class="prob-class-code">${c} • ${classNames[c] || c}</span>
-        <span class="prob-value">${p}%</span>
-      `;
-      el.classDistributionGrid.appendChild(cell);
-    });
+      nistClasses.forEach((c) => {
+        const p = probs[c] !== undefined ? (probs[c] * 100).toFixed(1) : "0.0";
+        const cell = document.createElement("div");
+        cell.className = `prob-cell ${c === primClass ? "active-class" : ""}`;
+        cell.innerHTML = `
+          <span class="prob-class-code">${c} • ${classNames[c] || c}</span>
+          <span class="prob-value">${p}%</span>
+        `;
+        el.classDistributionGrid.appendChild(cell);
+      });
+    }
 
     // 3. Subtype Refinement Card
     const sub = res.subtype || {};
-    el.subtypeName.textContent = sub.subtype || "Uncertain / Degraded";
-    el.subtypeStatusBadge.textContent = sub.status || "Uncertain";
-    if (sub.is_uncertain) {
-      el.subtypeStatusBadge.className = "badge badge-accent";
-      el.subtypeStatusBadge.style.color = "var(--amber-bright)";
-      el.subtypeStatusBadge.style.borderColor = "rgba(245, 158, 11, 0.4)";
-    } else {
-      el.subtypeStatusBadge.className = "badge badge-status";
+    if (el.subtypeName) el.subtypeName.textContent = sub.subtype || "Uncertain / Degraded";
+    if (el.subtypeStatusBadge) {
+      el.subtypeStatusBadge.textContent = sub.status || "Uncertain";
+      if (sub.is_uncertain) {
+        el.subtypeStatusBadge.className = "badge badge-accent";
+        el.subtypeStatusBadge.style.color = "var(--amber-bright)";
+        el.subtypeStatusBadge.style.borderColor = "rgba(245, 158, 11, 0.4)";
+      } else {
+        el.subtypeStatusBadge.className = "badge badge-status";
+      }
     }
 
-    el.subtypeCategory.textContent = `Category: ${sub.primary_category || "Unclassified"}`;
-    el.verifiabilityBadge.textContent = sub.forensic_verifiability || "Expert Discretion";
-    el.subtypeReasonText.textContent = sub.reason || "Subtype rule synthesis evaluated dermatoglyphic topology.";
+    if (el.subtypeCategory) el.subtypeCategory.textContent = `Category: ${sub.primary_category || "Unclassified"}`;
+    if (el.verifiabilityBadge) el.verifiabilityBadge.textContent = sub.forensic_verifiability || "Expert Discretion";
+    if (el.subtypeReasonText) el.subtypeReasonText.textContent = sub.reason || "Subtype rule synthesis evaluated dermatoglyphic topology.";
 
     // 4. Dermatoglyphic Landmark Metrics
     const feat = res.features || {};
     const times = res.execution_time_ms || {};
-    el.pipelineLatency.textContent = `Pipeline Latency: ${(times.total_ms || 0).toFixed(1)} ms`;
+    if (el.pipelineLatency) {
+      el.pipelineLatency.textContent = `Pipeline Latency: ${(times.total_ms || 0).toFixed(1)} ms`;
+    }
 
     el.valCoresCount.textContent = feat.num_cores !== undefined ? feat.num_cores : 0;
     const coresList = feat.cores || [];
@@ -1061,8 +1079,9 @@
     ctx.drawImage(img, 0, 0, w, h);
 
     // Layer 1: Damage / Alteration Mask
-    if (showDamage && state.damageImage) {
-      ctx.drawImage(state.damageImage, 0, 0, w, h);
+    const dmg = state.damageMaskImage || state.damageImage;
+    if (showDamage && dmg) {
+      ctx.drawImage(dmg, 0, 0, w, h);
     }
 
     const vis = state.currentResult.visualizations || {};
@@ -1090,9 +1109,9 @@
     // Layer 3: Singular Points - Cores (Red Circle & Crosshair)
     if (showCores && vis.cores) {
       vis.cores.forEach((core) => {
-        const cx = core.x;
-        const cy = core.y;
-        if (cx < 0 || cy < 0 || cx > w || cy > h) return;
+        const cx = core.x !== undefined ? core.x : (Array.isArray(core) ? core[0] : null);
+        const cy = core.y !== undefined ? core.y : (Array.isArray(core) ? core[1] : null);
+        if (cx === null || cy === null || cx < 0 || cy < 0 || cx > w || cy > h) return;
 
         ctx.save();
         // Crisp vector ring in Red
@@ -1123,9 +1142,9 @@
     // Layer 4: Singular Points - Deltas (Blue Triradius Triangle)
     if (showDeltas && vis.deltas) {
       vis.deltas.forEach((delta) => {
-        const dx = delta.x;
-        const dy = delta.y;
-        if (dx < 0 || dy < 0 || dx > w || dy > h) return;
+        const dx = delta.x !== undefined ? delta.x : (Array.isArray(delta) ? delta[0] : null);
+        const dy = delta.y !== undefined ? delta.y : (Array.isArray(delta) ? delta[1] : null);
+        if (dx === null || dy === null || dx < 0 || dy < 0 || dx > w || dy > h) return;
 
         ctx.save();
         const r = 10;
@@ -1252,11 +1271,15 @@
   function openImageModal() {
     if (!state.rawImage || !state.currentResult || !el.imageModal) return;
 
-    // Sync modal toggles from main toggles
-    if (el.modalToggleCores && el.toggleCores) el.modalToggleCores.checked = el.toggleCores.checked;
-    if (el.modalToggleDeltas && el.toggleDeltas) el.modalToggleDeltas.checked = el.toggleDeltas.checked;
-    if (el.modalToggleStreamlines && el.toggleStreamlines) el.modalToggleStreamlines.checked = el.toggleStreamlines.checked;
-    if (el.modalToggleDamage && el.toggleDamage) el.modalToggleDamage.checked = el.toggleDamage.checked;
+    // Enable all inspection toggles by default (Cores, Deltas, Streamlines, Damage)
+    if (el.modalToggleCores) el.modalToggleCores.checked = true;
+    if (el.modalToggleDeltas) el.modalToggleDeltas.checked = true;
+    if (el.modalToggleStreamlines) el.modalToggleStreamlines.checked = true;
+    if (el.modalToggleDamage) el.modalToggleDamage.checked = true;
+    if (el.toggleCores) el.toggleCores.checked = true;
+    if (el.toggleDeltas) el.toggleDeltas.checked = true;
+    if (el.toggleStreamlines) el.toggleStreamlines.checked = true;
+    if (el.toggleDamage) el.toggleDamage.checked = true;
 
     if (el.modalCanvas) {
       el.modalCanvas.width = state.rawImage.width || 512;
@@ -1298,6 +1321,7 @@
     state.rawImage = null;
     state.compositeImage = null;
     state.damageImage = null;
+    state.damageMaskImage = null;
     state.selectedFile = null;
     state.selectedSampleId = null;
 
@@ -1347,6 +1371,12 @@
     if (el.primaryConfBadge) el.primaryConfBadge.textContent = "0.0%";
     if (el.confidenceBarFill) el.confidenceBarFill.style.width = "0%";
     if (el.confidencePercentageText) el.confidencePercentageText.textContent = "0.0%";
+    if (el.confidenceRingCircle) {
+      const circumference = 2 * Math.PI * 42;
+      el.confidenceRingCircle.style.strokeDasharray = circumference;
+      el.confidenceRingCircle.style.strokeDashoffset = circumference;
+      el.confidenceRingCircle.style.stroke = "var(--blue-primary)";
+    }
     if (el.classDistributionGrid) el.classDistributionGrid.innerHTML = "";
 
     if (el.subtypeStatusBadge) {
@@ -1440,7 +1470,7 @@
     }
   }
 
-  async function submitFeedback() {
+  async function submitFeedbackRecord() {
     if (!state.currentResult) return;
 
     const selected = document.querySelector('input[name="feedbackCategoryOption"]:checked');
@@ -1499,6 +1529,8 @@
       category: category,
       notes: (el.feedbackNotes ? el.feedbackNotes.value : "").trim(),
       metrics: metrics,
+      visualizations: state.currentResult.visualizations || null,
+      analysis_result: state.currentResult || null,
     };
 
     if (el.btnSubmitFeedback) {
@@ -1531,6 +1563,8 @@
       }
     }
   }
+
+  const submitFeedback = submitFeedbackRecord;
 
   // ------------------------------------------------------------------------
   // Correction Review Vault Drawer / Modal
@@ -1654,40 +1688,11 @@
     );
   }
 
-  function handleClearAllVault() {
-    if (!currentVaultCorrections || currentVaultCorrections.length === 0) {
-      showToast("Archive is empty", "warning");
-      return;
-    }
-    showVaultConfirm(
-      "Clear Entire Archive?",
-      "Clear entire archive? All records will be permanently deleted.",
-      "Clear All",
-      "btn-danger",
-      async () => {
-        try {
-          const res = await fetch("/api/feedback", { method: "DELETE" });
-          if (!res.ok) {
-            throw new Error(`Server returned HTTP ${res.status}`);
-          }
-          currentVaultCorrections = [];
-          selectedCorrectionId = null;
-          renderVaultList([]);
-          renderVaultEmptyDetail();
-          await fetchVaultCount();
-          showToast("Archive cleared successfully.", "success");
-        } catch (err) {
-          showToast("Failed to clear archive: " + err.message, "danger");
-        }
-      }
-    );
-  }
-
   function handleDownloadSingleRecord(id) {
     if (!id) return;
     const link = document.createElement("a");
     link.href = `/api/feedback/${encodeURIComponent(id)}/download`;
-    link.download = "";
+    link.download = `correction_${id}_bundle.zip`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -1821,19 +1826,31 @@
 
     const ai = c.ai_prediction || {};
     const metrics = c.metrics || {};
-    const imgSrc = c.image_url || (c.image_filename ? `/api/feedback/image/${c.image_filename}` : "");
+    let imgSrc = c.image_url || (c.image_filename ? `/api/feedback/image/${c.image_filename}` : "") || (c.visualizations && (c.visualizations.original || c.visualizations.image_base64)) || c.image_base64 || "";
+    if (imgSrc && !imgSrc.startsWith("http") && !imgSrc.startsWith("/") && !imgSrc.startsWith("data:")) {
+      imgSrc = `data:image/png;base64,${imgSrc}`;
+    }
     const timeFormatted = c.timestamp ? formatTimestamp(c.timestamp) : "--";
     const qScore = metrics.quality_score !== undefined ? Number(metrics.quality_score).toFixed(1) : (ai.quality_score ? Number(ai.quality_score).toFixed(1) : "--");
 
     el.vaultDetailContent.innerHTML = `
       <div class="vault-detail-header">
-        ${imgSrc ? `<img src="${imgSrc}" class="vault-detail-img" alt="Impression Snapshot" onerror="this.style.display='none'" />` : ""}
+        ${imgSrc ? `
+          <div class="vault-detail-img-wrap" id="vaultDetailImgWrap" title="Click to inspect fingerprint impression, ridge flow streamlines, cores &amp; deltas">
+            <img src="${imgSrc}" class="vault-detail-img" alt="Impression Snapshot" onerror="this.style.display='none'" />
+            <span class="vault-img-hover-badge">🔍 Inspect Overlays &amp; Zoom</span>
+          </div>
+        ` : ""}
         <div class="vault-detail-meta">
           <div class="vault-detail-title">${escapeHtml(c.filename || "Impression Snapshot")}</div>
           <div class="vault-detail-subtitle">ID: ${escapeHtml(c.id)} • Category: ${escapeHtml(c.category || "Other")} • Logged: ${timeFormatted}</div>
         </div>
         <div class="vault-detail-actions">
-          <button type="button" id="btnDownloadSingleVault" class="btn btn-secondary btn-sm" title="Download record as JSON">
+          <button type="button" id="btnInspectVaultPrint" class="btn btn-primary btn-sm" title="Open full-screen forensic inspection with ridge flow lines, cores and deltas">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Inspect Print &amp; Overlays
+          </button>
+          <button type="button" id="btnDownloadSingleVault" class="btn btn-secondary btn-sm" title="Download record bundle as ZIP (JSON, PDF report, impression image)">
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
               <polyline points="7 10 12 15 17 10"/>
@@ -1906,6 +1923,14 @@
       </div>
     `;
 
+    const imgWrap = el.vaultDetailContent.querySelector("#vaultDetailImgWrap");
+    if (imgWrap) {
+      imgWrap.addEventListener("click", () => openVaultInspectionModal(c));
+    }
+    const btnInspect = el.vaultDetailContent.querySelector("#btnInspectVaultPrint");
+    if (btnInspect) {
+      btnInspect.addEventListener("click", () => openVaultInspectionModal(c));
+    }
     const btnDown = el.vaultDetailContent.querySelector("#btnDownloadSingleVault");
     if (btnDown) {
       btnDown.addEventListener("click", () => handleDownloadSingleRecord(c.id));
@@ -1913,6 +1938,102 @@
     const btnDel = el.vaultDetailContent.querySelector("#btnDeleteSingleVault");
     if (btnDel) {
       btnDel.addEventListener("click", () => handleDeleteSingleRecord(c.id));
+    }
+  }
+
+  async function openVaultInspectionModal(c) {
+    if (!c) return;
+    const vis = c.visualizations || (c.analysis_result && c.analysis_result.visualizations);
+    const hasStoredVis = Boolean(vis && (
+      (vis.streamlines && vis.streamlines.length > 0) ||
+      (Array.isArray(vis.cores)) ||
+      (Array.isArray(vis.deltas)) ||
+      vis.composite_overlay_base64 ||
+      vis.damage_mask_base64 ||
+      vis.image_base64 ||
+      vis.original
+    ));
+
+    if (hasStoredVis) {
+      const mergedVis = Object.assign({}, vis, {
+        cores: (vis && vis.cores) || (c.analysis_result && c.analysis_result.features && c.analysis_result.features.cores) || [],
+        deltas: (vis && vis.deltas) || (c.analysis_result && c.analysis_result.features && c.analysis_result.features.deltas) || [],
+        streamlines: (vis && vis.streamlines) || [],
+      });
+      state.currentResult = c.analysis_result || Object.assign({}, c, {
+        filename: c.filename || (c.analysis_result && c.analysis_result.filename) || "impression.png",
+        input_shape: (c.analysis_result && c.analysis_result.input_shape) || [512, 512],
+        visualizations: mergedVis,
+        classification: c.ai_prediction || {},
+        quality: c.metrics || {},
+        features: {
+          cores: mergedVis.cores,
+          deltas: mergedVis.deltas,
+        },
+      });
+      if (!state.currentResult.visualizations) {
+        state.currentResult.visualizations = mergedVis;
+      }
+
+      let rawSrc = c.image_url || (vis && (vis.original || vis.image_base64)) || c.image_base64 || (c.image_filename ? `/api/feedback/image/${c.image_filename}` : "");
+      if (rawSrc && !rawSrc.startsWith("http") && !rawSrc.startsWith("/") && !rawSrc.startsWith("data:")) {
+        rawSrc = `data:image/png;base64,${rawSrc}`;
+      }
+
+      const compositeSrc = vis && vis.composite_overlay_base64;
+      const damageSrc = vis && vis.damage_mask_base64;
+
+      const [raw, composite, damage] = await Promise.all([
+        loadImagePromise(rawSrc),
+        loadImagePromise(compositeSrc),
+        loadImagePromise(damageSrc),
+      ]);
+      state.rawImage = raw;
+      state.compositeImage = composite;
+      state.damageImage = damage;
+      state.damageMaskImage = damage;
+
+      if (!state.rawImage) {
+        showToast("Could not load impression image for inspection.", "warning");
+        return;
+      }
+      openImageModal();
+      return;
+    }
+
+    let imgSrc = c.image_url || (c.image_filename ? `/api/feedback/image/${c.image_filename}` : "") || c.image_base64;
+    if (imgSrc && !imgSrc.startsWith("http") && !imgSrc.startsWith("/") && !imgSrc.startsWith("data:")) {
+      imgSrc = `data:image/png;base64,${imgSrc}`;
+    }
+
+    if (imgSrc) {
+      showToast("Analyzing impression overlays on-the-fly...", "info");
+      try {
+        const resp = await fetch(imgSrc);
+        if (!resp.ok) throw new Error("Could not fetch impression image.");
+        const blob = await resp.blob();
+        const formData = new FormData();
+        formData.append("file", blob, c.filename || "impression.png");
+        const analyzeRes = await fetch("/api/analyze", {
+          method: "POST",
+          body: formData,
+        });
+        if (!analyzeRes.ok) {
+          const errJson = await analyzeRes.json().catch(() => ({}));
+          throw new Error(errJson.detail || "Analysis request failed.");
+        }
+        const result = await analyzeRes.json();
+        state.currentResult = result;
+        await loadImages(result.visualizations);
+        state.damageMaskImage = state.damageImage;
+        openImageModal();
+        showToast("Forensic overlays & streamlines loaded.", "success");
+      } catch (err) {
+        console.error("Failed to analyze vault image:", err);
+        showToast("Could not inspect overlays: " + err.message, "danger");
+      }
+    } else {
+      showToast("No impression image available for inspection.", "warning");
     }
   }
 

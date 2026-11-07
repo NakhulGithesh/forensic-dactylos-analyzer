@@ -697,6 +697,8 @@ class TestStage10ApplicationAPI:
             assert "corrections.json" in namelist
             assert "METADATA.txt" in namelist
             assert f"images/{id1}.png" in namelist
+            assert f"reports/forensic_report_{id1}.pdf" in namelist
+            assert f"reports/forensic_report_{id2}.pdf" in namelist
 
             corrections_in_zip = json.loads(zf.read("corrections.json").decode("utf-8"))
             zip_ids = {c["id"] for c in corrections_in_zip}
@@ -764,13 +766,16 @@ class TestStage10ApplicationAPI:
         assert del_res.status_code == 404
 
     def test_feedback_download_single_record(self, client):
-        """POST 1 feedback item, call GET /api/feedback/{id}/download, verify 200 OK, application/json, valid body."""
+        """POST 1 feedback item with image, call GET /api/feedback/{id}/download, verify 200 OK, application/zip bundle."""
+        tiny_png = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
         p = {
-            "image_base64": None,
+            "image_base64": tiny_png,
             "filename": "download_test.png",
             "ai_prediction": {"anatomical_label": "Arch"},
             "user_correction": "Tented Arch",
             "category": "Arch",
+            "visualizations": {"streamlines": [[[10.0, 12.0], [15.0, 18.0]]], "cores": [{"x": 50, "y": 60}]},
+            "analysis_result": {"filename": "download_test.png", "classification": {"primary_class": "A"}},
         }
         res = client.post("/api/feedback", json=p)
         assert res.status_code == 200
@@ -778,11 +783,23 @@ class TestStage10ApplicationAPI:
 
         dl_res = client.get(f"/api/feedback/{corr_id}/download")
         assert dl_res.status_code == 200
-        assert dl_res.headers["content-type"] == "application/json"
-        assert f'filename="{corr_id}.json"' in dl_res.headers.get("content-disposition", "")
-        data = dl_res.json()
-        assert data["id"] == corr_id
-        assert data["user_correction"] == "Tented Arch"
+        assert dl_res.headers["content-type"] == "application/zip"
+        assert f'filename="correction_{corr_id}_bundle.zip"' in dl_res.headers.get("content-disposition", "")
+        with zipfile.ZipFile(io.BytesIO(dl_res.content)) as zf:
+            namelist = zf.namelist()
+            assert f"{corr_id}_analysis.json" in namelist
+            assert "forensic_report.pdf" in namelist
+            assert "fingerprint.png" in namelist
+
+            data = json.loads(zf.read(f"{corr_id}_analysis.json").decode("utf-8"))
+            assert data["id"] == corr_id
+            assert data["user_correction"] == "Tented Arch"
+            assert data["visualizations"] is not None
+            assert data["analysis_result"] is not None
+
+            pdf_bytes = zf.read("forensic_report.pdf")
+            assert len(pdf_bytes) > 500
+            assert pdf_bytes.startswith(b"%PDF")
 
     def test_feedback_clear_all(self, client):
         """POST 2 items, call DELETE /api/feedback, verify 200 OK, count 0."""
@@ -804,16 +821,136 @@ class TestStage10ApplicationAPI:
         assert count_res.json()["count"] == 0
 
     def test_frontend_vault_export_and_delete_controls_present(self, client):
-        """Verify index.html contains btnDownloadAllVault, btnClearAllVault, vaultConfirmModal."""
+        """Verify index.html contains btnDownloadAllVault, does NOT contain btnClearAllVault, and has circular gauge."""
         res = client.get("/")
         assert res.status_code == 200
         html_text = res.text
         assert 'id="btnDownloadAllVault"' in html_text
-        assert 'id="btnClearAllVault"' in html_text
+        assert 'id="btnClearAllVault"' not in html_text
+        assert 'id="btnInspectVaultPrint"' in html_text
         assert 'id="vaultConfirmModal"' in html_text
         assert 'id="vaultConfirmTitle"' in html_text
         assert 'id="vaultConfirmMessage"' in html_text
         assert 'id="btnCancelVaultConfirm"' in html_text
         assert 'id="btnAcceptVaultConfirm"' in html_text
+
+        # Verify circular confidence gauge
+        assert 'id="confidenceRingCircle"' in html_text
+        assert 'id="confidencePercentageText"' in html_text
+
+        # Verify removed badges are NOT in HTML
+        assert 'id="inputStatusBadge"' not in html_text
+        assert 'id="nistSymbolBadge"' not in html_text
+        assert 'id="subtypeStatusBadge"' not in html_text
+        assert 'id="pipelineLatency"' not in html_text
+
+    def test_feedback_persists_visualizations_and_analysis_result(self, client):
+        """Verify POST /api/feedback stores visualizations and analysis_result and GET /api/feedback returns them."""
+        vis = {
+            "cores": [{"x": 100, "y": 150}],
+            "deltas": [{"x": 200, "y": 250}],
+            "streamlines": [[[10, 20], [30, 40]]],
+            "composite_overlay_base64": "data:image/png;base64,fake",
+            "damage_mask_base64": "data:image/png;base64,fake2",
+        }
+        res_data = {
+            "filename": "vis_test.png",
+            "classification": {"primary_class": "W", "confidence": 0.99},
+            "subtype": {"subtype": "Plain Whorl"},
+            "visualizations": vis,
+        }
+        payload = {
+            "filename": "vis_test.png",
+            "ai_prediction": {"anatomical_label": "Whorl", "confidence": 0.99},
+            "user_correction": "Plain Whorl",
+            "category": "Whorl",
+            "visualizations": vis,
+            "analysis_result": res_data,
+        }
+        post_res = client.post("/api/feedback", json=payload)
+        assert post_res.status_code == 200
+        corr_id = post_res.json()["id"]
+
+        get_res = client.get(f"/api/feedback/{corr_id}")
+        assert get_res.status_code == 200
+        record = get_res.json()
+        assert record["id"] == corr_id
+        assert record["visualizations"] is not None
+        assert record["visualizations"]["cores"] == [{"x": 100, "y": 150}]
+        assert record["analysis_result"] is not None
+        assert record["analysis_result"]["classification"]["primary_class"] == "W"
+
+    def test_feedback_accepts_and_stores_visualizations_none(self, client):
+        """Verify POST /api/feedback accepts payload where visualizations and analysis_result are None."""
+        payload = {
+            "user_correction": "Arch",
+            "category": "Arch",
+            "visualizations": None,
+            "analysis_result": None,
+        }
+        res = client.post("/api/feedback", json=payload)
+        assert res.status_code == 200
+        corr_id = res.json()["id"]
+
+        get_res = client.get(f"/api/feedback/{corr_id}")
+        assert get_res.status_code == 200
+        rec = get_res.json()
+        assert rec["visualizations"] is None
+        assert rec["analysis_result"] is None
+
+    def test_feedback_persists_arch_empty_singular_points(self, client):
+        """Verify POST /api/feedback handles Arch prints with 0 cores and 0 deltas."""
+        vis = {
+            "cores": [],
+            "deltas": [],
+            "streamlines": [],
+            "composite_overlay_base64": "data:image/png;base64,archfake",
+            "damage_mask_base64": None,
+        }
+        payload = {
+            "user_correction": "Plain Arch",
+            "category": "Arch",
+            "visualizations": vis,
+            "analysis_result": {"filename": "arch.png", "features": {"cores": [], "deltas": []}},
+        }
+        res = client.post("/api/feedback", json=payload)
+        assert res.status_code == 200
+        corr_id = res.json()["id"]
+
+        get_res = client.get(f"/api/feedback/{corr_id}")
+        assert get_res.status_code == 200
+        rec = get_res.json()
+        assert rec["visualizations"]["cores"] == []
+        assert rec["visualizations"]["deltas"] == []
+        assert rec["visualizations"]["composite_overlay_base64"] == "data:image/png;base64,archfake"
+
+    def test_frontend_vault_inspection_and_clear_button_contract(self, client):
+        """Verify frontend contract: btnClearAllVault removed, btnInspectVaultPrint and overlays present."""
+        # 1. index.html checks
+        res = client.get("/")
+        assert res.status_code == 200
+        html = res.text
+        assert 'id="btnClearAllVault"' not in html
+        assert 'id="btnDownloadAllVault"' in html
+        assert 'id="btnInspectVaultPrint"' in html
+
+        # 2. app.js checks
+        res_js = client.get("/static/app.js")
+        assert res_js.status_code == 200
+        js = res_js.text
+        assert "btnClearAllVault" not in js
+        assert "handleClearAllVault" not in js
+        assert "openVaultInspectionModal" in js
+        assert "submitFeedbackRecord" in js
+        assert "vaultDetailImgWrap" in js
+        assert "vault-img-hover-badge" in js
+
+        # 3. style.css checks
+        res_css = client.get("/static/style.css")
+        assert res_css.status_code == 200
+        css = res_css.text
+        assert ".vault-detail-img-wrap" in css
+        assert ".vault-img-hover-badge" in css
+        assert "#btnInspectVaultPrint" in css
 
 
