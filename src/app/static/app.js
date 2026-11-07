@@ -6,6 +6,11 @@
 (function () {
   "use strict";
 
+  // Bulletproof DOM helper
+  function setText(elem, text) {
+    if (elem) elem.textContent = (text !== undefined && text !== null) ? String(text) : "";
+  }
+
   // Application State
   const state = {
     currentResult: null,
@@ -179,16 +184,16 @@
       const data = await res.json();
 
       if (data.mps_active) {
-        if (el.hardwareText) el.hardwareText.textContent = "MPS GPU ACTIVE";
+        if (el.hardwareText) setText(el.hardwareText, "MPS GPU ACTIVE");
         if (el.hardwareBadge) {
           el.hardwareBadge.style.color = "var(--emerald-bright)";
           el.hardwareBadge.style.borderColor = "rgba(16, 185, 129, 0.4)";
         }
       } else {
-        if (el.hardwareText) el.hardwareText.textContent = `DEVICE: ${data.device.toUpperCase()}`;
+        if (el.hardwareText) setText(el.hardwareText, `DEVICE: ${data.device.toUpperCase()}`);
       }
     } catch (err) {
-      if (el.hardwareText) el.hardwareText.textContent = "BACKEND DISCONNECTED";
+      if (el.hardwareText) setText(el.hardwareText, "BACKEND DISCONNECTED");
       if (el.hardwareBadge) el.hardwareBadge.style.color = "var(--rose-bright)";
     }
   }
@@ -239,7 +244,7 @@
     // Upload New Image Button
     if (el.btnUploadImage) {
       el.btnUploadImage.addEventListener("click", () => {
-        el.fileInput.click();
+        if (el.fileInput) el.fileInput.click();
       });
     }
 
@@ -248,20 +253,7 @@
       el.btnLoadSample.addEventListener("click", () => {
         const sid = el.sampleSelect.value;
         if (!sid) return;
-        state.selectedSampleId = sid;
-        state.selectedFile = null;
-
-        const selectedOpt = el.sampleSelect.options[el.sampleSelect.selectedIndex];
-        if (selectedOpt && selectedOpt.dataset.hand) {
-          el.handSelect.value = selectedOpt.dataset.hand;
-        }
-        if (selectedOpt && selectedOpt.dataset.digit) {
-          el.digitSelect.value = selectedOpt.dataset.digit;
-        }
-
-        el.inputStatusBadge.textContent = `Sample: ${sid}`;
-        el.inputStatusBadge.className = "badge badge-info";
-        analyzeCurrent();
+        handleSampleSelection(sid);
       });
     }
 
@@ -269,27 +261,14 @@
       el.sampleSelect.addEventListener("change", () => {
         const sid = el.sampleSelect.value;
         if (!sid) return;
-        state.selectedSampleId = sid;
-        state.selectedFile = null;
-
-        const selectedOpt = el.sampleSelect.options[el.sampleSelect.selectedIndex];
-        if (selectedOpt && selectedOpt.dataset.hand) {
-          el.handSelect.value = selectedOpt.dataset.hand;
-        }
-        if (selectedOpt && selectedOpt.dataset.digit) {
-          el.digitSelect.value = selectedOpt.dataset.digit;
-        }
-
-        el.inputStatusBadge.textContent = `Sample: ${sid}`;
-        el.inputStatusBadge.className = "badge badge-info";
-        analyzeCurrent();
+        handleSampleSelection(sid);
       });
     }
 
     // File Drag and Drop & Click to Browse
     if (el.dropZone) {
       el.dropZone.addEventListener("click", (e) => {
-        if (e.target !== el.fileInput) {
+        if (el.fileInput && e.target !== el.fileInput) {
           el.fileInput.click();
         }
       });
@@ -306,7 +285,7 @@
       el.dropZone.addEventListener("drop", (e) => {
         e.preventDefault();
         el.dropZone.classList.remove("dragover");
-        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
           handleFileSelection(e.dataTransfer.files[0]);
         }
       });
@@ -329,9 +308,11 @@
     window.addEventListener("drop", (e) => e.preventDefault(), false);
 
     // Run Analysis Button
-    el.btnAnalyze.addEventListener("click", () => {
-      analyzeCurrent();
-    });
+    if (el.btnAnalyze) {
+      el.btnAnalyze.addEventListener("click", () => {
+        analyzeCurrent();
+      });
+    }
 
     // Layer Toggles (Main)
     [el.toggleCores, el.toggleDeltas, el.toggleStreamlines, el.toggleDamage, el.toggleComposite].forEach(
@@ -351,18 +332,24 @@
     );
 
     // Zoom Controls (Main Dashboard Canvas)
-    el.btnZoomFit.addEventListener("click", () => {
-      el.fingerprintCanvas.style.maxWidth = "100%";
-      el.fingerprintCanvas.style.maxHeight = "460px";
-    });
+    if (el.btnZoomFit) {
+      el.btnZoomFit.addEventListener("click", () => {
+        if (el.fingerprintCanvas) {
+          el.fingerprintCanvas.style.maxWidth = "100%";
+          el.fingerprintCanvas.style.maxHeight = "460px";
+        }
+      });
+    }
 
-    el.btnZoom100.addEventListener("click", () => {
-      if (state.currentResult && state.currentResult.input_shape) {
-        const [h, w] = state.currentResult.input_shape;
-        el.fingerprintCanvas.style.maxWidth = `${w}px`;
-        el.fingerprintCanvas.style.maxHeight = `${h}px`;
-      }
-    });
+    if (el.btnZoom100) {
+      el.btnZoom100.addEventListener("click", () => {
+        if (state.currentResult && state.currentResult.input_shape && el.fingerprintCanvas) {
+          const [h, w] = state.currentResult.input_shape;
+          el.fingerprintCanvas.style.maxWidth = `${w}px`;
+          el.fingerprintCanvas.style.maxHeight = `${h}px`;
+        }
+      });
+    }
 
     // Open Modal on Clicking Canvas or Viewport
     if (el.canvasViewport) {
@@ -700,14 +687,41 @@
     }
   }
 
+  function handleSampleSelection(sid) {
+    if (!sid) return;
+    state.selectedSampleId = sid;
+    state.selectedFile = null;
+
+    if (el.sampleSelect) {
+      const selectedOpt = el.sampleSelect.options ? el.sampleSelect.options[el.sampleSelect.selectedIndex] : null;
+      if (selectedOpt && selectedOpt.dataset && selectedOpt.dataset.hand) {
+        if (el.handSelect) el.handSelect.value = selectedOpt.dataset.hand;
+      }
+      if (selectedOpt && selectedOpt.dataset && selectedOpt.dataset.digit) {
+        if (el.digitSelect) el.digitSelect.value = selectedOpt.dataset.digit;
+      }
+    }
+
+    if (el.inputStatusBadge) {
+      setText(el.inputStatusBadge, `Sample: ${sid}`);
+      el.inputStatusBadge.className = "badge badge-info";
+    }
+    analyzeCurrent();
+  }
+
   function handleFileSelection(file) {
+    if (!file) return;
     state.selectedFile = file;
     state.selectedSampleId = null;
-    el.inputStatusBadge.textContent = `File: ${file.name}`;
-    el.inputStatusBadge.className = "badge badge-status";
+    if (el.inputStatusBadge) {
+      setText(el.inputStatusBadge, `File: ${file.name}`);
+      el.inputStatusBadge.className = "badge badge-status";
+    }
 
-    const p = el.dropZone.querySelector(".drop-text");
-    if (p) p.innerHTML = `Loaded: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(1)} KB)`;
+    if (el.dropZone) {
+      const p = el.dropZone.querySelector(".drop-text");
+      if (p) p.innerHTML = `Loaded: <strong>${escapeHtml(file.name)}</strong> (${(file.size / 1024).toFixed(1)} KB)`;
+    }
 
     // Auto-analyze uploaded file immediately for responsive UX
     analyzeCurrent();
@@ -716,13 +730,13 @@
   function setAnalyzingState(loading) {
     state.isAnalyzing = loading;
     if (loading) {
-      el.btnAnalyze.disabled = true;
-      el.analyzeSpinner.classList.remove("hidden");
-      el.analyzeBtnText.textContent = "Analyzing Ridge Geometry...";
+      if (el.btnAnalyze) el.btnAnalyze.disabled = true;
+      if (el.analyzeSpinner) el.analyzeSpinner.classList.remove("hidden");
+      if (el.analyzeBtnText) setText(el.analyzeBtnText, "Analyzing Ridge Geometry...");
     } else {
-      el.btnAnalyze.disabled = false;
-      el.analyzeSpinner.classList.add("hidden");
-      el.analyzeBtnText.textContent = "Run Forensic Analysis";
+      if (el.btnAnalyze) el.btnAnalyze.disabled = false;
+      if (el.analyzeSpinner) el.analyzeSpinner.classList.add("hidden");
+      if (el.analyzeBtnText) setText(el.analyzeBtnText, "Run Forensic Analysis");
     }
   }
 
@@ -744,10 +758,10 @@
       return;
     }
 
-    if (el.handSelect.value) {
+    if (el.handSelect && el.handSelect.value) {
       formData.append("hand", el.handSelect.value);
     }
-    if (el.digitSelect.value) {
+    if (el.digitSelect && el.digitSelect.value) {
       formData.append("digit_code", el.digitSelect.value);
     }
 
@@ -777,9 +791,11 @@
         renderModalCanvas();
         if (el.modalImageMeta) {
           const filename = result.filename || "impression.png";
-          const w = el.modalCanvas ? el.modalCanvas.width : (state.rawImage.width || 512);
-          const h = el.modalCanvas ? el.modalCanvas.height : (state.rawImage.height || 512);
-          el.modalImageMeta.textContent = `${filename} • ${w} × ${h} px`;
+          const imgW = state.rawImage ? state.rawImage.width : 512;
+          const imgH = state.rawImage ? state.rawImage.height : 512;
+          const w = el.modalCanvas ? el.modalCanvas.width : (imgW || 512);
+          const h = el.modalCanvas ? el.modalCanvas.height : (imgH || 512);
+          setText(el.modalImageMeta, `${filename} • ${w} × ${h} px`);
         }
       }
     } catch (err) {
@@ -820,31 +836,39 @@
   // UI Dashboard Updater
   // ------------------------------------------------------------------------
   function updateDashboard(res) {
+    if (!res) return;
+
     // 1. Metadata Chips
-    el.chipFilename.textContent = res.filename || "impression.png";
-    if (res.input_shape) {
-      el.chipResolution.textContent = `${res.input_shape[0]} × ${res.input_shape[1]} px`;
+    if (el.chipFilename) setText(el.chipFilename, res.filename || "impression.png");
+    if (el.chipResolution) {
+      if (res.input_shape) {
+        setText(el.chipResolution, `${res.input_shape[0]} × ${res.input_shape[1]} px`);
+      } else {
+        setText(el.chipResolution, "-- × -- px");
+      }
     }
 
     const q = res.quality || {};
     const qScore = q.overall_score !== undefined ? q.overall_score.toFixed(1) : "--";
     const qTier = q.quality_tier || "N/A";
-    el.chipQuality.textContent = `Q: ${qScore} (${qTier})`;
+    if (el.chipQuality) setText(el.chipQuality, `Q: ${qScore} (${qTier})`);
 
     const gate = res.decision_gate || "ACCEPTED";
-    el.chipGate.textContent = `GATE: ${gate}`;
-    if (gate === "ACCEPTED") {
-      el.chipGate.style.background = "rgba(16, 185, 129, 0.15)";
-      el.chipGate.style.color = "var(--emerald-bright)";
-      el.chipGate.style.borderColor = "rgba(16, 185, 129, 0.35)";
-    } else if (gate === "ACCEPTED_WITH_WARNINGS") {
-      el.chipGate.style.background = "rgba(245, 158, 11, 0.15)";
-      el.chipGate.style.color = "var(--amber-bright)";
-      el.chipGate.style.borderColor = "rgba(245, 158, 11, 0.35)";
-    } else {
-      el.chipGate.style.background = "rgba(244, 63, 94, 0.15)";
-      el.chipGate.style.color = "var(--rose-bright)";
-      el.chipGate.style.borderColor = "rgba(244, 63, 94, 0.35)";
+    if (el.chipGate) {
+      setText(el.chipGate, `GATE: ${gate}`);
+      if (gate === "ACCEPTED") {
+        el.chipGate.style.background = "rgba(16, 185, 129, 0.15)";
+        el.chipGate.style.color = "var(--emerald-bright)";
+        el.chipGate.style.borderColor = "rgba(16, 185, 129, 0.35)";
+      } else if (gate === "ACCEPTED_WITH_WARNINGS") {
+        el.chipGate.style.background = "rgba(245, 158, 11, 0.15)";
+        el.chipGate.style.color = "var(--amber-bright)";
+        el.chipGate.style.borderColor = "rgba(245, 158, 11, 0.35)";
+      } else {
+        el.chipGate.style.background = "rgba(244, 63, 94, 0.15)";
+        el.chipGate.style.color = "var(--rose-bright)";
+        el.chipGate.style.borderColor = "rgba(244, 63, 94, 0.35)";
+      }
     }
 
     // 2. Macro Anatomical Class Banner
@@ -853,11 +877,14 @@
     const primClass = cls.primary_class || "?";
     const conf = cls.confidence !== undefined ? (cls.confidence * 100).toFixed(1) : "0.0";
 
-    if (el.primaryClassTitle) el.primaryClassTitle.textContent = anatLabel;
-    if (el.nistSymbolBadge) el.nistSymbolBadge.textContent = `[${primClass}]`;
-    if (el.primaryConfBadge) el.primaryConfBadge.textContent = `${conf}% Confidence`;
-    if (el.confidenceBarFill) el.confidenceBarFill.style.width = `${Math.min(Math.max(cls.confidence * 100, 0), 100)}%`;
-    if (el.confidencePercentageText) el.confidencePercentageText.textContent = `${conf}%`;
+    if (el.primaryClassTitle) setText(el.primaryClassTitle, anatLabel);
+    if (el.nistSymbolBadge) setText(el.nistSymbolBadge, `[${primClass}]`);
+    if (el.primaryConfBadge) setText(el.primaryConfBadge, `${conf}% Confidence`);
+    if (el.confidenceBarFill) {
+      const confVal = cls.confidence !== undefined ? cls.confidence * 100 : 0;
+      el.confidenceBarFill.style.width = `${Math.min(Math.max(confVal, 0), 100)}%`;
+    }
+    if (el.confidencePercentageText) setText(el.confidencePercentageText, `${conf}%`);
 
     // Multi-class Softmax breakdown
     if (el.classDistributionGrid) {
@@ -871,8 +898,8 @@
         const cell = document.createElement("div");
         cell.className = `prob-cell ${c === primClass ? "active-class" : ""}`;
         cell.innerHTML = `
-          <span class="prob-class-code">${c} • ${classNames[c] || c}</span>
-          <span class="prob-value">${p}%</span>
+          <span class="prob-class-code">${escapeHtml(c)} • ${escapeHtml(classNames[c] || c)}</span>
+          <span class="prob-value">${escapeHtml(p)}%</span>
         `;
         el.classDistributionGrid.appendChild(cell);
       });
@@ -880,128 +907,167 @@
 
     // 3. Subtype Refinement Card
     const sub = res.subtype || {};
-    if (el.subtypeName) el.subtypeName.textContent = sub.subtype || "Uncertain / Degraded";
+    if (el.subtypeName) setText(el.subtypeName, sub.subtype || "Uncertain / Degraded");
     if (el.subtypeStatusBadge) {
-      el.subtypeStatusBadge.textContent = sub.status || "Uncertain";
+      setText(el.subtypeStatusBadge, sub.status || "Uncertain");
       if (sub.is_uncertain) {
         el.subtypeStatusBadge.className = "badge badge-accent";
         el.subtypeStatusBadge.style.color = "var(--amber-bright)";
         el.subtypeStatusBadge.style.borderColor = "rgba(245, 158, 11, 0.4)";
       } else {
         el.subtypeStatusBadge.className = "badge badge-status";
+        el.subtypeStatusBadge.style.color = "";
+        el.subtypeStatusBadge.style.borderColor = "";
       }
     }
 
-    if (el.subtypeCategory) el.subtypeCategory.textContent = `Category: ${sub.primary_category || "Unclassified"}`;
-    if (el.verifiabilityBadge) el.verifiabilityBadge.textContent = sub.forensic_verifiability || "Expert Discretion";
-    if (el.subtypeReasonText) el.subtypeReasonText.textContent = sub.reason || "Subtype rule synthesis evaluated dermatoglyphic topology.";
+    if (el.subtypeCategory) setText(el.subtypeCategory, `Category: ${sub.primary_category || "Unclassified"}`);
+    if (el.verifiabilityBadge) setText(el.verifiabilityBadge, sub.forensic_verifiability || "Expert Discretion");
+    if (el.subtypeReasonText) setText(el.subtypeReasonText, sub.reason || "Subtype rule synthesis evaluated dermatoglyphic topology.");
 
     // 4. Dermatoglyphic Landmark Metrics
     const feat = res.features || {};
     const times = res.execution_time_ms || {};
     if (el.pipelineLatency) {
-      el.pipelineLatency.textContent = `Pipeline Latency: ${(times.total_ms || 0).toFixed(1)} ms`;
+      setText(el.pipelineLatency, `Pipeline Latency: ${(times.total_ms || 0).toFixed(1)} ms`);
     }
 
-    el.valCoresCount.textContent = feat.num_cores !== undefined ? feat.num_cores : 0;
+    if (el.valCoresCount) setText(el.valCoresCount, feat.num_cores !== undefined ? feat.num_cores : 0);
     const coresList = feat.cores || [];
-    if (coresList.length === 0) {
-      el.valCoresCoord.textContent = "Zero cores detected";
-      el.valCoresCoord.removeAttribute("title");
-    } else {
-      const formattedList = coresList.map((c) => `(${Math.round(c.x)}, ${Math.round(c.y)})`);
-      const allCoordsStr = formattedList.join(", ");
-      el.valCoresCoord.title = allCoordsStr;
-      if (coresList.length <= 2) {
-        el.valCoresCoord.textContent = `Coords: ${allCoordsStr}`;
+    if (el.valCoresCoord) {
+      if (coresList.length === 0) {
+        setText(el.valCoresCoord, "Zero cores detected");
+        el.valCoresCoord.removeAttribute("title");
       } else {
-        const firstTwo = formattedList.slice(0, 2).join(", ");
-        el.valCoresCoord.textContent = `Coords: ${firstTwo} (+${coresList.length - 2} more)`;
+        const formattedList = coresList.map((c) => `(${Math.round(c.x)}, ${Math.round(c.y)})`);
+        const allCoordsStr = formattedList.join(", ");
+        el.valCoresCoord.title = allCoordsStr;
+        if (coresList.length <= 2) {
+          setText(el.valCoresCoord, `Coords: ${allCoordsStr}`);
+        } else {
+          const firstTwo = formattedList.slice(0, 2).join(", ");
+          setText(el.valCoresCoord, `Coords: ${firstTwo} (+${coresList.length - 2} more)`);
+        }
       }
     }
 
-    el.valDeltasCount.textContent = feat.num_deltas !== undefined ? feat.num_deltas : 0;
+    if (el.valDeltasCount) setText(el.valDeltasCount, feat.num_deltas !== undefined ? feat.num_deltas : 0);
     const deltasList = feat.deltas || [];
-    if (deltasList.length === 0) {
-      el.valDeltasCoord.textContent = "Zero deltas detected";
-      el.valDeltasCoord.removeAttribute("title");
-    } else {
-      const formattedDeltas = deltasList.map((d) => `(${Math.round(d.x)}, ${Math.round(d.y)})`);
-      const allDeltasStr = formattedDeltas.join(", ");
-      el.valDeltasCoord.title = allDeltasStr;
-      if (deltasList.length <= 2) {
-        el.valDeltasCoord.textContent = `Coords: ${allDeltasStr}`;
+    if (el.valDeltasCoord) {
+      if (deltasList.length === 0) {
+        setText(el.valDeltasCoord, "Zero deltas detected");
+        el.valDeltasCoord.removeAttribute("title");
       } else {
-        const firstTwo = formattedDeltas.slice(0, 2).join(", ");
-        el.valDeltasCoord.textContent = `Coords: ${firstTwo} (+${deltasList.length - 2} more)`;
+        const formattedDeltas = deltasList.map((d) => `(${Math.round(d.x)}, ${Math.round(d.y)})`);
+        const allDeltasStr = formattedDeltas.join(", ");
+        el.valDeltasCoord.title = allDeltasStr;
+        if (deltasList.length <= 2) {
+          setText(el.valDeltasCoord, `Coords: ${allDeltasStr}`);
+        } else {
+          const firstTwo = formattedDeltas.slice(0, 2).join(", ");
+          setText(el.valDeltasCoord, `Coords: ${firstTwo} (+${deltasList.length - 2} more)`);
+        }
       }
     }
 
-    if (feat.delta_truncated) {
-      el.valTruncation.textContent = "Margin Truncated";
-      el.valTruncation.style.color = "var(--amber-bright)";
-      el.valTruncationDetail.textContent = `Sector: ${feat.expected_delta_sector || "Perimeter"}`;
-    } else {
-      el.valTruncation.textContent = "Enclosed";
-      el.valTruncation.style.color = "#ffffff";
-      el.valTruncationDetail.textContent = "All landmarks within impression";
+    if (el.valTruncation) {
+      if (feat.delta_truncated) {
+        setText(el.valTruncation, "Margin Truncated");
+        el.valTruncation.style.color = "var(--amber-bright)";
+      } else {
+        setText(el.valTruncation, "Enclosed");
+        el.valTruncation.style.color = "#ffffff";
+      }
+    }
+    if (el.valTruncationDetail) {
+      if (feat.delta_truncated) {
+        setText(el.valTruncationDetail, `Sector: ${feat.expected_delta_sector || "Perimeter"}`);
+      } else {
+        setText(el.valTruncationDetail, "All landmarks within impression");
+      }
     }
 
     // Dermatoglyphic Ridge Count
     if (el.valRidgeCount) {
       if (feat.num_cores === 0 && feat.num_deltas === 0) {
-        el.valRidgeCount.textContent = "0.0 (Arch)";
+        setText(el.valRidgeCount, "0.0 (Arch)");
       } else if (feat.ridge_count !== undefined && feat.ridge_count !== null) {
-        el.valRidgeCount.textContent = `${feat.ridge_count.toFixed(1)} ridges`;
+        setText(el.valRidgeCount, `${feat.ridge_count.toFixed(1)} ridges`);
       } else {
-        el.valRidgeCount.textContent = "--";
+        setText(el.valRidgeCount, "--");
       }
     }
 
-    el.valWavelength.textContent = feat.median_wavelength ? `Wavelength: ${feat.median_wavelength.toFixed(1)} px` : "--";
+    if (el.valWavelength) {
+      setText(el.valWavelength, feat.median_wavelength ? `Wavelength: ${feat.median_wavelength.toFixed(1)} px` : "--");
+    }
     if (el.valFrequency) {
-      el.valFrequency.textContent = feat.median_frequency ? `Freq: ${feat.median_frequency.toFixed(3)} cyc/px` : "--";
+      setText(el.valFrequency, feat.median_frequency ? `Freq: ${feat.median_frequency.toFixed(3)} cyc/px` : "--");
     }
 
-    el.valFlowDirection.textContent = feat.flow_direction || "--";
-    el.valExitAngle.textContent = feat.exit_angle_deg !== undefined ? `${feat.exit_angle_deg.toFixed(1)}° Drift` : "--";
+    if (el.valFlowDirection) setText(el.valFlowDirection, feat.flow_direction || "--");
+    if (el.valExitAngle) {
+      setText(el.valExitAngle, feat.exit_angle_deg !== undefined ? `${feat.exit_angle_deg.toFixed(1)}° Drift` : "--");
+    }
 
     const coh = feat.mean_coherence !== undefined ? feat.mean_coherence.toFixed(2) : "--";
-    el.valCoherence.textContent = coh;
-    el.valCoherenceTier.textContent = feat.mean_coherence > 0.6 ? "High Ridge Coherence" : feat.mean_coherence > 0.35 ? "Moderate Parallelism" : "Low Ridge Coherence";
+    if (el.valCoherence) setText(el.valCoherence, coh);
+    if (el.valCoherenceTier) {
+      setText(el.valCoherenceTier, feat.mean_coherence > 0.6 ? "High Ridge Coherence" : feat.mean_coherence > 0.35 ? "Moderate Parallelism" : "Low Ridge Coherence");
+    }
 
     // 5. Quality & Defect Diagnostics Card
-    el.overallQualityScore.textContent = qScore;
-    el.qualityTierBadge.textContent = `${qTier} Tier`;
-    el.qUsableArea.textContent = q.usable_area_percentage !== undefined ? `${q.usable_area_percentage.toFixed(1)}%` : "--";
+    if (el.overallQualityScore) setText(el.overallQualityScore, qScore);
+    if (el.qualityTierBadge) setText(el.qualityTierBadge, `${qTier} Tier`);
+    if (el.qUsableArea) {
+      setText(el.qUsableArea, q.usable_area_percentage !== undefined ? `${q.usable_area_percentage.toFixed(1)}%` : "--");
+    }
 
     const metrics = q.metrics || {};
-    el.qClarity.textContent = metrics.clarity !== undefined ? `${metrics.clarity.toFixed(1)} / 100` : "--";
-    el.qFreqCont.textContent = metrics.frequency_continuity !== undefined ? `${metrics.frequency_continuity.toFixed(1)} / 100` : "--";
+    if (el.qClarity) setText(el.qClarity, metrics.clarity !== undefined ? `${metrics.clarity.toFixed(1)} / 100` : "--");
+    if (el.qFreqCont) setText(el.qFreqCont, metrics.frequency_continuity !== undefined ? `${metrics.frequency_continuity.toFixed(1)} / 100` : "--");
 
     if (q.damage_detected) {
       const dmgTypes = (q.damage_types || []).join(", ") || "Physical Alteration";
       const dmgPct = q.damage_percentage !== undefined ? `${q.damage_percentage.toFixed(1)}%` : "";
-      el.qDamageStatus.textContent = `${dmgTypes} (${dmgPct})`;
-      el.qDamageStatus.style.color = "var(--rose-bright)";
+      if (el.qDamageStatus) {
+        setText(el.qDamageStatus, `${dmgTypes} (${dmgPct})`);
+        el.qDamageStatus.style.color = "var(--rose-bright)";
+      }
 
-      el.qualityAlertBanner.className = "quality-alert-banner danger";
-      el.qualityAlertBanner.querySelector(".alert-icon").textContent = "⚠";
-      el.qualityAlertText.textContent = `Warning: ${dmgTypes} defect localized in impression. Special forensic audit required.`;
+      if (el.qualityAlertBanner) {
+        el.qualityAlertBanner.className = "quality-alert-banner danger";
+        const alertIcon = el.qualityAlertBanner.querySelector(".alert-icon");
+        if (alertIcon) setText(alertIcon, "⚠");
+        const alertText = el.qualityAlertText || el.qualityAlertBanner.querySelector(".alert-text");
+        if (alertText) setText(alertText, `Warning: ${dmgTypes} defect localized in impression. Special forensic audit required.`);
+      }
     } else if (res.decision_gate === "ACCEPTED_WITH_WARNINGS") {
-      el.qDamageStatus.textContent = "Intact (Marginal Warnings)";
-      el.qDamageStatus.style.color = "var(--amber-bright)";
+      if (el.qDamageStatus) {
+        setText(el.qDamageStatus, "Intact (Marginal Warnings)");
+        el.qDamageStatus.style.color = "var(--amber-bright)";
+      }
 
-      el.qualityAlertBanner.className = "quality-alert-banner warning";
-      el.qualityAlertBanner.querySelector(".alert-icon").textContent = "⚠";
-      el.qualityAlertText.textContent = q.quality_warning || "Impression accepted with operational cautions.";
+      if (el.qualityAlertBanner) {
+        el.qualityAlertBanner.className = "quality-alert-banner warning";
+        const alertIcon = el.qualityAlertBanner.querySelector(".alert-icon");
+        if (alertIcon) setText(alertIcon, "⚠");
+        const alertText = el.qualityAlertText || el.qualityAlertBanner.querySelector(".alert-text");
+        if (alertText) setText(alertText, q.quality_warning || "Impression accepted with operational cautions.");
+      }
     } else {
-      el.qDamageStatus.textContent = "Intact (Zero Defects)";
-      el.qDamageStatus.style.color = "var(--emerald-bright)";
+      if (el.qDamageStatus) {
+        setText(el.qDamageStatus, "Intact (Zero Defects)");
+        el.qDamageStatus.style.color = "var(--emerald-bright)";
+      }
 
-      el.qualityAlertBanner.className = "quality-alert-banner";
-      el.qualityAlertBanner.querySelector(".alert-icon").textContent = "✓";
-      el.qualityAlertText.textContent = "Impression meets ISO/NIST biometric quality standards for automated filing.";
+      if (el.qualityAlertBanner) {
+        el.qualityAlertBanner.className = "quality-alert-banner";
+        const alertIcon = el.qualityAlertBanner.querySelector(".alert-icon");
+        if (alertIcon) setText(alertIcon, "✓");
+        const alertText = el.qualityAlertText || el.qualityAlertBanner.querySelector(".alert-text");
+        if (alertText) setText(alertText, "Impression meets ISO/NIST biometric quality standards for automated filing.");
+      }
     }
 
     // 6. Forensic Explanation (Safely guarded if card is present)
@@ -1014,16 +1080,18 @@
         stepCard.innerHTML = `
           <div class="step-header">
             <span class="step-num-badge">${idx + 1}</span>
-            <span class="step-title">${item.title || item.step}</span>
+            <span class="step-title">${escapeHtml(item.title || item.step)}</span>
           </div>
-          <div class="step-detail">${item.detail || ""}</div>
+          <div class="step-detail">${escapeHtml(item.detail || "")}</div>
         `;
         el.explanationAccordion.appendChild(stepCard);
       });
     }
 
     // Hide placeholder
-    el.canvasPlaceholder.classList.add("hidden");
+    if (el.canvasPlaceholder) {
+      el.canvasPlaceholder.classList.add("hidden");
+    }
   }
 
   // ------------------------------------------------------------------------
@@ -1159,15 +1227,17 @@
 
   function renderCanvas() {
     const canvas = el.fingerprintCanvas;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
     if (!state.currentResult || !state.rawImage) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      el.canvasPlaceholder.classList.remove("hidden");
+      if (el.canvasPlaceholder) el.canvasPlaceholder.classList.remove("hidden");
       return;
     }
 
-    el.canvasPlaceholder.classList.add("hidden");
+    if (el.canvasPlaceholder) el.canvasPlaceholder.classList.add("hidden");
     drawFingerprint(canvas, {
       cores: el.toggleCores ? el.toggleCores.checked : true,
       deltas: el.toggleDeltas ? el.toggleDeltas.checked : true,
@@ -1198,7 +1268,7 @@
       el.modalCanvasContainer.style.transform = `translate(${modalPanX}px, ${modalPanY}px) scale(${modalZoom})`;
     }
     if (el.modalZoomLevel) {
-      el.modalZoomLevel.textContent = `${Math.round(modalZoom * 100)}%`;
+      setText(el.modalZoomLevel, `${Math.round(modalZoom * 100)}%`);
     }
   }
 
@@ -1313,10 +1383,10 @@
     closeVaultModal();
     if (el.modalCanvas) {
       const mctx = el.modalCanvas.getContext("2d");
-      mctx.clearRect(0, 0, el.modalCanvas.width, el.modalCanvas.height);
+      if (mctx) mctx.clearRect(0, 0, el.modalCanvas.width, el.modalCanvas.height);
     }
     if (el.modalImageMeta) {
-      el.modalImageMeta.textContent = "Native Resolution";
+      setText(el.modalImageMeta, "Native Resolution");
     }
 
     if (el.fileInput) el.fileInput.value = "";
@@ -1325,7 +1395,7 @@
     if (el.digitSelect) el.digitSelect.value = "";
 
     if (el.inputStatusBadge) {
-      el.inputStatusBadge.textContent = "Ready for Input";
+      setText(el.inputStatusBadge, "Ready for Input");
       el.inputStatusBadge.className = "badge badge-info";
     }
 
@@ -1336,73 +1406,74 @@
 
     if (el.fingerprintCanvas) {
       const ctx = el.fingerprintCanvas.getContext("2d");
-      ctx.clearRect(0, 0, el.fingerprintCanvas.width, el.fingerprintCanvas.height);
+      if (ctx) ctx.clearRect(0, 0, el.fingerprintCanvas.width, el.fingerprintCanvas.height);
     }
     if (el.canvasPlaceholder) el.canvasPlaceholder.classList.remove("hidden");
 
-    if (el.chipFilename) el.chipFilename.textContent = "No Image Loaded";
-    if (el.chipResolution) el.chipResolution.textContent = "-- × -- px";
-    if (el.chipQuality) el.chipQuality.textContent = "Q: --";
+    if (el.chipFilename) setText(el.chipFilename, "No Image Loaded");
+    if (el.chipResolution) setText(el.chipResolution, "-- × -- px");
+    if (el.chipQuality) setText(el.chipQuality, "Q: --");
     if (el.chipGate) {
-      el.chipGate.textContent = "GATE: IDLE";
+      setText(el.chipGate, "GATE: IDLE");
       el.chipGate.style.background = "";
       el.chipGate.style.color = "";
       el.chipGate.style.borderColor = "";
     }
-    if (el.primaryClassTitle) el.primaryClassTitle.textContent = "AWAITING IMPRESSION";
-    if (el.nistSymbolBadge) el.nistSymbolBadge.textContent = "[--]";
-    if (el.primaryConfBadge) el.primaryConfBadge.textContent = "0.0%";
+    if (el.primaryClassTitle) setText(el.primaryClassTitle, "AWAITING IMPRESSION");
+    if (el.nistSymbolBadge) setText(el.nistSymbolBadge, "[--]");
+    if (el.primaryConfBadge) setText(el.primaryConfBadge, "0.0%");
     if (el.confidenceBarFill) el.confidenceBarFill.style.width = "0%";
-    if (el.confidencePercentageText) el.confidencePercentageText.textContent = "0.0%";
+    if (el.confidencePercentageText) setText(el.confidencePercentageText, "0.0%");
     if (el.classDistributionGrid) el.classDistributionGrid.innerHTML = "";
 
     if (el.subtypeStatusBadge) {
-      el.subtypeStatusBadge.textContent = "Idle";
+      setText(el.subtypeStatusBadge, "Idle");
       el.subtypeStatusBadge.className = "badge badge-info";
     }
-    if (el.subtypeName) el.subtypeName.textContent = "Awaiting Impression";
-    if (el.subtypeCategory) el.subtypeCategory.textContent = "Category: --";
-    if (el.verifiabilityBadge) el.verifiabilityBadge.textContent = "Pending";
-    if (el.subtypeReasonText) el.subtypeReasonText.textContent = "Upload an impression to evaluate dermatoglyphic pattern and landmarks.";
+    if (el.subtypeName) setText(el.subtypeName, "Awaiting Impression");
+    if (el.subtypeCategory) setText(el.subtypeCategory, "Category: --");
+    if (el.verifiabilityBadge) setText(el.verifiabilityBadge, "Pending");
+    if (el.subtypeReasonText) setText(el.subtypeReasonText, "Upload an impression to evaluate dermatoglyphic pattern and landmarks.");
 
-    if (el.pipelineLatency) el.pipelineLatency.textContent = "Execution: -- ms";
-    if (el.valCoresCount) el.valCoresCount.textContent = "0";
+    if (el.pipelineLatency) setText(el.pipelineLatency, "Execution: -- ms");
+    if (el.valCoresCount) setText(el.valCoresCount, "0");
     if (el.valCoresCoord) {
-      el.valCoresCoord.textContent = "No impression loaded";
+      setText(el.valCoresCoord, "No impression loaded");
       el.valCoresCoord.removeAttribute("title");
     }
-    if (el.valDeltasCount) el.valDeltasCount.textContent = "0";
+    if (el.valDeltasCount) setText(el.valDeltasCount, "0");
     if (el.valDeltasCoord) {
-      el.valDeltasCoord.textContent = "No impression loaded";
+      setText(el.valDeltasCoord, "No impression loaded");
       el.valDeltasCoord.removeAttribute("title");
     }
     if (el.valTruncation) {
-      el.valTruncation.textContent = "Idle";
+      setText(el.valTruncation, "Idle");
       el.valTruncation.style.color = "";
     }
-    if (el.valTruncationDetail) el.valTruncationDetail.textContent = "--";
-    if (el.valRidgeCount) el.valRidgeCount.textContent = "--";
-    if (el.valWavelength) el.valWavelength.textContent = "--";
-    if (el.valFrequency) el.valFrequency.textContent = "--";
-    if (el.valFlowDirection) el.valFlowDirection.textContent = "--";
-    if (el.valExitAngle) el.valExitAngle.textContent = "--";
-    if (el.valCoherence) el.valCoherence.textContent = "--";
-    if (el.valCoherenceTier) el.valCoherenceTier.textContent = "--";
+    if (el.valTruncationDetail) setText(el.valTruncationDetail, "--");
+    if (el.valRidgeCount) setText(el.valRidgeCount, "--");
+    if (el.valWavelength) setText(el.valWavelength, "--");
+    if (el.valFrequency) setText(el.valFrequency, "--");
+    if (el.valFlowDirection) setText(el.valFlowDirection, "--");
+    if (el.valExitAngle) setText(el.valExitAngle, "--");
+    if (el.valCoherence) setText(el.valCoherence, "--");
+    if (el.valCoherenceTier) setText(el.valCoherenceTier, "--");
 
-    if (el.overallQualityScore) el.overallQualityScore.textContent = "--";
-    if (el.qualityTierBadge) el.qualityTierBadge.textContent = "Idle";
-    if (el.qUsableArea) el.qUsableArea.textContent = "--%";
-    if (el.qClarity) el.qClarity.textContent = "-- / 100";
-    if (el.qFreqCont) el.qFreqCont.textContent = "-- / 100";
+    if (el.overallQualityScore) setText(el.overallQualityScore, "--");
+    if (el.qualityTierBadge) setText(el.qualityTierBadge, "Idle");
+    if (el.qUsableArea) setText(el.qUsableArea, "--%");
+    if (el.qClarity) setText(el.qClarity, "-- / 100");
+    if (el.qFreqCont) setText(el.qFreqCont, "-- / 100");
     if (el.qDamageStatus) {
-      el.qDamageStatus.textContent = "--";
+      setText(el.qDamageStatus, "--");
       el.qDamageStatus.style.color = "";
     }
     if (el.qualityAlertBanner) {
       el.qualityAlertBanner.className = "quality-alert-banner";
       const icon = el.qualityAlertBanner.querySelector(".alert-icon");
-      if (icon) icon.textContent = "ℹ";
-      if (el.qualityAlertText) el.qualityAlertText.textContent = "Upload or drag & drop a fingerprint impression to run forensic classification.";
+      if (icon) setText(icon, "ℹ");
+      const alertText = el.qualityAlertText || el.qualityAlertBanner.querySelector(".alert-text");
+      if (alertText) setText(alertText, "Upload or drag & drop a fingerprint impression to run forensic classification.");
     }
 
     if (el.explanationAccordion) el.explanationAccordion.innerHTML = "";
@@ -1433,7 +1504,7 @@
     const subLabel = sub.subtype || "Unresolved";
     const confVal = cls.confidence ? (cls.confidence * 100).toFixed(1) : "--";
     if (el.feedbackAiSummary) {
-      el.feedbackAiSummary.textContent = `${macroLabel} (${subLabel}) — ${confVal}% Conf`;
+      setText(el.feedbackAiSummary, `${macroLabel} (${subLabel}) — ${confVal}% Conf`);
     }
 
     if (el.feedbackModal) {
@@ -1512,7 +1583,7 @@
 
     if (el.btnSubmitFeedback) {
       el.btnSubmitFeedback.disabled = true;
-      el.btnSubmitFeedback.textContent = "Saving...";
+      setText(el.btnSubmitFeedback, "Saving...");
     }
 
     try {
@@ -1536,7 +1607,7 @@
     } finally {
       if (el.btnSubmitFeedback) {
         el.btnSubmitFeedback.disabled = false;
-        el.btnSubmitFeedback.textContent = "Save to Feedback Archive";
+        setText(el.btnSubmitFeedback, "Save to Feedback Archive");
       }
     }
   }
@@ -1563,7 +1634,7 @@
 
   function updateVaultBadge(count) {
     if (el.vaultBadgeCount) {
-      el.vaultBadgeCount.textContent = count !== undefined ? String(count) : "0";
+      setText(el.vaultBadgeCount, count !== undefined ? String(count) : "0");
     }
   }
 
@@ -1616,10 +1687,10 @@
       if (window.confirm(message)) onConfirm();
       return;
     }
-    if (el.vaultConfirmTitle) el.vaultConfirmTitle.textContent = title;
-    if (el.vaultConfirmMessage) el.vaultConfirmMessage.textContent = message;
+    if (el.vaultConfirmTitle) setText(el.vaultConfirmTitle, title);
+    if (el.vaultConfirmMessage) setText(el.vaultConfirmMessage, message);
     if (el.btnAcceptVaultConfirm) {
-      el.btnAcceptVaultConfirm.textContent = confirmText || "Confirm";
+      setText(el.btnAcceptVaultConfirm, confirmText || "Confirm");
       el.btnAcceptVaultConfirm.className = `btn ${confirmClass || "btn-danger"} btn-sm`;
     }
     pendingVaultConfirmCallback = onConfirm;
@@ -2020,9 +2091,9 @@
       const p = el.vaultEmptyState.querySelector("p");
       if (p) {
         if (!currentVaultCorrections || currentVaultCorrections.length === 0) {
-          p.textContent = "No corrections logged yet. Use 'False Prediction?' to record discrepancies.";
+          setText(p, "No corrections logged yet. Use 'False Prediction?' to record discrepancies.");
         } else {
-          p.textContent = "Select a correction from the archive list to view side-by-side comparison";
+          setText(p, "Select a correction from the archive list to view side-by-side comparison");
         }
       }
     }
@@ -2058,7 +2129,7 @@
     }
     const toast = document.createElement("div");
     toast.className = `toast toast-${type}`;
-    toast.textContent = message;
+    setText(toast, message);
     container.appendChild(toast);
     setTimeout(() => {
       toast.style.opacity = "0";

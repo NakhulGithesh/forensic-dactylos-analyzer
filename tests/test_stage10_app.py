@@ -954,4 +954,13 @@ class TestStage10ApplicationAPI:
         assert ".vault-img-hover-badge" in css
         assert "#btnInspectVaultPrint" in css
 
+    def test_app_js_dom_resilience_node_mock(self):
+        """Execute Node.js DOM mock resilience tests ensuring app.js never throws null property errors."""
+        import subprocess
+        test_script = os.path.join(BASE_DIR, "tests", "test_dom_resilience.js")
+        proc = subprocess.run(["node", test_script], capture_output=True, text=True)
+        assert proc.returncode == 0, f"Node DOM test failed:\nSTDOUT:\n{proc.stdout}\nSTDERR:\n{proc.stderr}"
+        assert "ALL NODE.JS DOM RESILIENCE TESTS PASSED CLEANLY!" in proc.stdout
+
+
 
