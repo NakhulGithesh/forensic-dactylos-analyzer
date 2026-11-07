@@ -834,8 +834,9 @@ class TestStage10ApplicationAPI:
         assert 'id="btnCancelVaultConfirm"' in html_text
         assert 'id="btnAcceptVaultConfirm"' in html_text
 
-        # Verify circular confidence gauge
-        assert 'id="confidenceRingCircle"' in html_text
+        # Verify confidence gauge / bar
+        assert 'id="confidenceBarFill"' in html_text
+        assert 'id="primaryConfBadge"' in html_text
         assert 'id="confidencePercentageText"' in html_text
 
         # Verify removed badges are NOT in HTML

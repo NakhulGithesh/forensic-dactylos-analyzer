@@ -83,7 +83,6 @@
     primaryConfBadge: document.getElementById("primaryConfBadge"),
     confidenceBarFill: document.getElementById("confidenceBarFill"),
     confidencePercentageText: document.getElementById("confidencePercentageText"),
-    confidenceRingCircle: document.getElementById("confidenceRingCircle"),
     classDistributionGrid: document.getElementById("classDistributionGrid"),
 
     subtypeStatusBadge: document.getElementById("subtypeStatusBadge"),
@@ -860,22 +859,6 @@
     if (el.confidenceBarFill) el.confidenceBarFill.style.width = `${Math.min(Math.max(cls.confidence * 100, 0), 100)}%`;
     if (el.confidencePercentageText) el.confidencePercentageText.textContent = `${conf}%`;
 
-    // Circular Confidence Meter Gauge
-    if (el.confidenceRingCircle) {
-      const circumference = 2 * Math.PI * 42; // ~263.89
-      el.confidenceRingCircle.style.strokeDasharray = circumference;
-      const confRatio = cls.confidence !== undefined ? cls.confidence : 0;
-      const offset = circumference * (1 - Math.min(1, Math.max(0, confRatio)));
-      el.confidenceRingCircle.style.strokeDashoffset = offset;
-      if (confRatio >= 0.8) {
-        el.confidenceRingCircle.style.stroke = "var(--emerald-bright)";
-      } else if (confRatio >= 0.6) {
-        el.confidenceRingCircle.style.stroke = "var(--amber-bright)";
-      } else {
-        el.confidenceRingCircle.style.stroke = "var(--rose-bright)";
-      }
-    }
-
     // Multi-class Softmax breakdown
     if (el.classDistributionGrid) {
       el.classDistributionGrid.innerHTML = "";
@@ -1371,12 +1354,6 @@
     if (el.primaryConfBadge) el.primaryConfBadge.textContent = "0.0%";
     if (el.confidenceBarFill) el.confidenceBarFill.style.width = "0%";
     if (el.confidencePercentageText) el.confidencePercentageText.textContent = "0.0%";
-    if (el.confidenceRingCircle) {
-      const circumference = 2 * Math.PI * 42;
-      el.confidenceRingCircle.style.strokeDasharray = circumference;
-      el.confidenceRingCircle.style.strokeDashoffset = circumference;
-      el.confidenceRingCircle.style.stroke = "var(--blue-primary)";
-    }
     if (el.classDistributionGrid) el.classDistributionGrid.innerHTML = "";
 
     if (el.subtypeStatusBadge) {

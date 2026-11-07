@@ -175,19 +175,18 @@
           <span class="banner-eyebrow">ANATOMICAL PATTERN CLASSIFICATION</span>
         </div>
         <div class="banner-main-row">
-          <div class="banner-title-group">
-            <h2 class="banner-class-title" id="primaryClassTitle">WHORL</h2>
-            <div class="banner-confidence-badge" id="primaryConfBadge" style="display: none;">98.4% Confidence</div>
+          <h2 class="banner-class-title" id="primaryClassTitle">WHORL</h2>
+          <div class="banner-confidence-badge" id="primaryConfBadge">98.4% Confidence</div>
+        </div>
+
+        <!-- Softmax Confidence Bar -->
+        <div class="confidence-meter-wrap">
+          <div class="confidence-meter-header">
+            <span>Primary Softmax Probability</span>
+            <span id="confidencePercentageText">98.4%</span>
           </div>
-          <div class="confidence-circle-wrap">
-            <svg class="confidence-ring" viewBox="0 0 100 100">
-              <circle class="confidence-ring-bg" cx="50" cy="50" r="42" stroke-width="8" fill="none"/>
-              <circle class="confidence-ring-fill" id="confidenceRingCircle" cx="50" cy="50" r="42" stroke-width="8" stroke-linecap="round" fill="none" stroke-dasharray="263.89" stroke-dashoffset="4.22"/>
-            </svg>
-            <div class="confidence-circle-content">
-              <span class="confidence-circle-num" id="confidencePercentageText">98.4%</span>
-              <span class="confidence-circle-label">CONFIDENCE</span>
-            </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="confidenceBarFill" style="width: 98.4%;"></div>
           </div>
         </div>
 

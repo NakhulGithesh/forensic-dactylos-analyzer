@@ -761,86 +761,55 @@ body.dark-theme {
 
 .banner-main-row {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.5rem;
   margin-bottom: 1rem;
-}
-
-.banner-title-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
 }
 
 .banner-class-title {
   font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  color: var(--text-primary);
-}
-
-.banner-confidence-badge {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--emerald-bright);
-}
-
-/* Circular Confidence Gauge / Meter */
-.confidence-circle-wrap {
-  position: relative;
-  width: 105px;
-  height: 105px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.confidence-ring {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-}
-
-.confidence-ring-bg {
-  stroke: rgba(255, 255, 255, 0.08);
-}
-
-.confidence-ring-fill {
-  stroke: var(--emerald-bright, #10b981);
-  stroke-dasharray: 263.89;
-  stroke-dashoffset: 4.22;
-  transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s ease;
-}
-
-.confidence-circle-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  pointer-events: none;
-}
-
-.confidence-circle-num {
-  font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
 
-.confidence-circle-label {
-  font-size: 0.55rem;
+.banner-confidence-badge {
+  font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  margin-top: 2px;
+  color: var(--emerald-bright);
+}
+
+.confidence-meter-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.confidence-meter-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-input);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--blue-primary);
+  border-radius: 9999px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .multiclass-distribution {
