@@ -328,7 +328,7 @@ def load_fingerprint_classifier(
         raise FileNotFoundError(f"Checkpoint file not found: {checkpoint_path}")
 
     target_device = torch.device(device) if device is not None else get_default_device()
-    checkpoint = torch.load(checkpoint_path, map_location=target_device)
+    checkpoint = torch.load(checkpoint_path, map_location=target_device, weights_only=True)
 
     backbone_name = checkpoint.get("backbone_name", "resnet18")
     in_channels = checkpoint.get("in_channels", 1)

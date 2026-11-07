@@ -394,7 +394,7 @@ def main():
     if not os.path.isfile(model_path):
         raise FileNotFoundError(f"Model checkpoint not found: {model_path}")
 
-    checkpoint = torch.load(model_path, map_location=device)
+    checkpoint = torch.load(model_path, map_location=device, weights_only=True)
     backbone_name = checkpoint.get("backbone_name", "resnet18")
     in_channels = checkpoint.get("in_channels", 1)
     num_classes = checkpoint.get("num_classes", 5)

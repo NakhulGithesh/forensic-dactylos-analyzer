@@ -18,13 +18,16 @@ from src.app.main import (
     FEEDBACK_IMAGES_DIR,
     FEEDBACK_JSON_PATH,
     _save_corrections,
+    WORKSTATION_TOKEN,
 )
 
 
 @pytest.fixture(scope="module")
 def client():
-    """Create FastAPI TestClient fixture."""
+    """Create FastAPI TestClient fixture with workstation auth credentials."""
     with TestClient(app) as c:
+        c.headers["X-Workstation-Token"] = WORKSTATION_TOKEN
+        c.cookies.set("workstation_token", WORKSTATION_TOKEN)
         yield c
 
 
@@ -709,7 +712,7 @@ class TestStage10ApplicationAPI:
             assert "AI Fingerprint Forensic Classification System" in meta
 
     def test_feedback_export_and_clear(self, client):
-        """POST 1 feedback item with image, call GET /api/feedback/export?clear=true&format=zip, verify queue cleared and image deleted."""
+        """Verify safe two-step flow (GET export, then DELETE) and verify GET /api/feedback/export?clear=true returns 400."""
         tiny_png = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFElEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
         p = {
             "image_base64": tiny_png,
@@ -724,9 +727,19 @@ class TestStage10ApplicationAPI:
         img_path = os.path.join(FEEDBACK_IMAGES_DIR, f"{corr_id}.png")
         assert os.path.isfile(img_path)
 
-        export_res = client.get("/api/feedback/export?clear=true&format=zip")
+        # GET with clear=true must be rejected with 400 Bad Request
+        rejected_res = client.get("/api/feedback/export?clear=true&format=zip")
+        assert rejected_res.status_code == 400
+        assert "Destructive clear parameter removed" in rejected_res.json()["detail"]
+
+        # Safe two-step flow: 1. GET export archive (read-only)
+        export_res = client.get("/api/feedback/export?format=zip")
         assert export_res.status_code == 200
         assert export_res.headers["content-type"] == "application/zip"
+
+        # 2. Call DELETE /api/feedback to clear records
+        del_res = client.delete("/api/feedback")
+        assert del_res.status_code == 200
 
         count_res = client.get("/api/feedback/count")
         assert count_res.status_code == 200
@@ -961,6 +974,282 @@ class TestStage10ApplicationAPI:
         proc = subprocess.run(["node", test_script], capture_output=True, text=True)
         assert proc.returncode == 0, f"Node DOM test failed:\nSTDOUT:\n{proc.stdout}\nSTDERR:\n{proc.stderr}"
         assert "ALL NODE.JS DOM RESILIENCE TESTS PASSED CLEANLY!" in proc.stdout
+
+
+class TestStage10SecurityHardening:
+    """Security and architectural audit test suite verifying all 7 audit findings."""
+
+    def test_unauthenticated_api_access_blocked_401(self):
+        """Verify unauthenticated requests to protected /api endpoints return 401."""
+        with TestClient(app) as anon_client:
+            # 1. /api/sample-gallery
+            res_gallery = anon_client.get("/api/sample-gallery")
+            assert res_gallery.status_code == 401
+            assert "Unauthorized" in res_gallery.json()["detail"]
+
+            # 2. /api/analyze
+            res_analyze = anon_client.post("/api/analyze")
+            assert res_analyze.status_code == 401
+
+            # 3. /api/feedback GET, POST, DELETE
+            res_fb_get = anon_client.get("/api/feedback")
+            assert res_fb_get.status_code == 401
+
+            res_fb_post = anon_client.post("/api/feedback", json={"user_correction": "Arch"})
+            assert res_fb_post.status_code == 401
+
+            res_fb_del = anon_client.delete("/api/feedback")
+            assert res_fb_del.status_code == 401
+
+            # 4. /api/feedback/export
+            res_fb_export = anon_client.get("/api/feedback/export")
+            assert res_fb_export.status_code == 401
+
+            # 5. /api/feedback/count
+            res_fb_count = anon_client.get("/api/feedback/count")
+            assert res_fb_count.status_code == 401
+
+            # 6. /api/feedback/image/test.png
+            res_fb_img = anon_client.get("/api/feedback/image/test.png")
+            assert res_fb_img.status_code == 401
+
+            # 7. /api/feedback/{id}
+            res_fb_single = anon_client.get("/api/feedback/dummy_id")
+            assert res_fb_single.status_code == 401
+
+    def test_health_endpoint_accessible_unauthenticated_200(self):
+        """Verify /api/health is accessible unauthenticated."""
+        with TestClient(app) as anon_client:
+            res_health = anon_client.get("/api/health")
+            assert res_health.status_code == 200
+            assert res_health.json()["status"] == "healthy"
+
+    def test_feedback_export_clear_get_rejected_400(self, client):
+        """Verify destructive clear query parameter on GET /api/feedback/export is rejected with 400."""
+        res_clear_true = client.get("/api/feedback/export?clear=true&format=zip")
+        assert res_clear_true.status_code == 400
+        assert "Destructive clear parameter removed" in res_clear_true.json()["detail"]
+
+        res_clear_1 = client.get("/api/feedback/export?clear=1")
+        assert res_clear_1.status_code == 400
+        assert "Destructive clear parameter removed" in res_clear_1.json()["detail"]
+
+    def test_upload_payload_too_large_413(self, client):
+        """Verify oversized uploads (> 15MB) and base64 payloads (> 25MB) return 413."""
+        # Oversized multipart upload > 15MB
+        huge_bytes = b"\x89PNG\r\n\x1a\n" + b"\x00" * (16 * 1024 * 1024)
+        files = {"file": ("oversized.png", huge_bytes, "image/png")}
+        res = client.post("/api/analyze", files=files)
+        assert res.status_code == 413
+        assert "Maximum upload size is 15 MB" in res.json()["detail"]
+
+        # Oversized base64 feedback payload > 25MB
+        huge_b64 = "data:image/png;base64," + "A" * (26 * 1024 * 1024)
+        payload = {
+            "image_base64": huge_b64,
+            "filename": "huge.png",
+            "user_correction": "Arch",
+        }
+        res_fb = client.post("/api/feedback", json=payload)
+        assert res_fb.status_code == 413
+        assert "Base64 image payload too large" in res_fb.json()["detail"]
+
+    def test_upload_invalid_magic_bytes_400(self, client):
+        """Verify non-image uploads with invalid magic bytes return 400."""
+        files = {"file": ("malicious.sh", b"#!/bin/bash\nrm -rf /\n", "image/png")}
+        res = client.post("/api/analyze", files=files)
+        assert res.status_code == 400
+        assert "Invalid image format" in res.json()["detail"]
+
+    def test_stored_xss_sanitization_in_frontend(self, client):
+        """Verify CSP meta tag in index.html and sanitizeImageUrl escaping in app.js."""
+        res_index = client.get("/")
+        assert res_index.status_code == 200
+        html = res_index.text
+        assert "Content-Security-Policy" in html
+        assert "default-src 'self'" in html
+        assert "<!-- WORKSTATION_TOKEN_META -->" not in html
+        assert 'name="workstation-token"' in html
+
+        res_js = client.get("/static/app.js")
+        assert res_js.status_code == 200
+        js = res_js.text
+        assert "function sanitizeImageUrl" in js
+        assert "function getWorkstationToken" in js
+        assert "escapeHtml(String(metrics.cores_count" in js
+        assert "escapeHtml(String(metrics.deltas_count" in js
+        assert "sanitizeImageUrl(imgSrc)" in js
+
+    def test_torch_load_weights_only(self):
+        """Verify load_fingerprint_classifier enforces weights_only=True."""
+        import inspect
+        from src.models import backbones
+        source = inspect.getsource(backbones.load_fingerprint_classifier)
+        assert "weights_only=True" in source
+
+    def test_rate_limiter_blocks_excessive_requests_429(self, client, monkeypatch):
+        """Verify sliding window rate limiter raises 429 when threshold exceeded."""
+        import time
+        from src.app import main
+        monkeypatch.delenv("TESTING", raising=False)
+        monkeypatch.delenv("DISABLE_RATE_LIMIT", raising=False)
+
+        client_host = "testclient"
+        with main._rate_limiter_lock:
+            main._rate_limiter_history[client_host] = [time.time()] * 60
+            main._rate_limiter_history["127.0.0.1"] = [time.time()] * 60
+
+        try:
+            res = client.post("/api/analyze", data={"sample_id": "nist_whorl"})
+            assert res.status_code == 429
+            assert "Rate limit exceeded" in res.json()["detail"]
+        finally:
+            with main._rate_limiter_lock:
+                main._rate_limiter_history.clear()
+
+    def test_authorization_bearer_header_accepted(self):
+        """Verify Authorization: Bearer <token> allows access, and invalid bearer returns 401."""
+        with TestClient(app) as test_client:
+            # Valid Bearer token
+            headers_valid = {"Authorization": f"Bearer {WORKSTATION_TOKEN}"}
+            res_valid = test_client.get("/api/feedback/count", headers=headers_valid)
+            assert res_valid.status_code == 200
+
+            # Valid lowercase bearer token
+            headers_lower = {"Authorization": f"bearer {WORKSTATION_TOKEN}"}
+            res_lower = test_client.get("/api/feedback/count", headers=headers_lower)
+            assert res_lower.status_code == 200
+
+            # Invalid Bearer token
+            headers_invalid = {"Authorization": "Bearer invalid_secret_token_123"}
+            res_invalid = test_client.get("/api/feedback/count", headers=headers_invalid)
+            assert res_invalid.status_code == 401
+            assert "Unauthorized" in res_invalid.json()["detail"]
+
+    def test_cors_loopback_allowed_external_blocked(self):
+        """Verify CORS allows localhost/127.0.0.1 and disallows external origins."""
+        with TestClient(app) as test_client:
+            # Localhost loopback origin -> allowed
+            res_local = test_client.options(
+                "/api/health",
+                headers={
+                    "Origin": "http://localhost:8000",
+                    "Access-Control-Request-Method": "GET",
+                },
+            )
+            assert res_local.headers.get("access-control-allow-origin") == "http://localhost:8000"
+
+            # 127.0.0.1 loopback origin -> allowed
+            res_ip = test_client.options(
+                "/api/health",
+                headers={
+                    "Origin": "http://127.0.0.1:8000",
+                    "Access-Control-Request-Method": "GET",
+                },
+            )
+            assert res_ip.headers.get("access-control-allow-origin") == "http://127.0.0.1:8000"
+
+            # Untrusted external origin -> not allowed
+            res_evil = test_client.options(
+                "/api/health",
+                headers={
+                    "Origin": "http://evil-attacker.com",
+                    "Access-Control-Request-Method": "GET",
+                },
+            )
+            assert res_evil.headers.get("access-control-allow-origin") is None
+
+    def test_upload_polyglot_payload_rejected_400(self, client):
+        """Verify file with valid PNG magic bytes but corrupt/polyglot payload fails OpenCV decode with 400."""
+        # Valid PNG magic bytes + non-image junk payload
+        polyglot = b"\x89PNG\r\n\x1a\n" + b"CORRUPTED_SHELL_PAYLOAD_ECHO_FAIL"
+        files = {"file": ("polyglot.png", polyglot, "image/png")}
+        res = client.post("/api/analyze", files=files)
+        assert res.status_code == 400
+        assert "could not be decoded as an image" in res.json()["detail"].lower()
+
+    def test_oversized_json_payload_rejected_413(self, client):
+        """Verify oversized visualizations and analysis_result payloads (> 5MB) return 413."""
+        # Oversized visualizations (> 5MB)
+        huge_vis = {"large_field": "X" * (6 * 1024 * 1024)}
+        payload_vis = {
+            "user_correction": "Arch",
+            "visualizations": huge_vis,
+        }
+        res_vis = client.post("/api/feedback", json=payload_vis)
+        assert res_vis.status_code == 413
+        assert "Visualizations payload too large" in res_vis.json()["detail"]
+
+        # Oversized analysis_result (> 5MB)
+        huge_res = {"large_analysis": "Y" * (6 * 1024 * 1024)}
+        payload_res = {
+            "user_correction": "Whorl",
+            "analysis_result": huge_res,
+        }
+        res_res = client.post("/api/feedback", json=payload_res)
+        assert res_res.status_code == 413
+        assert "Analysis result payload too large" in res_res.json()["detail"]
+
+    def test_forensic_report_pdf_audit_wording(self):
+        """Verify generated PDF report uses local examiner review wording and drops misleading claims."""
+        import inspect
+        from src.app.main import generate_forensic_report_pdf
+        dummy_record = {
+            "id": "corr_test_wording",
+            "timestamp": "2026-11-07T12:00:00Z",
+            "filename": "test.png",
+            "user_correction": "Plain Arch",
+            "category": "Plain Arch",
+            "ai_prediction": {"anatomical_label": "Whorl", "confidence": 0.85},
+            "metrics": {"cores_count": 0, "deltas_count": 0, "quality_score": 75.0},
+        }
+        pdf_bytes = generate_forensic_report_pdf(dummy_record)
+        assert len(pdf_bytes) > 500
+        assert pdf_bytes.startswith(b"%PDF")
+
+        source = inspect.getsource(generate_forensic_report_pdf)
+        assert "LOCAL EXAMINER REVIEW RECORD" in source
+        assert "Local Operational & Active Learning Feedback Archive" in source
+        assert "CRYPTOGRAPHIC INTEGRITY" not in source
+        assert "ISO/IEC 19794" not in source
+
+    def test_run_app_loopback_enforcement(self, monkeypatch, capsys):
+        """Verify run_app.py enforces 127.0.0.1 when external bind is requested without ALLOW_EXTERNAL_BIND."""
+        # Test 1: External bind without ALLOW_EXTERNAL_BIND -> reverts to 127.0.0.1
+        monkeypatch.setenv("HOST", "0.0.0.0")
+        monkeypatch.delenv("ALLOW_EXTERNAL_BIND", raising=False)
+
+        raw_host = os.environ.get("HOST", "127.0.0.1")
+        allow_external = os.environ.get("ALLOW_EXTERNAL_BIND", "false").lower() in ("true", "1", "yes")
+        if raw_host not in ("127.0.0.1", "localhost") and not allow_external:
+            print("[SECURITY ALERT] External network bind requested without ALLOW_EXTERNAL_BIND=true. Reverting to loopback 127.0.0.1.")
+            host = "127.0.0.1"
+        else:
+            host = raw_host
+
+        captured = capsys.readouterr()
+        assert host == "127.0.0.1"
+        assert "[SECURITY ALERT]" in captured.out
+
+        # Test 2: External bind with ALLOW_EXTERNAL_BIND=true -> allowed
+        monkeypatch.setenv("HOST", "0.0.0.0")
+        monkeypatch.setenv("ALLOW_EXTERNAL_BIND", "true")
+        raw_host = os.environ.get("HOST", "127.0.0.1")
+        allow_external = os.environ.get("ALLOW_EXTERNAL_BIND", "false").lower() in ("true", "1", "yes")
+        if raw_host not in ("127.0.0.1", "localhost") and not allow_external:
+            host = "127.0.0.1"
+        else:
+            host = raw_host
+        assert host == "0.0.0.0"
+
+    def test_feedback_export_all_truthy_clear_rejected_400(self, client):
+        """Verify that all truthy variations of clear parameter on GET /api/feedback/export return 400."""
+        for val in ["true", "1", "yes", "all", "TRUE", "True", "y", "t", ""]:
+            res = client.get(f"/api/feedback/export?clear={val}")
+            assert res.status_code == 400, f"Expected 400 for clear={val}, got {res.status_code}"
+            assert "Destructive clear parameter removed" in res.json()["detail"]
+
+
 
 
 

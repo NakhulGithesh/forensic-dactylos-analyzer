@@ -11,6 +11,29 @@
     if (elem) elem.textContent = (text !== undefined && text !== null) ? String(text) : "";
   }
 
+  function getWorkstationToken() {
+    if (typeof document === "undefined") return "";
+    const meta = document.querySelector ? document.querySelector('meta[name="workstation-token"]') : null;
+    if (meta && meta.content) return meta.content;
+    if (typeof document.cookie === "string") {
+      const match = document.cookie.match(/(?:^|;\s*)workstation_token=([^;]+)/);
+      return match ? match[1] : "";
+    }
+    return "";
+  }
+
+  function sanitizeImageUrl(url) {
+    if (!url || typeof url !== "string") return "";
+    const trimmed = url.trim();
+    if (/^\/api\/feedback\/image\/[a-zA-Z0-9_.-]+$/.test(trimmed)) {
+      return trimmed;
+    }
+    if (/^data:image\/(png|jpeg|bmp|webp);base64,[A-Za-z0-9+/=]+$/.test(trimmed)) {
+      return trimmed;
+    }
+    return "";
+  }
+
   // Application State
   const state = {
     currentResult: null,
@@ -179,7 +202,10 @@
   // ------------------------------------------------------------------------
   async function checkHealth() {
     try {
-      const res = await fetch("/api/health");
+      const res = await fetch("/api/health", {
+        headers: { "X-Workstation-Token": getWorkstationToken() },
+        credentials: "same-origin",
+      });
       if (!res.ok) throw new Error("Health check failed");
       const data = await res.json();
 
@@ -204,7 +230,10 @@
   async function loadSampleGallery() {
     if (!el.groupNistClean) return;
     try {
-      const res = await fetch("/api/sample-gallery");
+      const res = await fetch("/api/sample-gallery", {
+        headers: { "X-Workstation-Token": getWorkstationToken() },
+        credentials: "same-origin",
+      });
       if (!res.ok) return;
       const data = await res.json();
       const samples = data.samples || [];
@@ -770,6 +799,8 @@
     try {
       const response = await fetch("/api/analyze", {
         method: "POST",
+        headers: { "X-Workstation-Token": getWorkstationToken() },
+        credentials: "same-origin",
         body: formData,
       });
 
@@ -1589,7 +1620,11 @@
     try {
       const res = await fetch("/api/feedback", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-Workstation-Token": getWorkstationToken(),
+        },
+        credentials: "same-origin",
         body: JSON.stringify(payload),
       });
 
@@ -1623,7 +1658,10 @@
 
   async function fetchVaultCount() {
     try {
-      const res = await fetch("/api/feedback/count");
+      const res = await fetch("/api/feedback/count", {
+        headers: { "X-Workstation-Token": getWorkstationToken() },
+        credentials: "same-origin",
+      });
       if (!res.ok) return;
       const data = await res.json();
       updateVaultBadge(data.count);
@@ -1660,7 +1698,10 @@
       if (category && category !== "All") {
         url += `?category=${encodeURIComponent(category)}`;
       }
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: { "X-Workstation-Token": getWorkstationToken() },
+        credentials: "same-origin",
+      });
       if (!res.ok) throw new Error("Failed to load feedback records");
       const data = await res.json();
       currentVaultCorrections = data.corrections || [];
@@ -1704,6 +1745,46 @@
     pendingVaultConfirmCallback = null;
   }
 
+  async function handleDownloadAllAndClear() {
+    try {
+      const res = await fetch("/api/feedback/export?format=zip", {
+        headers: { "X-Workstation-Token": getWorkstationToken() },
+        credentials: "same-origin",
+      });
+      if (!res.ok) {
+        throw new Error(`Export request failed (${res.status})`);
+      }
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = `forensic_corrections_archive_${Date.now()}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      if (URL.revokeObjectURL) {
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+      }
+
+      const delRes = await fetch("/api/feedback", {
+        method: "DELETE",
+        headers: { "X-Workstation-Token": getWorkstationToken() },
+        credentials: "same-origin",
+      });
+      if (!delRes.ok) {
+        throw new Error(`Clear request failed (${delRes.status})`);
+      }
+
+      selectedCorrectionId = null;
+      await loadVaultRecords();
+      await fetchVaultCount();
+      showToast("Archive exported and cleared successfully.", "success");
+    } catch (err) {
+      showToast("Export failed: " + err.message, "danger");
+      throw err;
+    }
+  }
+
   function handleDownloadAllVault() {
     if (!currentVaultCorrections || currentVaultCorrections.length === 0) {
       showToast("Archive is empty", "warning");
@@ -1716,34 +1797,37 @@
       "btn-primary",
       async () => {
         try {
-          const link = document.createElement("a");
-          link.href = "/api/feedback/export?clear=true&format=zip";
-          link.download = "";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-
-          currentVaultCorrections = [];
-          selectedCorrectionId = null;
-          renderVaultList([]);
-          renderVaultEmptyDetail();
-          await fetchVaultCount();
-          showToast("Archive exported and cleared successfully.", "success");
-        } catch (err) {
-          showToast("Export failed: " + err.message, "danger");
-        }
+          await handleDownloadAllAndClear();
+        } catch (_) {}
       }
     );
   }
+  const loadVaultRecords = loadVaultData;
 
-  function handleDownloadSingleRecord(id) {
+  async function handleDownloadSingleRecord(id) {
     if (!id) return;
-    const link = document.createElement("a");
-    link.href = `/api/feedback/${encodeURIComponent(id)}/download`;
-    link.download = `correction_${id}_bundle.zip`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+      const res = await fetch(`/api/feedback/${encodeURIComponent(id)}/download`, {
+        headers: { "X-Workstation-Token": getWorkstationToken() },
+        credentials: "same-origin",
+      });
+      if (!res.ok) {
+        throw new Error(`Failed to download record (HTTP ${res.status})`);
+      }
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = `correction_${id}_bundle.zip`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      if (URL.revokeObjectURL) {
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+      }
+    } catch (err) {
+      showToast("Download failed: " + err.message, "danger");
+    }
   }
 
   function handleDeleteSingleRecord(id) {
@@ -1757,6 +1841,8 @@
         try {
           const res = await fetch(`/api/feedback/${encodeURIComponent(id)}`, {
             method: "DELETE",
+            headers: { "X-Workstation-Token": getWorkstationToken() },
+            credentials: "same-origin",
           });
           if (!res.ok) {
             throw new Error(`Failed to delete record (HTTP ${res.status})`);
@@ -1797,12 +1883,13 @@
         const aiName = ai.anatomical_label || ai.primary_class || "AI";
         const userCorr = c.user_correction || "Verified";
         const confText = ai.confidence ? `${(ai.confidence * 100).toFixed(0)}% conf` : "";
-        const imgSrc = c.image_url || (c.image_filename ? `/api/feedback/image/${c.image_filename}` : "");
+        let imgSrc = c.image_url || (c.image_filename ? `/api/feedback/image/${c.image_filename}` : "");
+        imgSrc = sanitizeImageUrl(imgSrc);
         const timeFormatted = c.timestamp ? formatTimestamp(c.timestamp) : "";
 
         return `
           <div class="vault-card${isActive}" data-id="${c.id}">
-            ${imgSrc ? `<img src="${imgSrc}" class="vault-card-thumb" alt="Thumbnail" />` : '<div class="vault-card-thumb"></div>'}
+            ${imgSrc ? `<img src="${escapeHtml(imgSrc)}" class="vault-card-thumb" alt="Thumbnail" />` : '<div class="vault-card-thumb"></div>'}
             <div class="vault-card-info">
               <div class="vault-card-top">
                 <span class="vault-card-filename" title="${escapeHtml(c.filename || "")}">${escapeHtml(c.filename || "impression.png")}</span>
@@ -1855,7 +1942,10 @@
     if (rec) {
       renderVaultDetail(rec);
     } else if (id) {
-      fetch(`/api/feedback/${encodeURIComponent(id)}`)
+      fetch(`/api/feedback/${encodeURIComponent(id)}`, {
+        headers: { "X-Workstation-Token": getWorkstationToken() },
+        credentials: "same-origin",
+      })
         .then((r) => (r.ok ? r.json() : null))
         .then((data) => {
           if (data) renderVaultDetail(data);
@@ -1878,6 +1968,7 @@
     if (imgSrc && !imgSrc.startsWith("http") && !imgSrc.startsWith("/") && !imgSrc.startsWith("data:")) {
       imgSrc = `data:image/png;base64,${imgSrc}`;
     }
+    imgSrc = sanitizeImageUrl(imgSrc);
     const timeFormatted = c.timestamp ? formatTimestamp(c.timestamp) : "--";
     const qScore = metrics.quality_score !== undefined ? Number(metrics.quality_score).toFixed(1) : (ai.quality_score ? Number(ai.quality_score).toFixed(1) : "--");
 
@@ -1885,7 +1976,7 @@
       <div class="vault-detail-header">
         ${imgSrc ? `
           <div class="vault-detail-img-wrap" id="vaultDetailImgWrap" title="Click to inspect fingerprint impression, ridge flow streamlines, cores &amp; deltas">
-            <img src="${imgSrc}" class="vault-detail-img" alt="Impression Snapshot" onerror="this.style.display='none'" />
+            <img src="${escapeHtml(imgSrc)}" class="vault-detail-img" alt="Impression Snapshot" onerror="this.style.display='none'" />
             <span class="vault-img-hover-badge">🔍 Inspect Overlays &amp; Zoom</span>
           </div>
         ` : ""}
@@ -1933,15 +2024,15 @@
           </div>
           <div class="diff-item">
             <span class="diff-item-label">Landmark Cores:</span>
-            <span class="diff-item-val">${metrics.cores_count ?? "--"}</span>
+            <span class="diff-item-val">${escapeHtml(String(metrics.cores_count ?? "--"))}</span>
           </div>
           <div class="diff-item">
             <span class="diff-item-label">Delta Triradii:</span>
-            <span class="diff-item-val">${metrics.deltas_count ?? "--"}</span>
+            <span class="diff-item-val">${escapeHtml(String(metrics.deltas_count ?? "--"))}</span>
           </div>
           <div class="diff-item">
             <span class="diff-item-label">Quality Score (Q):</span>
-            <span class="diff-item-val">${qScore}</span>
+            <span class="diff-item-val">${escapeHtml(String(qScore))}</span>
           </div>
         </div>
 
@@ -2057,13 +2148,18 @@
     if (imgSrc) {
       showToast("Analyzing impression overlays on-the-fly...", "info");
       try {
-        const resp = await fetch(imgSrc);
+        const resp = await fetch(imgSrc, {
+          headers: (typeof imgSrc === "string" && imgSrc.startsWith("/api/")) ? { "X-Workstation-Token": getWorkstationToken() } : {},
+          credentials: "same-origin",
+        });
         if (!resp.ok) throw new Error("Could not fetch impression image.");
         const blob = await resp.blob();
         const formData = new FormData();
         formData.append("file", blob, c.filename || "impression.png");
         const analyzeRes = await fetch("/api/analyze", {
           method: "POST",
+          headers: { "X-Workstation-Token": getWorkstationToken() },
+          credentials: "same-origin",
           body: formData,
         });
         if (!analyzeRes.ok) {
@@ -2110,7 +2206,7 @@
   }
 
   function escapeHtml(str) {
-    if (!str) return "";
+    if (str === null || str === undefined) return "";
     return String(str)
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")

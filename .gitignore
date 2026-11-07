@@ -39,3 +39,6 @@ Thumbs.db
 # Feedback Queue Local Run Data (Keep folder structure, ignore test run images)
 data/feedback_queue/images/*.png
 !data/feedback_queue/images/.gitkeep
+
+# Local Security Tokens
+.workstation_token

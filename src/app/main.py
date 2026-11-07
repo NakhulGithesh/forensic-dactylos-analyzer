@@ -6,11 +6,14 @@ health monitoring with Apple Silicon MPS GPU detection, and serves the interacti
 
 import base64
 import datetime
+import hmac
 import io
 import json
 import os
+import secrets
 import sys
 import threading
+import time
 import uuid
 import zipfile
 from typing import Dict, List, Optional, Any, Union
@@ -19,9 +22,9 @@ import cv2
 import numpy as np
 from pydantic import BaseModel, Field
 import torch
-from fastapi import FastAPI, File, Form, HTTPException, Query, Request, UploadFile
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Query, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from src.models.backbones import get_default_device
@@ -43,6 +46,108 @@ if not os.path.isfile(FEEDBACK_JSON_PATH):
         json.dump([], _f)
 
 _feedback_lock = threading.Lock()
+
+
+# ---------------------------------------------------------------------------
+# Workstation Authentication & Security Hardening
+# ---------------------------------------------------------------------------
+def _get_or_create_workstation_token() -> str:
+    env_token = os.environ.get("WORKSTATION_TOKEN")
+    if env_token and env_token.strip():
+        return env_token.strip()
+    token_path = os.path.join(BASE_DIR, ".workstation_token")
+    if os.path.isfile(token_path):
+        try:
+            with open(token_path, "r", encoding="utf-8") as f:
+                content = f.read().strip()
+                if content:
+                    return content
+        except Exception:
+            pass
+    token = secrets.token_hex(24)
+    try:
+        flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC
+        mode = 0o600
+        fd = os.open(token_path, flags, mode)
+        with open(fd, "w", encoding="utf-8") as f:
+            f.write(token)
+    except Exception:
+        pass
+    return token
+
+WORKSTATION_TOKEN = _get_or_create_workstation_token()
+
+
+async def verify_workstation_auth(
+    request: Request,
+    x_token: Optional[str] = Header(None, alias="X-Workstation-Token"),
+) -> str:
+    token: Optional[str] = x_token
+    if not token:
+        token = request.cookies.get("workstation_token")
+    if not token:
+        auth_header = request.headers.get("Authorization") or request.headers.get("authorization")
+        if auth_header:
+            parts = auth_header.split(None, 1)
+            if len(parts) == 2 and parts[0].lower() == "bearer":
+                token = parts[1].strip()
+
+    if not token or not hmac.compare_digest(token, WORKSTATION_TOKEN):
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized: Valid X-Workstation-Token or cookie required.",
+        )
+    return token
+
+
+# Payload and Upload Size Limits
+MAX_UPLOAD_SIZE = 15 * 1024 * 1024  # 15 MB
+MAX_BASE64_LENGTH = 25 * 1024 * 1024  # 25 MB
+MAX_JSON_PAYLOAD_SIZE = 5 * 1024 * 1024  # 5 MB
+
+
+def _validate_image_magic_bytes(data: bytes) -> bool:
+    if len(data) < 8:
+        return False
+    if data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return True
+    if data.startswith(b"\xff\xd8\xff"):
+        return True
+    if data.startswith(b"BM"):
+        return True
+    if data.startswith(b"RIFF") and b"WEBP" in data[:16]:
+        return True
+    return False
+
+
+# Rate Limiter (sliding window per client IP)
+_rate_limiter_lock = threading.Lock()
+_rate_limiter_history: Dict[str, List[float]] = {}
+
+
+def check_rate_limit(request: Request, max_requests: int = 60, window_seconds: float = 60.0):
+    if os.environ.get("TESTING") == "1" or os.environ.get("DISABLE_RATE_LIMIT") == "1":
+        return
+    client_ip = request.client.host if request.client and request.client.host else "127.0.0.1"
+    now = time.time()
+    with _rate_limiter_lock:
+        if len(_rate_limiter_history) > 500:
+            stale_cutoff = now - window_seconds
+            stale_ips = [
+                ip for ip, timestamps in _rate_limiter_history.items()
+                if not timestamps or timestamps[-1] < stale_cutoff
+            ]
+            for ip in stale_ips:
+                del _rate_limiter_history[ip]
+
+        history = _rate_limiter_history.get(client_ip, [])
+        cutoff = now - window_seconds
+        valid_history = [t for t in history if t > cutoff]
+        if len(valid_history) >= max_requests:
+            _rate_limiter_history[client_ip] = valid_history
+            raise HTTPException(status_code=429, detail="Rate limit exceeded. Please wait.")
+        valid_history.append(now)
+        _rate_limiter_history[client_ip] = valid_history
 
 
 def _load_corrections() -> List[Dict[str, Any]]:
@@ -76,12 +181,16 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# CORS middleware for open local accessibility
+# CORS middleware with explicit localhost/loopback origins
+ALLOWED_ORIGINS = os.environ.get(
+    "ALLOWED_ORIGINS",
+    "http://127.0.0.1:8000,http://localhost:8000"
+).split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[origin.strip() for origin in ALLOWED_ORIGINS if origin.strip()],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -314,7 +423,7 @@ async def health_check() -> Dict[str, Any]:
     }
 
 
-@app.get("/api/sample-gallery")
+@app.get("/api/sample-gallery", dependencies=[Depends(verify_workstation_auth)])
 async def get_sample_gallery() -> Dict[str, Any]:
     """
     Returns curated sample fingerprints bundled in the project
@@ -343,7 +452,7 @@ async def get_sample_gallery() -> Dict[str, Any]:
     }
 
 
-@app.get("/api/sample-image/{sample_id}")
+@app.get("/api/sample-image/{sample_id}", dependencies=[Depends(verify_workstation_auth)])
 async def get_sample_image(sample_id: str):
     """Serve the raw fingerprint image for a given sample ID."""
     if sample_id not in SAMPLE_REGISTRY:
@@ -358,7 +467,7 @@ async def get_sample_image(sample_id: str):
     return FileResponse(abs_path, media_type=media_type)
 
 
-@app.post("/api/analyze")
+@app.post("/api/analyze", dependencies=[Depends(verify_workstation_auth)])
 async def analyze_fingerprint(
     request: Request,
     file: Optional[UploadFile] = File(None),
@@ -377,6 +486,8 @@ async def analyze_fingerprint(
         geometric landmarks (cores, deltas, streamlines), 20-label subtype,
         step-by-step forensic reasoning narrative, and Base64 overlay assets.
     """
+    check_rate_limit(request)
+
     # Also support JSON body if called programmatically
     content_type = request.headers.get("content-type", "")
     if "application/json" in content_type:
@@ -405,9 +516,16 @@ async def analyze_fingerprint(
     if file is not None and file.filename:
         input_filename = file.filename
         try:
-            contents = await file.read()
+            contents = await file.read(MAX_UPLOAD_SIZE + 1)
             if len(contents) == 0:
                 raise HTTPException(status_code=400, detail="Uploaded file is empty (0 bytes).")
+            if len(contents) > MAX_UPLOAD_SIZE:
+                raise HTTPException(status_code=413, detail="Payload Too Large: Maximum upload size is 15 MB.")
+            if not _validate_image_magic_bytes(contents):
+                raise HTTPException(
+                    status_code=400,
+                    detail="Invalid image format. Supported formats: PNG, JPEG, BMP, WebP. Uploaded file could not be decoded as an image.",
+                )
             nparr = np.frombuffer(contents, np.uint8)
             decoded_img = cv2.imdecode(nparr, cv2.IMREAD_GRAYSCALE)
             if decoded_img is None:
@@ -636,8 +754,8 @@ def generate_forensic_report_pdf(record: Dict[str, Any], img_path: Optional[str]
         ax_notes.text(0.02, 0.68, notes_text, fontsize=8.5, color="#334155", va="top", wrap=True)
 
         # 6. Official Stamp & Chain of Custody Footer
-        fig.text(0.08, 0.08, "OFFICIAL FORENSIC RECORD • EXAMINER AUDITED • CRYPTOGRAPHIC INTEGRITY VERIFIED", fontsize=8, fontweight="bold", color="#2563eb")
-        fig.text(0.08, 0.06, "Forensic Dactylos Analyzer v2.0 • ISO/IEC 19794-2 Compliance • Continuous Active Learning Feedback Archive", fontsize=7.5, color="#64748b")
+        fig.text(0.08, 0.08, "FORENSIC DACTYLOS ANALYZER • LOCAL EXAMINER REVIEW RECORD", fontsize=8, fontweight="bold", color="#2563eb")
+        fig.text(0.08, 0.06, "Forensic Dactylos Analyzer v1.0.0 • Local Operational & Active Learning Feedback Archive", fontsize=7.5, color="#64748b")
 
         buf = io.BytesIO()
         fig.savefig(buf, format="pdf", bbox_inches="tight")
@@ -662,12 +780,34 @@ class FeedbackPayload(BaseModel):
     analysis_result: Optional[Dict[str, Any]] = None
 
 
-@app.post("/api/feedback")
-async def submit_feedback(payload: FeedbackPayload) -> Dict[str, Any]:
+@app.post("/api/feedback", dependencies=[Depends(verify_workstation_auth)])
+async def submit_feedback(payload: FeedbackPayload, request: Request) -> Dict[str, Any]:
     """
     Log an examiner misclassification correction to the review vault archive.
     Saves image snapshot and structured comparison telemetry.
     """
+    check_rate_limit(request)
+
+    if payload.visualizations is not None:
+        try:
+            vis_bytes = json.dumps(payload.visualizations).encode("utf-8")
+            if len(vis_bytes) > MAX_JSON_PAYLOAD_SIZE:
+                raise HTTPException(status_code=413, detail="Visualizations payload too large (max 5 MB).")
+        except HTTPException:
+            raise
+        except Exception:
+            pass
+
+    if payload.analysis_result is not None:
+        try:
+            res_bytes = json.dumps(payload.analysis_result).encode("utf-8")
+            if len(res_bytes) > MAX_JSON_PAYLOAD_SIZE:
+                raise HTTPException(status_code=413, detail="Analysis result payload too large (max 5 MB).")
+        except HTTPException:
+            raise
+        except Exception:
+            pass
+
     now_utc = datetime.datetime.now(datetime.timezone.utc)
     ts_str = now_utc.strftime("%Y%m%d_%H%M%S")
     short_uuid = uuid.uuid4().hex[:6]
@@ -675,15 +815,20 @@ async def submit_feedback(payload: FeedbackPayload) -> Dict[str, Any]:
 
     img_filename = None
     if payload.image_base64:
+        if len(payload.image_base64) > MAX_BASE64_LENGTH:
+            raise HTTPException(status_code=413, detail="Base64 image payload too large.")
         raw_b64 = payload.image_base64
         if "," in raw_b64:
             raw_b64 = raw_b64.split(",", 1)[1]
         try:
             img_bytes = base64.b64decode(raw_b64)
-            img_filename = f"{corr_id}.png"
-            img_path = os.path.join(FEEDBACK_IMAGES_DIR, img_filename)
-            with open(img_path, "wb") as f:
-                f.write(img_bytes)
+            if not _validate_image_magic_bytes(img_bytes):
+                img_filename = None
+            else:
+                img_filename = f"{corr_id}.png"
+                img_path = os.path.join(FEEDBACK_IMAGES_DIR, img_filename)
+                with open(img_path, "wb") as f:
+                    f.write(img_bytes)
         except Exception:
             img_filename = None
 
@@ -715,7 +860,7 @@ async def submit_feedback(payload: FeedbackPayload) -> Dict[str, Any]:
     }
 
 
-@app.get("/api/feedback")
+@app.get("/api/feedback", dependencies=[Depends(verify_workstation_auth)])
 async def get_feedback(category: Optional[str] = Query(None)) -> Dict[str, Any]:
     """
     Retrieve logged correction records sorted descending by timestamp.
@@ -746,15 +891,22 @@ async def get_feedback(category: Optional[str] = Query(None)) -> Dict[str, Any]:
     return {"corrections": records}
 
 
-@app.get("/api/feedback/export")
+@app.get("/api/feedback/export", dependencies=[Depends(verify_workstation_auth)])
 async def export_feedback(
-    clear: bool = Query(False),
+    request: Request,
+    clear: Optional[str] = Query(None),
     format: str = Query("zip"),
 ):
     """
     Bulk export logged corrections and biometric images as a ZIP archive or JSON bundle.
-    Optionally clears the archive and removes exported image assets atomically.
+    Strictly read-only endpoint. Destructive clear parameter removed.
     """
+    if clear is not None and clear.strip().lower() not in ("false", "0", "no", "f", "n", "none"):
+        raise HTTPException(
+            status_code=400,
+            detail="Destructive clear parameter removed from GET /api/feedback/export. Call DELETE /api/feedback to clear records.",
+        )
+
     now_utc = datetime.datetime.now(datetime.timezone.utc)
     ts = now_utc.strftime("%Y%m%d_%H%M%S")
 
@@ -763,17 +915,6 @@ async def export_feedback(
 
         if format.lower() == "json":
             json_bytes = json.dumps(records, indent=2).encode("utf-8")
-            if clear:
-                _save_corrections([])
-                for r in records:
-                    img_name = r.get("image_filename")
-                    if img_name:
-                        img_p = os.path.join(FEEDBACK_IMAGES_DIR, os.path.basename(img_name))
-                        if os.path.isfile(img_p):
-                            try:
-                                os.remove(img_p)
-                            except Exception:
-                                pass
             return Response(
                 content=json_bytes,
                 media_type="application/json",
@@ -824,15 +965,6 @@ async def export_feedback(
 
         zip_bytes = buf.getvalue()
 
-        if clear:
-            _save_corrections([])
-            for img_path in exported_images:
-                try:
-                    if os.path.isfile(img_path):
-                        os.remove(img_path)
-                except Exception:
-                    pass
-
         return Response(
             content=zip_bytes,
             media_type="application/zip",
@@ -842,7 +974,7 @@ async def export_feedback(
         )
 
 
-@app.get("/api/feedback/count")
+@app.get("/api/feedback/count", dependencies=[Depends(verify_workstation_auth)])
 async def get_feedback_count() -> Dict[str, Any]:
     """Return the total count of logged corrections in the archive."""
     with _feedback_lock:
@@ -850,7 +982,7 @@ async def get_feedback_count() -> Dict[str, Any]:
     return {"count": len(records)}
 
 
-@app.get("/api/feedback/image/{filename}")
+@app.get("/api/feedback/image/{filename}", dependencies=[Depends(verify_workstation_auth)])
 async def get_feedback_image(filename: str):
     """Serve the stored fingerprint impression thumbnail or raw image for a correction."""
     safe_name = os.path.basename(filename)
@@ -865,7 +997,7 @@ async def get_feedback_image(filename: str):
     return FileResponse(img_path, media_type="image/png")
 
 
-@app.delete("/api/feedback")
+@app.delete("/api/feedback", dependencies=[Depends(verify_workstation_auth)])
 async def clear_all_feedback() -> Dict[str, Any]:
     """
     Thread-safe bulk deletion of all feedback corrections and associated image assets.
@@ -887,7 +1019,7 @@ async def clear_all_feedback() -> Dict[str, Any]:
     return {"status": "cleared", "deleted_count": count}
 
 
-@app.get("/api/feedback/{feedback_id}")
+@app.get("/api/feedback/{feedback_id}", dependencies=[Depends(verify_workstation_auth)])
 async def get_feedback_record(feedback_id: str) -> Dict[str, Any]:
     """Retrieve single correction record by unique ID."""
     with _feedback_lock:
@@ -898,7 +1030,7 @@ async def get_feedback_record(feedback_id: str) -> Dict[str, Any]:
     raise HTTPException(status_code=404, detail=f"Correction '{feedback_id}' not found.")
 
 
-@app.delete("/api/feedback/{feedback_id}")
+@app.delete("/api/feedback/{feedback_id}", dependencies=[Depends(verify_workstation_auth)])
 async def delete_feedback_record(feedback_id: str) -> Dict[str, Any]:
     """
     Thread-safe deletion of a single feedback correction and its disk image asset.
@@ -933,7 +1065,7 @@ async def delete_feedback_record(feedback_id: str) -> Dict[str, Any]:
     return {"status": "deleted", "id": feedback_id, "remaining": remaining}
 
 
-@app.get("/api/feedback/{feedback_id}/download")
+@app.get("/api/feedback/{feedback_id}/download", dependencies=[Depends(verify_workstation_auth)])
 async def download_feedback_record(feedback_id: str):
     """
     Export a single correction record as a ZIP bundle containing
@@ -995,12 +1127,27 @@ if os.path.isdir(STATIC_DIR):
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
-@app.get("/", response_class=FileResponse)
+@app.get("/", response_class=HTMLResponse)
 async def serve_index():
     """Serve the interactive web frontend dashboard."""
     index_file = os.path.join(STATIC_DIR, "index.html")
     if os.path.isfile(index_file):
-        return FileResponse(index_file)
+        with open(index_file, "r", encoding="utf-8") as f:
+            html_content = f.read()
+        meta_tag = f'<meta name="workstation-token" content="{WORKSTATION_TOKEN}">'
+        if "<!-- WORKSTATION_TOKEN_META -->" in html_content:
+            html_content = html_content.replace("<!-- WORKSTATION_TOKEN_META -->", meta_tag)
+        elif "<head>" in html_content:
+            html_content = html_content.replace("<head>", f"<head>\n  {meta_tag}", 1)
+        response = HTMLResponse(content=html_content)
+        response.set_cookie(
+            key="workstation_token",
+            value=WORKSTATION_TOKEN,
+            path="/",
+            samesite="strict",
+            httponly=False,
+        )
+        return response
     return JSONResponse({
         "system": "AI Fingerprint Recognition & Forensic Classification System",
         "status": "API active, frontend index.html pending creation",

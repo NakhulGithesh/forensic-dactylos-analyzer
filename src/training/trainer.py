@@ -373,6 +373,6 @@ class FingerprintTrainer:
         """Load weights from saved checkpoint into model."""
         if not os.path.isfile(filepath):
             raise FileNotFoundError(f"Checkpoint not found at: {filepath}")
-        checkpoint = torch.load(filepath, map_location=self.device)
+        checkpoint = torch.load(filepath, map_location=self.device, weights_only=True)
         self.model.load_state_dict(checkpoint["model_state_dict"])
         return checkpoint

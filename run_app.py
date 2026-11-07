@@ -9,7 +9,13 @@ import sys
 import uvicorn
 
 if __name__ == "__main__":
-    host = os.environ.get("HOST", "127.0.0.1")
+    raw_host = os.environ.get("HOST", "127.0.0.1")
+    allow_external = os.environ.get("ALLOW_EXTERNAL_BIND", "false").lower() in ("true", "1", "yes")
+    if raw_host not in ("127.0.0.1", "localhost") and not allow_external:
+        print("[SECURITY ALERT] External network bind requested without ALLOW_EXTERNAL_BIND=true. Reverting to loopback 127.0.0.1.")
+        host = "127.0.0.1"
+    else:
+        host = raw_host
     port = int(os.environ.get("PORT", "8000"))
     reload = os.environ.get("RELOAD", "true").lower() in ("true", "1", "yes")
 
